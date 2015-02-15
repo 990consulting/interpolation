@@ -5,18 +5,34 @@
 
 package compiler.interpretation.visitors;
 
-import compiler.interpretation.nanosyntax.NanosyntaxParser;
 import compiler.nodes.StatementNode;
+import org.antlr.v4.runtime.tree.ParseTree;
+
+import static compiler.interpretation.nanosyntax.NanosyntaxParser.*;
 
 /**
  * Created by dbborens on 2/14/15.
  */
 public class StatementVisitor extends AbstractNodeVisitor {
+    private Class[] legalChildContexts = new Class[] {
+            AssignmentContext.class,
+            DefinitionContext.class
+    };
+
     public StatementVisitor(NanoToASTVisitor master) {
         super(master);
     }
 
-    public StatementNode visit(NanosyntaxParser.StatementContext ctx) {
-        return null;
+    public StatementNode visit(StatementContext ctx) {
+        // Second child is a semicolon (checked by ANTLR -- ignored)
+        if (ctx.getChildCount() != 2) {
+            throw new IllegalArgumentException("Unexpected child count");
+        }
+
+        ParseTree child = ctx.getChild(0);
+        verifyPayload(child, legalChildContexts);
+
+        return (StatementNode) child.accept(master);
     }
+
 }
