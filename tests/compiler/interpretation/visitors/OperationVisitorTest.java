@@ -129,15 +129,4 @@ public class OperationVisitorTest extends AbstractVisitorTest {
         when(ctx.getChild(1)).thenReturn(middle);
         when(ctx.getChild(2)).thenReturn(right);
     }
-//    @Test
-//    public void sanityCheck() {
-//        ANTLRInputStream input = new ANTLRInputStream("abc >= 2");
-//        NanosyntaxLexer lexer = new NanosyntaxLexer(input);
-//        CommonTokenStream tokenStream = new CommonTokenStream(lexer);
-//        NanosyntaxParser parser = new NanosyntaxParser(tokenStream);
-//        ParseTree tree = parser.operation();
-//        SlaveVisitorManager manager = new SlaveVisitorManager();
-//        NanoToASTVisitor visitor = new NanoToASTVisitor(manager);
-//        visitor.visit(tree);
-//    }
 }
