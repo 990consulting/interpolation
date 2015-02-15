@@ -9,6 +9,7 @@ import compiler.nodes.BaseNode;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.junit.Before;
+import test.TestBase;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,7 +18,7 @@ import java.util.stream.IntStream;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public abstract class AbstractVisitorTest {
+public abstract class AbstractVisitorTest extends TestBase {
 
     protected NanoToASTVisitor master;
 
