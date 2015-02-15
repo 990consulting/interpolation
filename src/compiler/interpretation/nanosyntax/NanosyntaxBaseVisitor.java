@@ -1,4 +1,4 @@
-// Generated from /Users/dbborens/IdeaProjects/protoverse/src/Nanosyntax.g4 by ANTLR 4.5
+// Generated from /home/dbborens/IdeaProjects/protoverse/src/Nanosyntax.g4 by ANTLR 4.5
 package compiler.interpretation.nanosyntax;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;

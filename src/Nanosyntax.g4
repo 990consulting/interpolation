@@ -51,9 +51,7 @@ operator
 
 reference
     : ID
-    | ID '->' reference
-    | ID '$' reference
-    | '$' reference;
+    | ID '->' reference;
 
 type
     : ID;

@@ -5,7 +5,6 @@
 
 package compiler.interpretation.visitors;
 
-import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 /**
@@ -19,12 +18,12 @@ public abstract class AbstractNodeVisitor {
         this.master = master;
     }
 
-    protected void verifyPayload(ParseTree ctx, Class expected) {
-        if (ctx.getPayload() == null) {
+    protected void verifyPayload(ParseTree child, Class expected) {
+        if (child.getPayload() == null) {
             throw new IllegalArgumentException("Empty payload");
         }
 
-        Object payload = ctx.getPayload();
+        Object payload = child.getPayload();
 
         if (!expected.isInstance(payload)) {
             throw new IllegalArgumentException("Unexpected payload class");

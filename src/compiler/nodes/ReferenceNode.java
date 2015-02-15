@@ -8,7 +8,7 @@ package compiler.nodes;
 /**
  * Created by dbborens on 2/13/15.
  */
-public abstract class ReferenceNode implements ValueNode {
+public class ReferenceNode implements ValueNode {
     private String name;
     private ReferenceNode child;
 
