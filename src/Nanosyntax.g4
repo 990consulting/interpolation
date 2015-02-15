@@ -26,7 +26,6 @@ block: '{' (statement)* '}' ;
 singleton
     : reference
     | operation
-    | singleton operand singleton
     | primitive
     | assignment;
 
