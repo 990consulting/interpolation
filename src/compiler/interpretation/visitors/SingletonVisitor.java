@@ -5,8 +5,18 @@
 
 package compiler.interpretation.visitors;
 
+import compiler.interpretation.nanosyntax.NanosyntaxParser;
+import compiler.nodes.ValueNode;
+
 /**
  * Created by dbborens on 2/14/15.
  */
-public class SingletonVisitor {
+public class SingletonVisitor extends NodeVisitor{
+    public SingletonVisitor(NanoToASTVisitor master) {
+        super(master);
+    }
+
+    public ValueNode visit(NanosyntaxParser.SingletonContext ctx) {
+        return null;
+    }
 }

@@ -5,8 +5,18 @@
 
 package compiler.interpretation.visitors;
 
+import compiler.interpretation.nanosyntax.NanosyntaxParser;
+import compiler.nodes.ReferenceNode;
+
 /**
  * Created by dbborens on 2/14/15.
  */
-public class ReferenceVisitor {
+public class ReferenceVisitor extends NodeVisitor{
+    public ReferenceVisitor(NanoToASTVisitor master) {
+        super(master);
+    }
+
+    public ReferenceNode visit(NanosyntaxParser.ReferenceContext ctx) {
+        return null;
+    }
 }

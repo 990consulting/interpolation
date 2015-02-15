@@ -8,7 +8,7 @@ package compiler.interpretation.visitors;
 /**
  * Created by dbborens on 2/14/15.
  */
-public class NodeVisitor {
+public abstract class NodeVisitor {
 
     protected NanoToASTVisitor master;
 

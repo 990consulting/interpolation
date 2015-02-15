@@ -8,7 +8,7 @@ package compiler.nodes;
 /**
  * Created by dbborens on 2/14/15.
  */
-public class PrimitiveNode<T> implements BaseNode {
+public class PrimitiveNode<T> implements ValueNode {
 
     private T content;
 

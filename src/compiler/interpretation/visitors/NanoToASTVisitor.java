@@ -5,7 +5,7 @@
 
 package compiler.interpretation.visitors;
 
-import compiler.interpretation.nanosyntax.NanosyntaxParser;
+import static compiler.interpretation.nanosyntax.NanosyntaxParser.*;
 import compiler.nodes.*;
 import org.antlr.v4.runtime.misc.NotNull;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -14,80 +14,86 @@ import compiler.interpretation.nanosyntax.NanosyntaxBaseVisitor;
  * Created by dbborens on 2/14/15.
  */
 public class NanoToASTVisitor extends NanosyntaxBaseVisitor<BaseNode> {
-    @Override
-    public RootNode visitRoot(@NotNull NanosyntaxParser.RootContext ctx) {
-        return null;
+
+    private SlaveVisitorManager manager;
+
+    public NanoToASTVisitor(SlaveVisitorManager manager) {
+        manager.init(this);
+        this.manager = manager;
     }
 
     @Override
-    public StatementNode visitStatement(@NotNull NanosyntaxParser.StatementContext ctx) {
-        return null;
+    public RootNode visitRoot(@NotNull RootContext ctx) {
+        return manager.visit(ctx);
     }
 
     @Override
-    public AssignmentNode visitAssignment(@NotNull NanosyntaxParser.AssignmentContext ctx) {
-        AssignmentVisitor visitor = new AssignmentVisitor(this);
-        visitor.visit(ctx);
-        return null;
+    public StatementNode visitStatement(@NotNull StatementContext ctx) {
+        return manager.visit(ctx);
     }
 
     @Override
-    public DefinitionNode visitDefinition(@NotNull NanosyntaxParser.DefinitionContext ctx) {
+    public AssignmentNode visitAssignment(@NotNull AssignmentContext ctx) {
+        return manager.visit(ctx);
+    }
+
+    @Override
+    public DefinitionNode visitDefinition(@NotNull DefinitionContext ctx) {
         throw new NotImplementedException();
     }
 
     @Override
-    public BlockNode visitBlock(@NotNull NanosyntaxParser.BlockContext ctx) {
-        return null;
+    public BlockNode visitBlock(@NotNull BlockContext ctx) {
+        return manager.visit(ctx);
     }
 
     @Override
-    public ValueNode visitSingleton(@NotNull NanosyntaxParser.SingletonContext ctx) {
-        return null;
+    public ValueNode visitSingleton(@NotNull SingletonContext ctx) {
+        return manager.visit(ctx);
     }
 
     @Override
-    public OperationNode visitOperation(@NotNull NanosyntaxParser.OperationContext ctx) {
-        return null;
+    public OperationNode visitOperation(@NotNull OperationContext ctx) {
+        return manager.visit(ctx);
     }
 
     @Override
-    public PrimitiveNode<String> visitOperand(@NotNull NanosyntaxParser.OperandContext ctx) {
-        return null;
+    public ValueNode visitOperand(@NotNull OperandContext ctx) {
+        return manager.visit(ctx);
     }
 
     @Override
-    public ValueNode visitOperator(@NotNull NanosyntaxParser.OperatorContext ctx) {
-        return null;
+    public PrimitiveNode<String> visitOperator(@NotNull OperatorContext ctx) {
+        return manager.visit(ctx);
     }
 
     @Override
-    public ReferenceNode visitReference(@NotNull NanosyntaxParser.ReferenceContext ctx) {
-        return null;
+    public ReferenceNode visitReference(@NotNull ReferenceContext ctx) {
+        return manager.visit(ctx);
     }
 
     @Override
-    public BaseNode visitType(@NotNull NanosyntaxParser.TypeContext ctx) {
+    public BaseNode visitType(@NotNull TypeContext ctx) {
         throw new NotImplementedException();
     }
 
     @Override
-    public PrimitiveNode visitPrimitive(@NotNull NanosyntaxParser.PrimitiveContext ctx) {
-        return null;
+    public PrimitiveNode visitPrimitive(@NotNull PrimitiveContext ctx) {
+        return manager.visit(ctx);
     }
 
     @Override
-    public PrimitiveNode<String> visitStringPrimitive(@NotNull NanosyntaxParser.StringPrimitiveContext ctx) {
-        return null;
+    public PrimitiveNode<String> visitStringPrimitive(@NotNull StringPrimitiveContext ctx) {
+        return manager.visit(ctx);
     }
 
     @Override
-    public PrimitiveNode<Double> visitFloatPrimitive(@NotNull NanosyntaxParser.FloatPrimitiveContext ctx) {
-        return null;
+    public PrimitiveNode<Double> visitFloatPrimitive(@NotNull FloatPrimitiveContext ctx) {
+        return manager.visit(ctx);
     }
 
     @Override
-    public PrimitiveNode<Integer> visitIntPrimitive(@NotNull NanosyntaxParser.IntPrimitiveContext ctx) {
-        return null;
+    public PrimitiveNode<Integer> visitIntPrimitive(@NotNull IntPrimitiveContext ctx) {
+        return manager.visit(ctx);
     }
 }
