@@ -1,0 +1,18 @@
+///////////////////////////////////////////////////////////////////////////////
+// StupidModel 1: scatter 100 wandering bugs in a 100x100 rectangular space  //
+///////////////////////////////////////////////////////////////////////////////
+
+geometry -> shape: Rectangle {
+    height: 100;
+    width: 100;
+};
+
+initially: scatter {
+    count: 100;
+    description: Agent -> do: 
+        Behavior {
+            action: wander;
+            every: 1.0;
+            until: time >= 100.0;
+        };
+};

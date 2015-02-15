@@ -1,0 +1,28 @@
+///////////////////////////////////////////////////////////////////////////////
+// StupidModel 2: Grow by constant size; color reflects size                 //
+///////////////////////////////////////////////////////////////////////////////
+
+geometry -> shape: Rectangle {
+    height: 100;
+    width: 100;
+};
+
+initially: scatter {
+    count: 100;
+    description: Agent {
+        define Float weight: 1.0;
+        do: Behavior {
+            action {
+                wander;
+                weight: weight + 1;
+            };
+            every: exp: 1.0;
+            until: time >= 100.0;
+        };
+    };
+};
+ 
+output {
+    Visualization: 
+        Colors -> continuous -> colorBy: $weight; 
+};

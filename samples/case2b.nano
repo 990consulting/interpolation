@@ -1,0 +1,30 @@
+///////////////////////////////////////////////////////////////////////////////
+// Variant of SM2: Define a cell type separately                             //
+///////////////////////////////////////////////////////////////////////////////
+
+geometry -> shape: Rectangle {
+    height: 100;
+    width: 100;
+};
+
+define Agent Wanderer: Agent {
+    define Float weight: 1.0;
+    do: Behavior {
+        action {
+            wander;
+            weight: weight + 1;
+        };
+        every: exp: 1.0;
+        until: time >= 100.0;
+    };
+};
+
+initially: scatter {
+    count: 100;
+    description: Wanderer;
+};
+ 
+output {
+    Visualization: 
+        Colors -> continuous -> colorBy: $weight; 
+};

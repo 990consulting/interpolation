@@ -1,0 +1,18 @@
+///////////////////////////////////////////////////////////////////////////////
+// Variant of SM1: Exponential waiting time                                  // 
+///////////////////////////////////////////////////////////////////////////////
+
+geometry -> shape: Rectangle {
+    height: 100;
+    width: 100;
+};
+
+initially: scatter {
+    count: 100;
+    description: Agent -> do: 
+        Behavior {
+            action: wander;
+            every: exp: 1.0;
+            until: time >= 100.0;
+        };
+};
