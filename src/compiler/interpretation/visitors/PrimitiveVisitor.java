@@ -5,9 +5,9 @@
 
 package compiler.interpretation.visitors;
 
-import compiler.interpretation.nanosyntax.NanosyntaxParser;
-import compiler.nodes.PrimitiveNode;
-
+import static compiler.interpretation.nanosyntax.NanosyntaxParser.*;
+ import compiler.nodes.PrimitiveNode;
+import org.antlr.v4.runtime.tree.ParseTree;
 /**
  * Created by dbborens on 2/14/15.
  */
@@ -16,19 +16,27 @@ public class PrimitiveVisitor extends AbstractNodeVisitor {
         super(master);
     }
 
-    public PrimitiveNode visit(NanosyntaxParser.PrimitiveContext ctx) {
-        return null;
+    public PrimitiveNode visit(PrimitiveContext ctx) {
+        if (ctx.getChildCount() != 1) {
+            throw new IllegalArgumentException("Unexpected child count on primitive");
+        }
+
+        ParseTree child = ctx.getChild(0);
+
+        return narrow(child);
     }
 
-    public PrimitiveNode<String> visit(NanosyntaxParser.StringPrimitiveContext ctx) {
-        return null;
-    }
+    private PrimitiveNode narrow(ParseTree child) {
+        Object payload = child.getPayload();
 
-    public PrimitiveNode<Integer> visit(NanosyntaxParser.IntPrimitiveContext ctx) {
-        return null;
-    }
-
-    public PrimitiveNode<Double> visit(NanosyntaxParser.FloatPrimitiveContext ctx) {
-        return null;
+        if (StringPrimitiveContext.class.isInstance(payload)) {
+            return (PrimitiveNode<String>) child.accept(master);
+        } else if (IntPrimitiveContext.class.isInstance(payload)) {
+            return (PrimitiveNode<Integer>) child.accept(master);
+        } else if (FloatPrimitiveContext.class.isInstance(payload)) {
+            return (PrimitiveNode<Double>) child.accept(master);
+        } else {
+            throw new IllegalArgumentException("Unrecognized primitive");
+        }
     }
 }

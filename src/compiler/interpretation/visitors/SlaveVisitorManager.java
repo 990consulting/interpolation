@@ -14,28 +14,32 @@ import static compiler.interpretation.nanosyntax.NanosyntaxParser.*;
  */
 public class SlaveVisitorManager {
 
-    private AssignmentVisitor assignmentVisitor;
-    private BlockVisitor      blockVisitor;
-    private OperandVisitor    operandVisitor;
-    private OperationVisitor  operationVisitor;
-    private OperatorVisitor   operatorVisitor;
-    private PrimitiveVisitor  primitiveVisitor;
-    private ReferenceVisitor  referenceVisitor;
-    private RootVisitor       rootVisitor;
-    private SingletonVisitor  singletonVisitor;
-    private StatementVisitor  statementVisitor;
+    private AssignmentVisitor      assignmentVisitor;
+    private BlockVisitor           blockVisitor;
+    private OperandVisitor         operandVisitor;
+    private OperationVisitor       operationVisitor;
+    private OperatorVisitor        operatorVisitor;
+    private PrimitiveVisitor       primitiveVisitor;
+    private PrimitiveStringVisitor primitiveStringVisitor;
+    private PrimitiveIntVisitor    primitiveIntVisitor;
+    private PrimitiveFloatVisitor  primitiveFloatVisitor;
+    private ReferenceVisitor       referenceVisitor;
+    private RootVisitor            rootVisitor;
+    private SingletonVisitor       singletonVisitor;
+    private StatementVisitor       statementVisitor;
 
     public void init(NanoToASTVisitor master) {
-        assignmentVisitor = new AssignmentVisitor(master);
-        blockVisitor      = new BlockVisitor(master);
-        operandVisitor    = new OperandVisitor(master);
-        operatorVisitor   = new OperatorVisitor(master);
-        operationVisitor  = new OperationVisitor(master);
-        primitiveVisitor  = new PrimitiveVisitor(master);
-        referenceVisitor  = new ReferenceVisitor(master);
-        rootVisitor       = new RootVisitor(master);
-        singletonVisitor  = new SingletonVisitor(master);
-        statementVisitor  = new StatementVisitor(master);
+        assignmentVisitor      = new AssignmentVisitor(master);
+        blockVisitor           = new BlockVisitor(master);
+        operandVisitor         = new OperandVisitor(master);
+        operatorVisitor        = new OperatorVisitor(master);
+        operationVisitor       = new OperationVisitor(master);
+        primitiveVisitor       = new PrimitiveVisitor(master);
+        primitiveStringVisitor = new PrimitiveStringVisitor(master);
+        referenceVisitor       = new ReferenceVisitor(master);
+        rootVisitor            = new RootVisitor(master);
+        singletonVisitor       = new SingletonVisitor(master);
+        statementVisitor       = new StatementVisitor(master);
     }
 
     public RootNode visit(RootContext ctx) {
@@ -79,53 +83,14 @@ public class SlaveVisitorManager {
     }
 
     public PrimitiveNode<String> visit(StringPrimitiveContext ctx) {
-        return primitiveVisitor.visit(ctx);
+        return primitiveStringVisitor.visit(ctx);
     }
 
     public PrimitiveNode<Double> visit(FloatPrimitiveContext ctx) {
-        return primitiveVisitor.visit(ctx);
+        return primitiveFloatVisitor.visit(ctx);
     }
 
     public PrimitiveNode<Integer> visit(IntPrimitiveContext ctx) {
-        return primitiveVisitor.visit(ctx);
+        return primitiveIntVisitor.visit(ctx);
     }
-//    public AssignmentVisitor getAssignmentVisitor() {
-//        return assignmentVisitor;
-//    }
-//
-//    public BlockVisitor getBlockVisitor() {
-//        return blockVisitor;
-//    }
-//
-//    public OperandVisitor getOperandVisitor() {
-//        return operandVisitor;
-//    }
-//
-//    public OperationVisitor getOperationVisitor() {
-//        return operationVisitor;
-//    }
-//
-//    public OperatorVisitor getOperatorVisitor() {
-//        return operatorVisitor;
-//    }
-//
-//    public PrimitiveVisitor getPrimitiveVisitor() {
-//        return primitiveVisitor;
-//    }
-//
-//    public ReferenceVisitor getReferenceVisitor() {
-//        return referenceVisitor;
-//    }
-//
-//    public RootVisitor getRootVisitor() {
-//        return rootVisitor;
-//    }
-//
-//    public SingletonVisitor getSingletonVisitor() {
-//        return singletonVisitor;
-//    }
-//
-//    public StatementVisitor getStatementVisitor() {
-//        return statementVisitor;
-//    }
 }

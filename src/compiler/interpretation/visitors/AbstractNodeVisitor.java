@@ -30,4 +30,20 @@ public abstract class AbstractNodeVisitor {
             throw new IllegalArgumentException("Unexpected payload class");
         }
     }
+
+    protected void verifyPayload(ParseTree child, Class[] legalChildClasses) {
+        if (child.getPayload() == null) {
+            throw new IllegalArgumentException("Empty payload");
+        }
+
+        Object payload = child.getPayload();
+
+        for(Class clazz : legalChildClasses) {
+            if (clazz.isInstance(payload)) {
+                return;
+            }
+        }
+
+        throw new IllegalArgumentException("Unexpected payload class");
+    }
 }

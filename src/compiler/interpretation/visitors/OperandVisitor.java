@@ -30,23 +30,8 @@ public class OperandVisitor extends AbstractNodeVisitor {
         }
 
         ParseTree child = ctx.getChild(0);
-        verify(child);
+        verifyPayload(child, legalChildClasses);
         return (ValueNode) child.accept(master);
     }
 
-    private void verify(ParseTree child) {
-        if (child.getPayload() == null) {
-            throw new IllegalArgumentException("Empty operand");
-        }
-
-        Object payload = child.getPayload();
-
-        for(Class clazz : legalChildClasses) {
-            if (clazz.isInstance(payload)) {
-                return;
-            }
-        }
-
-        throw new IllegalArgumentException("Unexpected operand class");
-    }
 }
