@@ -11,7 +11,7 @@ import compiler.nodes.ValueNode;
 /**
  * Created by dbborens on 2/14/15.
  */
-public class SingletonVisitor extends NodeVisitor{
+public class SingletonVisitor extends AbstractNodeVisitor {
     public SingletonVisitor(NanoToASTVisitor master) {
         super(master);
     }

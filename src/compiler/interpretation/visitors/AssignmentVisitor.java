@@ -14,7 +14,7 @@ import static compiler.interpretation.nanosyntax.NanosyntaxParser.AssignmentCont
 /**
  * Created by dbborens on 2/14/15.
  */
-public class AssignmentVisitor extends NodeVisitor {
+public class AssignmentVisitor extends AbstractNodeVisitor {
 
     public AssignmentVisitor(NanoToASTVisitor master) {
         super(master);

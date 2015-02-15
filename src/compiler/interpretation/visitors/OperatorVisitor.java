@@ -7,12 +7,11 @@ package compiler.interpretation.visitors;
 
 import compiler.interpretation.nanosyntax.NanosyntaxParser;
 import compiler.nodes.PrimitiveNode;
-import compiler.nodes.ValueNode;
 
 /**
  * Created by dbborens on 2/14/15.
  */
-public class OperatorVisitor extends NodeVisitor {
+public class OperatorVisitor extends AbstractNodeVisitor {
     public OperatorVisitor(NanoToASTVisitor master) {
         super(master);
     }

@@ -11,7 +11,7 @@ import compiler.nodes.StatementNode;
 /**
  * Created by dbborens on 2/14/15.
  */
-public class StatementVisitor extends NodeVisitor {
+public class StatementVisitor extends AbstractNodeVisitor {
     public StatementVisitor(NanoToASTVisitor master) {
         super(master);
     }

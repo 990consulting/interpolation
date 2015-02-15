@@ -12,9 +12,9 @@ public class OperationNode implements ValueNode {
 
     public ValueNode left;
     public ValueNode right;
-    public String operator;
+    public PrimitiveNode<String> operator;
 
-    public OperationNode(ValueNode left, ValueNode right, String operator) {
+    public OperationNode(ValueNode left, ValueNode right, PrimitiveNode<String> operator) {
         this.left = left;
         this.right = right;
         this.operator = operator;
@@ -28,7 +28,7 @@ public class OperationNode implements ValueNode {
         return right;
     }
 
-    public String getOperator() {
+    public PrimitiveNode<String> getOperator() {
         return operator;
     }
 }

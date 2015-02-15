@@ -5,9 +5,7 @@
 
 package compiler.interpretation.visitors;
 
-import compiler.interpretation.nanosyntax.NanosyntaxParser;
 import compiler.nodes.BlockNode;
-import compiler.nodes.RootNode;
 import compiler.nodes.StatementNode;
 import org.antlr.v4.runtime.ParserRuleContext;
 
@@ -18,7 +16,7 @@ import java.util.stream.Stream;
 /**
  * Created by dbborens on 2/14/15.
  */
-public class AbstractBlockVisitor<T extends BlockNode, S extends ParserRuleContext> extends NodeVisitor {
+public class AbstractBlockVisitor<T extends BlockNode, S extends ParserRuleContext> extends AbstractNodeVisitor {
     private Function<Stream<StatementNode>, T> constructor;
 
     public AbstractBlockVisitor(NanoToASTVisitor master, Function<Stream<StatementNode>, T> constructor) {

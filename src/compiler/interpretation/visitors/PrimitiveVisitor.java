@@ -11,7 +11,7 @@ import compiler.nodes.PrimitiveNode;
 /**
  * Created by dbborens on 2/14/15.
  */
-public class PrimitiveVisitor extends NodeVisitor{
+public class PrimitiveVisitor extends AbstractNodeVisitor {
     public PrimitiveVisitor(NanoToASTVisitor master) {
         super(master);
     }

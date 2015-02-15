@@ -11,7 +11,7 @@ import compiler.nodes.ReferenceNode;
 /**
  * Created by dbborens on 2/14/15.
  */
-public class ReferenceVisitor extends NodeVisitor{
+public class ReferenceVisitor extends AbstractNodeVisitor {
     public ReferenceVisitor(NanoToASTVisitor master) {
         super(master);
     }

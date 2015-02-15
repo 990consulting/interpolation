@@ -6,15 +6,14 @@
 package compiler.interpretation.visitors;
 
 import compiler.nodes.BaseNode;
-import compiler.nodes.ReferenceNode;
 import compiler.nodes.ValueNode;
 import org.antlr.v4.runtime.ParserRuleContext;
-import org.antlr.v4.runtime.tree.ParseTree;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 import static compiler.interpretation.nanosyntax.NanosyntaxParser.*;
+
 public class OperandVisitorTest extends AbstractVisitorTest {
 
     private OperandContext ctx;
