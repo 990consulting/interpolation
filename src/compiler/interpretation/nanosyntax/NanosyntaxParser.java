@@ -158,7 +158,10 @@ public class NanosyntaxParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_statement; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof NanosyntaxVisitor ) return ((NanosyntaxVisitor<? extends T>)visitor).visitStatement(this);
+			if ( visitor instanceof NanosyntaxVisitor ) {
+                T ret =((NanosyntaxVisitor<? extends T>) visitor).visitStatement(this);
+                return ret;
+            }
 			else return visitor.visitChildren(this);
 		}
 	}

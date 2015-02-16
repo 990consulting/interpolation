@@ -24,4 +24,17 @@ public class AssignmentNode implements StatementNode {
     public ValueNode getValue() {
         return value;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AssignmentNode that = (AssignmentNode) o;
+
+        if (!reference.equals(that.reference)) return false;
+        if (!value.equals(that.value)) return false;
+
+        return true;
+    }
 }

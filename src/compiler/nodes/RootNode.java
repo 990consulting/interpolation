@@ -16,4 +16,12 @@ public class RootNode extends BlockNode {
         super(children);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || !(o instanceof RootNode)) {
+            return false;
+        }
+
+        return super.equals(o);
+    }
 }

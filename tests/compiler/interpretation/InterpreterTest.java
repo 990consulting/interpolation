@@ -5,6 +5,7 @@
 
 package compiler.interpretation;
 
+import compiler.nodes.BaseNode;
 import compiler.nodes.RootNode;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +24,7 @@ public class InterpreterTest {
 
     @Before
     public void init() {
-        AntlrBinding<RootNode> antlr = mock(AntlrBinding.class);
+        AntlrBinding<BaseNode> antlr = mock(AntlrBinding.class);
         file = mock(File.class);
         when(file.exists()).thenReturn(true);
         rootNode = mock(RootNode.class);
@@ -33,7 +34,7 @@ public class InterpreterTest {
 
     @Test
     public void interpretReturnsRootNode() {
-        RootNode actual = query.interpret(file);
+        BaseNode actual = query.interpret(file);
         assertSame(rootNode, actual);
     }
 

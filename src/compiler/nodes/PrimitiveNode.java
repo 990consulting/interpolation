@@ -19,4 +19,16 @@ public class PrimitiveNode<T> implements ValueNode {
     public T getContent() {
         return content;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PrimitiveNode that = (PrimitiveNode) o;
+
+        if (!content.equals(that.content)) return false;
+
+        return true;
+    }
 }

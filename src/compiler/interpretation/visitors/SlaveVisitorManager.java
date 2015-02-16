@@ -4,7 +4,7 @@
  */
 
 package compiler.interpretation.visitors;
-import com.sun.prism.impl.BaseContext;
+
 import compiler.nodes.*;
 
 import static compiler.interpretation.nanosyntax.NanosyntaxParser.*;
@@ -36,6 +36,8 @@ public class SlaveVisitorManager {
         operationVisitor       = new OperationVisitor(master);
         primitiveVisitor       = new PrimitiveVisitor(master);
         primitiveStringVisitor = new PrimitiveStringVisitor(master);
+        primitiveIntVisitor    = new PrimitiveIntVisitor(master);
+        primitiveFloatVisitor  = new PrimitiveFloatVisitor(master);
         referenceVisitor       = new ReferenceVisitor(master);
         rootVisitor            = new RootVisitor(master);
         singletonVisitor       = new SingletonVisitor(master);

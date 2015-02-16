@@ -32,4 +32,17 @@ public class ReferenceNode implements ValueNode {
     public ReferenceNode getChild() {
         return child;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ReferenceNode that = (ReferenceNode) o;
+
+        if (child != null ? !child.equals(that.child) : that.child != null) return false;
+        if (!name.equals(that.name)) return false;
+
+        return true;
+    }
 }

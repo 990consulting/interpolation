@@ -24,4 +24,16 @@ public class BlockNode implements ValueNode {
     public Stream<StatementNode> getChildren() {
         return childList.stream();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        BlockNode blockNode = (BlockNode) o;
+
+        if (!childList.equals(blockNode.childList)) return false;
+
+        return true;
+    }
 }

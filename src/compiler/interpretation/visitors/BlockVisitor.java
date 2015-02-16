@@ -16,4 +16,13 @@ public class BlockVisitor extends AbstractBlockVisitor<BlockNode, NanosyntaxPars
     public BlockVisitor(NanoToASTVisitor master) {
         super(master, BlockNode::new);
     }
+
+    @Override
+    public BlockNode visit(NanosyntaxParser.BlockContext ctx) {
+        if (ctx.getChildCount() < 2) {
+            throw new IllegalArgumentException("Malformed block");
+        }
+        // Ignore the left and right brackets
+        return doVisit(ctx, 1, ctx.getChildCount() - 1);
+    }
 }

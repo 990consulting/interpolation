@@ -5,7 +5,7 @@
 
 package compiler.interpretation;
 
-import compiler.nodes.RootNode;
+import compiler.nodes.BaseNode;
 
 import java.io.File;
 
@@ -14,13 +14,13 @@ import java.io.File;
  */
 public class Interpreter {
 
-    private AntlrBinding<RootNode> antlr;
+    private AntlrBinding<BaseNode> antlr;
 
-    public Interpreter(AntlrBinding<RootNode> antlr) {
+    public Interpreter(AntlrBinding<BaseNode> antlr) {
         this.antlr = antlr;
     }
 
-    public RootNode interpret(File file) {
+    public BaseNode interpret(File file) {
         verify(file);
         return antlr.interpret(file);
     }

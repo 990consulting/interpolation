@@ -8,37 +8,44 @@ package compiler.interpretation.visitors;
 import compiler.nodes.BlockNode;
 import compiler.nodes.StatementNode;
 import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import static compiler.interpretation.nanosyntax.NanosyntaxParser.DefinitionContext;
+import static compiler.interpretation.nanosyntax.NanosyntaxParser.StatementContext;
+
 /**
  * Created by dbborens on 2/14/15.
  */
-public class AbstractBlockVisitor<T extends BlockNode, S extends ParserRuleContext> extends AbstractNodeVisitor {
+public abstract class AbstractBlockVisitor<T extends BlockNode, S extends ParserRuleContext> extends AbstractNodeVisitor {
     private Function<Stream<StatementNode>, T> constructor;
+
+    private Class[] validPayloadContexts = new Class[] {
+            StatementContext.class,
+            DefinitionContext.class
+    };
 
     public AbstractBlockVisitor(NanoToASTVisitor master, Function<Stream<StatementNode>, T> constructor) {
         super(master);
         this.constructor = constructor;
     }
 
-    public T visit(S ctx) {
-        int n = ctx.getChildCount();
-        Stream<StatementNode> children = IntStream.range(0, n)
+    public abstract T visit(S ctx);
+
+    protected T doVisit(S ctx, int start, int end) {
+        Stream<StatementNode> children = IntStream.range(start, end)
                 .mapToObj(ctx::getChild)             // int --> ParseTree
-                .map(child -> child.accept(master))  // ParseTree -> Object
-                .map(this::verify);
+                .map(this::verifyAndAccept);
 
         return constructor.apply(children);
     }
-
-    private StatementNode verify(Object o) {
-        if (!(o instanceof StatementNode)) {
-            throw new IllegalArgumentException("Unexpected node or object: " + o.getClass().toString());
-        }
-
-        return (StatementNode) o;
+    private StatementNode verifyAndAccept(ParseTree child) {
+        verifyPayload(child, validPayloadContexts);
+        StatementNode ret = (StatementNode) child.accept(master);
+        return ret;
     }
+
 }

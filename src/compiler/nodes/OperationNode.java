@@ -31,4 +31,18 @@ public class OperationNode implements ValueNode {
     public PrimitiveNode<String> getOperator() {
         return operator;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        OperationNode that = (OperationNode) o;
+
+        if (!left.equals(that.left)) return false;
+        if (!operator.equals(that.operator)) return false;
+        if (!right.equals(that.right)) return false;
+
+        return true;
+    }
 }
