@@ -6,7 +6,7 @@
 package compiler.translate.nodes;
 
 import compiler.interpret.nodes.ASTReferenceNode;
-import compiler.translate.ReferenceNameConverter;
+import compiler.translate.visitors.ReferenceNameConverter;
 import org.junit.Before;
 import org.junit.Test;
 

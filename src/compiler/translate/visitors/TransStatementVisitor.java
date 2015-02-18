@@ -3,7 +3,7 @@
  * Trustees of Princeton University. All rights reserved.
  */
 
-package compiler.translate;
+package compiler.translate.visitors;
 
 import compiler.interpret.nodes.*;
 import compiler.translate.nodes.TranslatorNode;
@@ -14,17 +14,17 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 /**
  * Created by dbborens on 2/17/15.
  */
-public class ASTStatementVisitor implements TranslationVisitor<ASTStatementNode> {
+public class TransStatementVisitor implements TranslationVisitor<ASTStatementNode> {
 
     private SymbolTable symbolTable;
 
-    public ASTStatementVisitor(SymbolTable symbolTable) {
+    public TransStatementVisitor(SymbolTable symbolTable) {
         this.symbolTable = symbolTable;
     }
 
     @Override
     public TranslatorNode visit(ASTStatementNode toVisit) {
-        TranslatorObjectNode ret = new TranslatorObjectNode(symbolTable.getType());
+        TranslatorObjectNode ret = symbolTable.node();
         doVisit(ret, toVisit);
         return ret;
     }
@@ -56,7 +56,7 @@ public class ASTStatementVisitor implements TranslationVisitor<ASTStatementNode>
 
     private TranslatorNode translateValue(ASTAssignmentNode toVisit) {
         ASTValueNode astValue = toVisit.getValue();
-        TranslationVisitor visitor = symbolTable.getVisitorFor(astValue);
+        TranslationVisitor visitor = symbolTable.getVisitorFor(toVisit.getReference());
         TranslatorNode translatedValue = visitor.visit(astValue);
         return translatedValue;
     }

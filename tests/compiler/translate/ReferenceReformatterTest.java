@@ -9,6 +9,7 @@ import compiler.interpret.nodes.ASTAssignmentNode;
 import compiler.interpret.nodes.ASTNode;
 import compiler.interpret.nodes.ASTReferenceNode;
 import compiler.nodes.Node;
+import compiler.translate.visitors.ReferenceReformatter;
 import org.junit.Before;
 import org.junit.Test;
 

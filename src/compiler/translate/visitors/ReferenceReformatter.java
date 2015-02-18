@@ -3,7 +3,7 @@
  * Trustees of Princeton University. All rights reserved.
  */
 
-package compiler.translate;
+package compiler.translate.visitors;
 
 import compiler.interpret.nodes.ASTAssignmentNode;
 import compiler.interpret.nodes.ASTNode;
