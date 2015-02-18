@@ -40,58 +40,58 @@ public class PreambleIntegrationTest implements FileTest {
         // See attached scan (in samples) for reference. From bottom, then
         // left to right.
 
-        ReferenceNode action = new ReferenceNode("action");
-        ReferenceNode wander = new ReferenceNode("wander");
-        AssignmentNode actionAssignment = new AssignmentNode(action, wander);
+        ASTReferenceNode action = new ASTReferenceNode("action");
+        ASTReferenceNode wander = new ASTReferenceNode("wander");
+        ASTAssignmentNode actionAssignment = new ASTAssignmentNode(action, wander);
 
-        ReferenceNode every = new ReferenceNode("every");
-        PrimitiveNode<Double> period = new PrimitiveNode<>(1.0);
-        AssignmentNode everyAssignment = new AssignmentNode(every, period);
+        ASTReferenceNode every = new ASTReferenceNode("every");
+        ASTPrimitiveNode<Double> period = new ASTPrimitiveNode<>(1.0);
+        ASTAssignmentNode everyAssignment = new ASTAssignmentNode(every, period);
 
-        ReferenceNode until = new ReferenceNode("until");
+        ASTReferenceNode until = new ASTReferenceNode("until");
 
-        ReferenceNode time = new ReferenceNode("time");
-        PrimitiveNode<String> ge = new PrimitiveNode<>(">=");
-        PrimitiveNode<Double> hundred = new PrimitiveNode<>(100.0);
-        OperationNode timeGeHundred = new OperationNode(time, hundred, ge);
+        ASTReferenceNode time = new ASTReferenceNode("time");
+        ASTPrimitiveNode<String> ge = new ASTPrimitiveNode<>(">=");
+        ASTPrimitiveNode<Double> hundred = new ASTPrimitiveNode<>(100.0);
+        ASTOperationNode timeGeHundred = new ASTOperationNode(time, hundred, ge);
 
-        AssignmentNode untilAssignment = new AssignmentNode(until, timeGeHundred);
+        ASTAssignmentNode untilAssignment = new ASTAssignmentNode(until, timeGeHundred);
 
-        Stream<StatementNode> behaviorStatements = Stream
+        Stream<ASTStatementNode> behaviorStatements = Stream
                 .of(
                         actionAssignment,
                         everyAssignment,
                         untilAssignment
                 );
 
-        ReferenceNode behavior = new ReferenceNode("Behavior");
-        BlockNode behaviorBlock = new BlockNode(behaviorStatements);
+        ASTReferenceNode behavior = new ASTReferenceNode("Behavior");
+        ASTBlockNode behaviorBlock = new ASTBlockNode(behaviorStatements);
 
-        AssignmentNode behaviorAssigment = new AssignmentNode(behavior, behaviorBlock);
+        ASTAssignmentNode behaviorAssigment = new ASTAssignmentNode(behavior, behaviorBlock);
 
-        ReferenceNode doRef = new ReferenceNode("do");
-        ReferenceNode agent = new ReferenceNode("Agent", doRef);
+        ASTReferenceNode doRef = new ASTReferenceNode("do");
+        ASTReferenceNode agent = new ASTReferenceNode("Agent", doRef);
 
-        ReferenceNode count = new ReferenceNode("count");
-        PrimitiveNode<Integer> one = new PrimitiveNode<>(1);
-        AssignmentNode countAssignment = new AssignmentNode(count, one);
+        ASTReferenceNode count = new ASTReferenceNode("count");
+        ASTPrimitiveNode<Integer> one = new ASTPrimitiveNode<>(1);
+        ASTAssignmentNode countAssignment = new ASTAssignmentNode(count, one);
 
-        AssignmentNode agentAssignment = new AssignmentNode(agent, behaviorAssigment);
-        ReferenceNode description = new ReferenceNode("description");
-        AssignmentNode descriptionAssignment = new AssignmentNode(description, agentAssignment);
+        ASTAssignmentNode agentAssignment = new ASTAssignmentNode(agent, behaviorAssigment);
+        ASTReferenceNode description = new ASTReferenceNode("description");
+        ASTAssignmentNode descriptionAssignment = new ASTAssignmentNode(description, agentAssignment);
 
-        BlockNode scatterBlock = new BlockNode(Stream.of(
+        ASTBlockNode scatterBlock = new ASTBlockNode(Stream.of(
                 countAssignment,
                 descriptionAssignment
         ));
 
-        ReferenceNode scatter = new ReferenceNode("scatter");
-        AssignmentNode scatterAssignment = new AssignmentNode(scatter, scatterBlock);
+        ASTReferenceNode scatter = new ASTReferenceNode("scatter");
+        ASTAssignmentNode scatterAssignment = new ASTAssignmentNode(scatter, scatterBlock);
 
-        ReferenceNode initially = new ReferenceNode("initially");
-        AssignmentNode initiallyAssignment = new AssignmentNode(initially, scatterAssignment);
+        ASTReferenceNode initially = new ASTReferenceNode("initially");
+        ASTAssignmentNode initiallyAssignment = new ASTAssignmentNode(initially, scatterAssignment);
 
-        RootNode root = new RootNode(Stream.of(initiallyAssignment));
+        ASTRootNode root = new ASTRootNode(Stream.of(initiallyAssignment));
         return root;
     }
 }

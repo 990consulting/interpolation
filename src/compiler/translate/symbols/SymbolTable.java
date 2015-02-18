@@ -5,8 +5,8 @@
 
 package compiler.translate.symbols;
 
-import compiler.interpret.nodes.ReferenceNode;
-import compiler.interpret.nodes.ValueNode;
+import compiler.interpret.nodes.ASTReferenceNode;
+import compiler.interpret.nodes.ASTValueNode;
 import compiler.translate.TranslationVisitor;
 import compiler.translate.nodes.TranslatorReferenceNode;
 
@@ -18,7 +18,7 @@ import java.util.stream.Stream;
  */
 public abstract class SymbolTable {
 
-    public void validate(ReferenceNode node) {
+    public void validate(ASTReferenceNode node) {
         if (isUnrecognized(node)) {
             String msg = Stream.of(
                     "Type '",
@@ -32,9 +32,9 @@ public abstract class SymbolTable {
     }
 
 
-    public abstract TranslationVisitor getVisitorFor(ValueNode node);
+    public abstract TranslationVisitor getVisitorFor(ASTValueNode node);
 
     public abstract TranslatorReferenceNode getType();
 
-    protected abstract boolean isUnrecognized(ReferenceNode node);
+    protected abstract boolean isUnrecognized(ASTReferenceNode node);
 }

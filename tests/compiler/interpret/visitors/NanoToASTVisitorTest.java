@@ -27,7 +27,7 @@ public class NanoToASTVisitorTest {
     @Test
     public void testVisitRoot() throws Exception {
         RootContext ctx = mock(RootContext.class);
-        RootNode expected = mock(RootNode.class);
+        ASTRootNode expected = mock(ASTRootNode.class);
         when(manager.visit(ctx)).thenReturn(expected);
 
         ASTNode actual = query.visitRoot(ctx);
@@ -37,7 +37,7 @@ public class NanoToASTVisitorTest {
     @Test
     public void testVisitStatement() throws Exception {
         StatementContext ctx = mock(StatementContext.class);
-        StatementNode expected = mock(StatementNode.class);
+        ASTStatementNode expected = mock(ASTStatementNode.class);
         when(manager.visit(ctx)).thenReturn(expected);
 
         ASTNode actual = query.visitStatement(ctx);
@@ -47,7 +47,7 @@ public class NanoToASTVisitorTest {
     @Test
     public void testVisitAssignment() throws Exception {
         AssignmentContext ctx = mock(AssignmentContext.class);
-        AssignmentNode expected = mock(AssignmentNode.class);
+        ASTAssignmentNode expected = mock(ASTAssignmentNode.class);
         when(manager.visit(ctx)).thenReturn(expected);
 
         ASTNode actual = query.visitAssignment(ctx);
@@ -57,7 +57,7 @@ public class NanoToASTVisitorTest {
     @Test
     public void testVisitBlock() throws Exception {
         BlockContext ctx = mock(BlockContext.class);
-        BlockNode expected = mock(BlockNode.class);
+        ASTBlockNode expected = mock(ASTBlockNode.class);
         when(manager.visit(ctx)).thenReturn(expected);
 
         ASTNode actual = query.visitBlock(ctx);
@@ -67,7 +67,7 @@ public class NanoToASTVisitorTest {
     @Test
     public void testVisitSingleton() throws Exception {
         SingletonContext ctx = mock(SingletonContext.class);
-        ValueNode expected = mock(ValueNode.class);
+        ASTValueNode expected = mock(ASTValueNode.class);
         when(manager.visit(ctx)).thenReturn(expected);
 
         ASTNode actual = query.visitSingleton(ctx);
@@ -77,7 +77,7 @@ public class NanoToASTVisitorTest {
     @Test
     public void testVisitOperation() throws Exception {
         OperationContext ctx = mock(OperationContext.class);
-        OperationNode expected = mock(OperationNode.class);
+        ASTOperationNode expected = mock(ASTOperationNode.class);
         when(manager.visit(ctx)).thenReturn(expected);
 
         ASTNode actual = query.visitOperation(ctx);
@@ -87,7 +87,7 @@ public class NanoToASTVisitorTest {
     @Test
     public void testVisitOperand() throws Exception {
         OperandContext ctx = mock(OperandContext.class);
-        ValueNode expected = mock(ValueNode.class);
+        ASTValueNode expected = mock(ASTValueNode.class);
         when(manager.visit(ctx)).thenReturn(expected);
 
         ASTNode actual = query.visitOperand(ctx);
@@ -97,7 +97,7 @@ public class NanoToASTVisitorTest {
     @Test
     public void testVisitOperator() throws Exception {
         OperatorContext ctx = mock(OperatorContext.class);
-        PrimitiveNode<String> expected = (PrimitiveNode<String>) mock(PrimitiveNode.class);
+        ASTPrimitiveNode<String> expected = (ASTPrimitiveNode<String>) mock(ASTPrimitiveNode.class);
         when(manager.visit(ctx)).thenReturn(expected);
 
         ASTNode actual = query.visitOperator(ctx);
@@ -107,7 +107,7 @@ public class NanoToASTVisitorTest {
     @Test
     public void testVisitReference() throws Exception {
         ReferenceContext ctx = mock(ReferenceContext.class);
-        ReferenceNode expected = mock(ReferenceNode.class);
+        ASTReferenceNode expected = mock(ASTReferenceNode.class);
         when(manager.visit(ctx)).thenReturn(expected);
 
         ASTNode actual = query.visitReference(ctx);
@@ -117,7 +117,7 @@ public class NanoToASTVisitorTest {
     @Test
     public void testVisitPrimitive() throws Exception {
         PrimitiveContext ctx = mock(PrimitiveContext.class);
-        PrimitiveNode expected = mock(PrimitiveNode.class);
+        ASTPrimitiveNode expected = mock(ASTPrimitiveNode.class);
         when(manager.visit(ctx)).thenReturn(expected);
 
         ASTNode actual = query.visitPrimitive(ctx);
@@ -127,7 +127,7 @@ public class NanoToASTVisitorTest {
     @Test
     public void testVisitStringPrimitive() throws Exception {
         StringPrimitiveContext ctx = mock(StringPrimitiveContext.class);
-        PrimitiveNode<String> expected = (PrimitiveNode<String>) mock(PrimitiveNode.class);
+        ASTPrimitiveNode<String> expected = (ASTPrimitiveNode<String>) mock(ASTPrimitiveNode.class);
         when(manager.visit(ctx)).thenReturn(expected);
 
         ASTNode actual = query.visitStringPrimitive(ctx);
@@ -137,7 +137,7 @@ public class NanoToASTVisitorTest {
     @Test
     public void testVisitFloatPrimitive() throws Exception {
         FloatPrimitiveContext ctx = mock(FloatPrimitiveContext.class);
-        PrimitiveNode<Double> expected = (PrimitiveNode<Double>) mock(PrimitiveNode.class);
+        ASTPrimitiveNode<Double> expected = (ASTPrimitiveNode<Double>) mock(ASTPrimitiveNode.class);
         when(manager.visit(ctx)).thenReturn(expected);
 
         ASTNode actual = query.visitFloatPrimitive(ctx);
@@ -147,7 +147,7 @@ public class NanoToASTVisitorTest {
     @Test
     public void testVisitIntPrimitive() throws Exception {
         IntPrimitiveContext ctx = mock(IntPrimitiveContext.class);
-        PrimitiveNode<Integer> expected = (PrimitiveNode<Integer>) mock(PrimitiveNode.class);
+        ASTPrimitiveNode<Integer> expected = (ASTPrimitiveNode<Integer>) mock(ASTPrimitiveNode.class);
         when(manager.visit(ctx)).thenReturn(expected);
 
         ASTNode actual = query.visitIntPrimitive(ctx);

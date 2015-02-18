@@ -5,9 +5,9 @@
 
 package compiler.translate;
 
+import compiler.interpret.nodes.ASTAssignmentNode;
 import compiler.interpret.nodes.ASTNode;
-import compiler.interpret.nodes.AssignmentNode;
-import compiler.interpret.nodes.ReferenceNode;
+import compiler.interpret.nodes.ASTReferenceNode;
 import compiler.nodes.Node;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,33 +24,33 @@ public class ReferenceReformatterTest {
     }
 
     private ASTNode configureInput() {
-        ReferenceNode rightSub = new ReferenceNode("rightSub");
-        ReferenceNode rightSuper = new ReferenceNode("rightSuper", rightSub);
+        ASTReferenceNode rightSub = new ASTReferenceNode("rightSub");
+        ASTReferenceNode rightSuper = new ASTReferenceNode("rightSuper", rightSub);
 
-        ReferenceNode middleSub = new ReferenceNode("middleSub");
-        ReferenceNode middleSuper = new ReferenceNode("middleSuper", middleSub);
-        AssignmentNode middleAssignment = new AssignmentNode(middleSuper, rightSuper);
+        ASTReferenceNode middleSub = new ASTReferenceNode("middleSub");
+        ASTReferenceNode middleSuper = new ASTReferenceNode("middleSuper", middleSub);
+        ASTAssignmentNode middleAssignment = new ASTAssignmentNode(middleSuper, rightSuper);
 
-        ReferenceNode leftSub = new ReferenceNode("leftSub");
-        ReferenceNode leftSuper = new ReferenceNode("leftSuper", leftSub);
-        return new AssignmentNode(leftSuper, middleAssignment);
+        ASTReferenceNode leftSub = new ASTReferenceNode("leftSub");
+        ASTReferenceNode leftSuper = new ASTReferenceNode("leftSuper", leftSub);
+        return new ASTAssignmentNode(leftSuper, middleAssignment);
     }
 
 
     private ASTNode configureOutput() {
-        ReferenceNode rightSub = new ReferenceNode("rightSub");
-        ReferenceNode rightSuper = new ReferenceNode("rightSuper", rightSub);
-        ReferenceNode middleSub = new ReferenceNode("middleSub");
-        AssignmentNode middleSubAssignment = new AssignmentNode(middleSub, rightSuper);
+        ASTReferenceNode rightSub = new ASTReferenceNode("rightSub");
+        ASTReferenceNode rightSuper = new ASTReferenceNode("rightSuper", rightSub);
+        ASTReferenceNode middleSub = new ASTReferenceNode("middleSub");
+        ASTAssignmentNode middleSubAssignment = new ASTAssignmentNode(middleSub, rightSuper);
 
-        ReferenceNode middleSuper = new ReferenceNode("middleSuper");
-        AssignmentNode middleSuperAssignment = new AssignmentNode(middleSuper, middleSubAssignment);
+        ASTReferenceNode middleSuper = new ASTReferenceNode("middleSuper");
+        ASTAssignmentNode middleSuperAssignment = new ASTAssignmentNode(middleSuper, middleSubAssignment);
 
-        ReferenceNode leftSub = new ReferenceNode("leftSub");
-        AssignmentNode leftSubAssignment = new AssignmentNode(leftSub, middleSuperAssignment);
+        ASTReferenceNode leftSub = new ASTReferenceNode("leftSub");
+        ASTAssignmentNode leftSubAssignment = new ASTAssignmentNode(leftSub, middleSuperAssignment);
 
-        ReferenceNode leftSuper = new ReferenceNode("leftSuper");
-        return new AssignmentNode(leftSuper, leftSubAssignment);
+        ASTReferenceNode leftSuper = new ASTReferenceNode("leftSuper");
+        return new ASTAssignmentNode(leftSuper, leftSubAssignment);
     }
 
 

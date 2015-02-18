@@ -14,85 +14,85 @@ import static compiler.interpret.nanosyntax.NanosyntaxParser.*;
  */
 public class SlaveNanoVisitorManager {
 
-    private AssignmentVisitor      assignmentVisitor;
-    private BlockVisitor           blockVisitor;
-    private OperandVisitor         operandVisitor;
-    private OperationVisitor       operationVisitor;
-    private OperatorVisitor        operatorVisitor;
-    private PrimitiveVisitor       primitiveVisitor;
-    private PrimitiveStringVisitor primitiveStringVisitor;
-    private PrimitiveIntVisitor    primitiveIntVisitor;
-    private PrimitiveFloatVisitor  primitiveFloatVisitor;
-    private ReferenceVisitor       referenceVisitor;
-    private RootVisitor            rootVisitor;
-    private SingletonVisitor       singletonVisitor;
-    private StatementVisitor       statementVisitor;
+    private ASTAssignmentVisitor assignmentVisitor;
+    private ASTBlockVisitor blockVisitor;
+    private ASTOperandVisitor operandVisitor;
+    private ASTOperationVisitor operationVisitor;
+    private ASTOperatorVisitor operatorVisitor;
+    private ASTPrimitiveVisitor primitiveVisitor;
+    private ASTPrimitiveStringVisitor primitiveStringVisitor;
+    private ASTPrimitiveIntVisitor primitiveIntVisitor;
+    private ASTPrimitiveFloatVisitor primitiveFloatVisitor;
+    private ASTReferenceVisitor referenceVisitor;
+    private ASTRootVisitor rootVisitor;
+    private ASTSingletonVisitor singletonVisitor;
+    private ASTStatementVisitor statementVisitor;
 
     public void init(NanoToASTVisitor master) {
-        assignmentVisitor      = new AssignmentVisitor(master);
-        blockVisitor           = new BlockVisitor(master);
-        operandVisitor         = new OperandVisitor(master);
-        operatorVisitor        = new OperatorVisitor(master);
-        operationVisitor       = new OperationVisitor(master);
-        primitiveVisitor       = new PrimitiveVisitor(master);
-        primitiveStringVisitor = new PrimitiveStringVisitor(master);
-        primitiveIntVisitor    = new PrimitiveIntVisitor(master);
-        primitiveFloatVisitor  = new PrimitiveFloatVisitor(master);
-        referenceVisitor       = new ReferenceVisitor(master);
-        rootVisitor            = new RootVisitor(master);
-        singletonVisitor       = new SingletonVisitor(master);
-        statementVisitor       = new StatementVisitor(master);
+        assignmentVisitor      = new ASTAssignmentVisitor(master);
+        blockVisitor           = new ASTBlockVisitor(master);
+        operandVisitor         = new ASTOperandVisitor(master);
+        operatorVisitor        = new ASTOperatorVisitor(master);
+        operationVisitor       = new ASTOperationVisitor(master);
+        primitiveVisitor       = new ASTPrimitiveVisitor(master);
+        primitiveStringVisitor = new ASTPrimitiveStringVisitor(master);
+        primitiveIntVisitor    = new ASTPrimitiveIntVisitor(master);
+        primitiveFloatVisitor  = new ASTPrimitiveFloatVisitor(master);
+        referenceVisitor       = new ASTReferenceVisitor(master);
+        rootVisitor            = new ASTRootVisitor(master);
+        singletonVisitor       = new ASTSingletonVisitor(master);
+        statementVisitor       = new ASTStatementVisitor(master);
     }
 
-    public RootNode visit(RootContext ctx) {
+    public ASTRootNode visit(RootContext ctx) {
         return rootVisitor.visit(ctx);
     }
 
-    public StatementNode visit(StatementContext ctx) {
+    public ASTStatementNode visit(StatementContext ctx) {
         return statementVisitor.visit(ctx);
     }
 
-    public AssignmentNode visit(AssignmentContext ctx) {
+    public ASTAssignmentNode visit(AssignmentContext ctx) {
         return assignmentVisitor.visit(ctx);
     }
 
-    public BlockNode visit(BlockContext ctx) {
+    public ASTBlockNode visit(BlockContext ctx) {
         return blockVisitor.visit(ctx);
     }
 
-    public ValueNode visit(SingletonContext ctx) {
+    public ASTValueNode visit(SingletonContext ctx) {
         return singletonVisitor.visit(ctx);
     }
 
-    public OperationNode visit(OperationContext ctx) {
+    public ASTOperationNode visit(OperationContext ctx) {
         return operationVisitor.visit(ctx);
     }
 
-    public PrimitiveNode<String> visit(OperatorContext ctx) {
+    public ASTPrimitiveNode<String> visit(OperatorContext ctx) {
         return operatorVisitor.visit(ctx);
     }
 
-    public ValueNode visit(OperandContext ctx) {
+    public ASTValueNode visit(OperandContext ctx) {
         return operandVisitor.visit(ctx);
     }
 
-    public ReferenceNode visit(ReferenceContext ctx) {
+    public ASTReferenceNode visit(ReferenceContext ctx) {
         return referenceVisitor.visit(ctx);
     }
 
-    public PrimitiveNode visit(PrimitiveContext ctx) {
+    public ASTPrimitiveNode visit(PrimitiveContext ctx) {
         return primitiveVisitor.visit(ctx);
     }
 
-    public PrimitiveNode<String> visit(StringPrimitiveContext ctx) {
+    public ASTPrimitiveNode<String> visit(StringPrimitiveContext ctx) {
         return primitiveStringVisitor.visit(ctx);
     }
 
-    public PrimitiveNode<Double> visit(FloatPrimitiveContext ctx) {
+    public ASTPrimitiveNode<Double> visit(FloatPrimitiveContext ctx) {
         return primitiveFloatVisitor.visit(ctx);
     }
 
-    public PrimitiveNode<Integer> visit(IntPrimitiveContext ctx) {
+    public ASTPrimitiveNode<Integer> visit(IntPrimitiveContext ctx) {
         return primitiveIntVisitor.visit(ctx);
     }
 }

@@ -5,10 +5,10 @@
 
 package compiler.translate;
 
+import compiler.interpret.nodes.ASTAssignmentNode;
 import compiler.interpret.nodes.ASTNode;
-import compiler.interpret.nodes.AssignmentNode;
-import compiler.interpret.nodes.ReferenceNode;
-import compiler.interpret.nodes.ValueNode;
+import compiler.interpret.nodes.ASTReferenceNode;
+import compiler.interpret.nodes.ASTValueNode;
 import compiler.nodes.Node;
 
 import java.util.stream.Stream;
@@ -30,25 +30,25 @@ public class ReferenceReformatter {
         // Special case: We're at an assignment with a left nested reference;
         //               reformat.
         else if (needsReformatting(root)) {
-            AssignmentNode aRoot = (AssignmentNode) root;
+            ASTAssignmentNode aRoot = (ASTAssignmentNode) root;
 
             // Get the child of the reference (which may itself be nested).
-            ReferenceNode subLeft = (ReferenceNode) aRoot.getReference().getChild();
+            ASTReferenceNode subLeft = (ASTReferenceNode) aRoot.getReference().getChild();
 
             // Create a new reference node with the name of the top-level
             // reference, and without any children.
             String superName = aRoot.getReference().getName();
-            ReferenceNode superLeft = new ReferenceNode(superName);
+            ASTReferenceNode superLeft = new ASTReferenceNode(superName);
 
-            ValueNode value = aRoot.getValue();
+            ASTValueNode value = aRoot.getValue();
 
             // Create an assignment of childReference: value.
-            AssignmentNode newRight = new AssignmentNode(subLeft, value);
+            ASTAssignmentNode newRight = new ASTAssignmentNode(subLeft, value);
 
             // Create a top-level assignment of the new value node (newRight)
             // to the top-level leaf reference (superLeft). Assign this to
             // root so it gets visited in the general case.
-            root = new AssignmentNode(superLeft, newRight);
+            root = new ASTAssignmentNode(superLeft, newRight);
         }
 
         Stream<? extends ASTNode> rfChildren = root.getChildren()
@@ -58,11 +58,11 @@ public class ReferenceReformatter {
     }
 
     public <T extends Node> boolean needsReformatting(T root) {
-        if (!(root instanceof AssignmentNode)) {
+        if (!(root instanceof ASTAssignmentNode)) {
             return false;
         }
 
-        AssignmentNode aRoot = (AssignmentNode) root;
+        ASTAssignmentNode aRoot = (ASTAssignmentNode) root;
 
         return aRoot.getReference().hasChild();
     }

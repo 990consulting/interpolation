@@ -6,7 +6,7 @@
 package compiler.interpret;
 
 import compiler.interpret.nodes.ASTNode;
-import compiler.interpret.nodes.RootNode;
+import compiler.interpret.nodes.ASTRootNode;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 
 public class InterpreterTest {
 
-    private RootNode rootNode;
+    private ASTRootNode rootNode;
     private File file;
     private Interpreter query;
 
@@ -27,7 +27,7 @@ public class InterpreterTest {
         AntlrBinding<ASTNode> antlr = mock(AntlrBinding.class);
         file = mock(File.class);
         when(file.exists()).thenReturn(true);
-        rootNode = mock(RootNode.class);
+        rootNode = mock(ASTRootNode.class);
         when(antlr.interpret(file)).thenReturn(rootNode);
         query = new Interpreter(antlr);
     }

@@ -24,52 +24,52 @@ public class NanoToASTVisitor extends NanosyntaxBaseVisitor<ASTNode> {
     }
 
     @Override
-    public RootNode visitRoot(@NotNull RootContext ctx) {
+    public ASTRootNode visitRoot(@NotNull RootContext ctx) {
         return manager.visit(ctx);
     }
 
     @Override
-    public StatementNode visitStatement(@NotNull StatementContext ctx) {
+    public ASTStatementNode visitStatement(@NotNull StatementContext ctx) {
         return manager.visit(ctx);
     }
 
     @Override
-    public AssignmentNode visitAssignment(@NotNull AssignmentContext ctx) {
+    public ASTAssignmentNode visitAssignment(@NotNull AssignmentContext ctx) {
         return manager.visit(ctx);
     }
 
     @Override
-    public DefinitionNode visitDefinition(@NotNull DefinitionContext ctx) {
+    public ASTDefinitionNode visitDefinition(@NotNull DefinitionContext ctx) {
         throw new NotImplementedException();
     }
 
     @Override
-    public BlockNode visitBlock(@NotNull BlockContext ctx) {
+    public ASTBlockNode visitBlock(@NotNull BlockContext ctx) {
         return manager.visit(ctx);
     }
 
     @Override
-    public ValueNode visitSingleton(@NotNull SingletonContext ctx) {
+    public ASTValueNode visitSingleton(@NotNull SingletonContext ctx) {
         return manager.visit(ctx);
     }
 
     @Override
-    public OperationNode visitOperation(@NotNull OperationContext ctx) {
+    public ASTOperationNode visitOperation(@NotNull OperationContext ctx) {
         return manager.visit(ctx);
     }
 
     @Override
-    public ValueNode visitOperand(@NotNull OperandContext ctx) {
+    public ASTValueNode visitOperand(@NotNull OperandContext ctx) {
         return manager.visit(ctx);
     }
 
     @Override
-    public PrimitiveNode<String> visitOperator(@NotNull OperatorContext ctx) {
+    public ASTPrimitiveNode<String> visitOperator(@NotNull OperatorContext ctx) {
         return manager.visit(ctx);
     }
 
     @Override
-    public ReferenceNode visitReference(@NotNull ReferenceContext ctx) {
+    public ASTReferenceNode visitReference(@NotNull ReferenceContext ctx) {
         return manager.visit(ctx);
     }
 
@@ -79,22 +79,22 @@ public class NanoToASTVisitor extends NanosyntaxBaseVisitor<ASTNode> {
     }
 
     @Override
-    public PrimitiveNode visitPrimitive(@NotNull PrimitiveContext ctx) {
+    public ASTPrimitiveNode visitPrimitive(@NotNull PrimitiveContext ctx) {
         return manager.visit(ctx);
     }
 
     @Override
-    public PrimitiveNode<String> visitStringPrimitive(@NotNull StringPrimitiveContext ctx) {
+    public ASTPrimitiveNode<String> visitStringPrimitive(@NotNull StringPrimitiveContext ctx) {
         return manager.visit(ctx);
     }
 
     @Override
-    public PrimitiveNode<Double> visitFloatPrimitive(@NotNull FloatPrimitiveContext ctx) {
+    public ASTPrimitiveNode<Double> visitFloatPrimitive(@NotNull FloatPrimitiveContext ctx) {
         return manager.visit(ctx);
     }
 
     @Override
-    public PrimitiveNode<Integer> visitIntPrimitive(@NotNull IntPrimitiveContext ctx) {
+    public ASTPrimitiveNode<Integer> visitIntPrimitive(@NotNull IntPrimitiveContext ctx) {
         return manager.visit(ctx);
     }
 }
