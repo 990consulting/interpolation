@@ -7,55 +7,63 @@ package compiler.interpret.visitors;
 
 import compiler.interpret.nodes.ASTPrimitiveNode;
 import org.antlr.v4.runtime.CommonToken;
+import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.junit.Test;
 
-import static compiler.interpret.nanosyntax.NanosyntaxParser.OperatorContext;
+import static compiler.interpret.nanosyntax.NanosyntaxParser.StringPrimitiveContext;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class ASTOperatorVisitorTest extends AbstractVisitorTest {
+public class NanoPrimitiveStringVisitorTest extends AbstractVisitorTest {
 
-    private NanoOperatorVisitor query;
-    private OperatorContext ctx;
+    private StringPrimitiveContext ctx;
+    private NanoPrimitiveStringVisitor query;
     private ParseTree child;
-    private Object payload;
 
     @Override
     public void init() {
         super.init();
-        ctx = mock(OperatorContext.class);
+
+        ctx = mock(StringPrimitiveContext.class);
         when(ctx.getChildCount()).thenReturn(1);
         child = mock(ParseTree.class);
-        payload = mock(CommonToken.class);
+        Object payload = mock(CommonToken.class);
         when(child.getPayload()).thenReturn(payload);
-        when(child.getText()).thenReturn(">=");
         when(ctx.getChild(0)).thenReturn(child);
-        query = new NanoOperatorVisitor(master);
+        query = new NanoPrimitiveStringVisitor(master);
     }
 
     @Test
-    public void visitGetsTokenValue() throws Exception {
-        ASTPrimitiveNode<String> result = query.visit(ctx);
+    public void quotedCase() {
+        doNormalTest("\"test\"");
+    }
 
-        String expected = ">=";
+    @Test
+    public void unquotedCase() {
+        doNormalTest("test");
+    }
+
+    private void doNormalTest(String valueString) {
+        when(child.getText()).thenReturn(valueString);
+        String expected = "test";
+        ASTPrimitiveNode<String> result = query.visit(ctx);
         String actual = result.getContent();
 
         assertEquals(expected, actual);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void payloadNotTokenThrows() throws Exception {
-        payload = mock(Object.class);
+    public void payloadNotTokenThrows() {
+        Object payload = mock(ParserRuleContext.class);
         when(child.getPayload()).thenReturn(payload);
         query.visit(ctx);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void wrongChildCountThrows() throws Exception {
-        when(ctx.getChildCount()).thenReturn(0);
+    public void wrongChildCountThrows() {
+        when(ctx.getChildCount()).thenReturn(2);
         query.visit(ctx);
     }
-
 }

@@ -7,7 +7,6 @@ package compiler.interpret.visitors;
 
 import compiler.interpret.nodes.ASTDefinitionNode;
 import compiler.interpret.nodes.ASTNode;
-import compiler.interpret.nodes.ASTPrimitiveNode;
 import compiler.interpret.nodes.ASTStatementNode;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.junit.Test;
@@ -18,34 +17,28 @@ import java.util.stream.Collectors;
 
 import static compiler.interpret.nanosyntax.NanosyntaxParser.*;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-public class BlockVisitorTest extends AbstractVisitorTest {
+public class NanoRootVisitorTest extends AbstractVisitorTest {
 
-    private NanoBlockVisitor query;
-    private BlockContext ctx;
-    private ParserRuleContext leftBracket, rightBracket;
+    private NanoRootVisitor query;
+    private RootContext ctx;
     private ParserRuleContext first, second;
 
     @Override
     public void init() {
         super.init();
-        query = new NanoBlockVisitor(master);
-        ctx = mock(BlockContext.class);
-
-        // Actually a CommonToken, but oh well
-        leftBracket = configureChild(PrimitiveContext.class, ASTPrimitiveNode.class);
-        rightBracket = configureChild(PrimitiveContext.class, ASTPrimitiveNode.class);
+        query = new NanoRootVisitor(master);
+        ctx = mock(RootContext.class);
 
         first = configureChild(StatementContext.class, ASTStatementNode.class);
         second = configureChild(DefinitionContext.class, ASTDefinitionNode.class);
 
-        when(ctx.getChild(0)).thenReturn(leftBracket);
-        when(ctx.getChild(1)).thenReturn(first);
-        when(ctx.getChild(2)).thenReturn(second);
-        when(ctx.getChild(3)).thenReturn(rightBracket);
+        when(ctx.getChild(0)).thenReturn(first);
+        when(ctx.getChild(1)).thenReturn(second);
 
-        when(ctx.getChildCount()).thenReturn(4);
+        when(ctx.getChildCount()).thenReturn(2);
     }
 
     private ParserRuleContext configureChildPayload(Class<? extends ParserRuleContext> childClass) {
@@ -63,20 +56,8 @@ public class BlockVisitorTest extends AbstractVisitorTest {
     }
 
     @Test
-    public void leftBracketIgnored() {
-        query.visit(ctx);
-        verifyNoMoreInteractions(leftBracket);
-    }
-
-    @Test
-    public void rightBracketIgnored() {
-        query.visit(ctx);
-        verifyNoMoreInteractions(rightBracket);
-    }
-
-    @Test
-    public void actualChildrenVisited() {
-        List<ASTNode> expected = Arrays.asList(new ASTNode[] {
+    public void allChildrenVisited() {
+        List<ASTNode> expected = Arrays.asList(new ASTNode[]{
                 first.accept(master),
                 second.accept(master)
         });
@@ -92,13 +73,6 @@ public class BlockVisitorTest extends AbstractVisitorTest {
     public void invalidPayloadThrows() {
         first = configureChildPayload(ParserRuleContext.class);
         when(ctx.getChild(1)).thenReturn(first);
-        query.visit(ctx);
-    }
-
-    // Should at least have brackets
-    @Test(expected = IllegalArgumentException.class)
-    public void tooFewChildrenThrows() {
-        when(ctx.getChildCount()).thenReturn(1);
         query.visit(ctx);
     }
 }

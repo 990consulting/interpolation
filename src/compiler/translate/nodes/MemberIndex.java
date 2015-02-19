@@ -6,7 +6,7 @@
 package compiler.translate.nodes;
 
 import compiler.nodes.AbstractReferenceNode;
-import compiler.translate.visitors.ReferenceNameConverter;
+import compiler.translate.ReferenceNameConverter;
 
 import java.util.HashMap;
 import java.util.Map;

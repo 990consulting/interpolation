@@ -11,4 +11,6 @@ import compiler.nodes.Node;
  * Created by dbborens on 2/16/15.
  */
 public interface TranslatorNode extends Node {
+
+    public TranslatorReferenceNode getType();
 }

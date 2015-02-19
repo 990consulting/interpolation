@@ -6,7 +6,6 @@
 package compiler.interpret.nodes;
 
 import compiler.nodes.Node;
-import compiler.translate.nodes.TranslatorNode;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,7 +14,7 @@ import java.util.stream.Stream;
 /**
  * Created by dbborens on 2/14/15.
  */
-public class ASTOperationNode implements ASTValueNode, TranslatorNode {
+public class ASTOperationNode implements ASTValueNode {
 
     public ASTValueNode left;
     public ASTValueNode right;

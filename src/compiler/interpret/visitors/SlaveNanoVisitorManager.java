@@ -14,34 +14,34 @@ import static compiler.interpret.nanosyntax.NanosyntaxParser.*;
  */
 public class SlaveNanoVisitorManager {
 
-    private ASTAssignmentVisitor assignmentVisitor;
-    private ASTBlockVisitor blockVisitor;
-    private ASTOperandVisitor operandVisitor;
-    private ASTOperationVisitor operationVisitor;
-    private ASTOperatorVisitor operatorVisitor;
-    private ASTPrimitiveVisitor primitiveVisitor;
-    private ASTPrimitiveStringVisitor primitiveStringVisitor;
-    private ASTPrimitiveIntVisitor primitiveIntVisitor;
-    private ASTPrimitiveFloatVisitor primitiveFloatVisitor;
-    private ASTReferenceVisitor referenceVisitor;
-    private ASTRootVisitor rootVisitor;
-    private ASTSingletonVisitor singletonVisitor;
-    private ASTStatementVisitor statementVisitor;
+    private NanoAssignmentVisitor assignmentVisitor;
+    private NanoBlockVisitor blockVisitor;
+    private NanoOperandVisitor operandVisitor;
+    private NanoOperationVisitor operationVisitor;
+    private NanoOperatorVisitor operatorVisitor;
+    private NanoPrimitiveVisitor primitiveVisitor;
+    private NanoPrimitiveStringVisitor primitiveStringVisitor;
+    private NanoPrimitiveIntVisitor primitiveIntVisitor;
+    private NanoPrimitiveFloatVisitor primitiveFloatVisitor;
+    private NanoReferenceVisitor referenceVisitor;
+    private NanoRootVisitor rootVisitor;
+    private NanoSingletonVisitor singletonVisitor;
+    private NanoStatementVisitor statementVisitor;
 
     public void init(NanoToASTVisitor master) {
-        assignmentVisitor      = new ASTAssignmentVisitor(master);
-        blockVisitor           = new ASTBlockVisitor(master);
-        operandVisitor         = new ASTOperandVisitor(master);
-        operatorVisitor        = new ASTOperatorVisitor(master);
-        operationVisitor       = new ASTOperationVisitor(master);
-        primitiveVisitor       = new ASTPrimitiveVisitor(master);
-        primitiveStringVisitor = new ASTPrimitiveStringVisitor(master);
-        primitiveIntVisitor    = new ASTPrimitiveIntVisitor(master);
-        primitiveFloatVisitor  = new ASTPrimitiveFloatVisitor(master);
-        referenceVisitor       = new ASTReferenceVisitor(master);
-        rootVisitor            = new ASTRootVisitor(master);
-        singletonVisitor       = new ASTSingletonVisitor(master);
-        statementVisitor       = new ASTStatementVisitor(master);
+        assignmentVisitor      = new NanoAssignmentVisitor(master);
+        blockVisitor           = new NanoBlockVisitor(master);
+        operandVisitor         = new NanoOperandVisitor(master);
+        operatorVisitor        = new NanoOperatorVisitor(master);
+        operationVisitor       = new NanoOperationVisitor(master);
+        primitiveVisitor       = new NanoPrimitiveVisitor(master);
+        primitiveStringVisitor = new NanoPrimitiveStringVisitor(master);
+        primitiveIntVisitor    = new NanoPrimitiveIntVisitor(master);
+        primitiveFloatVisitor  = new NanoPrimitiveFloatVisitor(master);
+        referenceVisitor       = new NanoReferenceVisitor(master);
+        rootVisitor            = new NanoRootVisitor(master);
+        singletonVisitor       = new NanoSingletonVisitor(master);
+        statementVisitor       = new NanoStatementVisitor(master);
     }
 
     public ASTRootNode visit(RootContext ctx) {
