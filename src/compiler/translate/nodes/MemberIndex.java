@@ -6,7 +6,7 @@
 package compiler.translate.nodes;
 
 import compiler.nodes.AbstractReferenceNode;
-import compiler.translate.ReferenceNameConverter;
+import compiler.translate.ReferenceToAssignmentConverter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,14 +17,14 @@ import java.util.stream.Stream;
  */
 public class MemberIndex {
     private Map<String, TranslatorNode> members;
-    private ReferenceNameConverter converter;
+    private ReferenceToAssignmentConverter converter;
 
     public MemberIndex() {
         this.members = new HashMap<>();
-        this.converter = new ReferenceNameConverter();
+        this.converter = new ReferenceToAssignmentConverter();
     }
 
-    public MemberIndex(Map<String, TranslatorNode> members, ReferenceNameConverter converter) {
+    public MemberIndex(Map<String, TranslatorNode> members, ReferenceToAssignmentConverter converter) {
         this.members = members;
         this.converter = converter;
     }

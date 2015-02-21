@@ -13,18 +13,18 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class ReferenceNameConverterTest {
+public class ReferenceToAssignmentConverterTest {
 
-    private ReferenceNameConverter query;
+    private ReferenceToAssignmentConverter query;
 
     @Before
     public void init() throws Exception {
-        query = new ReferenceNameConverter();
+        query = new ReferenceToAssignmentConverter();
     }
     @Test
     public void convertReturnsName() throws Exception {
         AbstractReferenceNode node = mock(AbstractReferenceNode.class);
-        when(node.getName()).thenReturn("name");
+        when(node.getIdentifier()).thenReturn("name");
         assertEquals("name", query.convert(node));
     }
 

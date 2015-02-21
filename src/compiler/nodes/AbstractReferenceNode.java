@@ -9,20 +9,20 @@ package compiler.nodes;
  * Created by dbborens on 2/13/15.
  */
 public abstract class AbstractReferenceNode implements Node {
-    private String name;
+    private String identifier;
     private AbstractReferenceNode child;
 
-    public AbstractReferenceNode(String name) {
-        this(name, null);
+    public AbstractReferenceNode(String identifier) {
+        this(identifier, null);
     }
 
-    public AbstractReferenceNode(String name, AbstractReferenceNode child) {
-        this.name = name;
+    public AbstractReferenceNode(String identifier, AbstractReferenceNode child) {
+        this.identifier = identifier;
         this.child = child;
     }
 
-    public String getName() {
-        return name;
+    public String getIdentifier() {
+        return identifier;
     }
 
     public boolean hasChild() {
@@ -42,7 +42,7 @@ public abstract class AbstractReferenceNode implements Node {
         AbstractReferenceNode that = (AbstractReferenceNode) o;
 
         if (child != null ? !child.equals(that.child) : that.child != null) return false;
-        if (!name.equals(that.name)) return false;
+        if (!identifier.equals(that.identifier)) return false;
 
         return true;
     }

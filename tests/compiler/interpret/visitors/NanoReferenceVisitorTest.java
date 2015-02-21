@@ -95,7 +95,7 @@ public class NanoReferenceVisitorTest extends AbstractVisitorTest {
     }
 
     private void checkReferenceNode(ASTReferenceNode actual, String name, boolean leaf) {
-        assertEquals(name, actual.getName());
+        assertEquals(name, actual.getIdentifier());
 
         if (leaf) {
             assertFalse(actual.hasChild());

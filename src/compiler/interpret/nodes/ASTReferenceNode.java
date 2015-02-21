@@ -36,10 +36,10 @@ public class ASTReferenceNode extends AbstractReferenceNode implements ASTNode, 
     public ASTNode withNewChildren(Stream<? extends ASTNode> children) {
         List<ASTNode> childList = children.collect(Collectors.<ASTNode>toList());
         if (childList.size() == 0) {
-            return new ASTReferenceNode(getName());
+            return new ASTReferenceNode(getIdentifier());
         } else if (childList.size() == 1) {
             AbstractReferenceNode newRefNode = (AbstractReferenceNode) childList.get(0);
-            return new ASTReferenceNode(getName(), newRefNode);
+            return new ASTReferenceNode(getIdentifier(), newRefNode);
 
         } else {
             throw new IllegalStateException("Unexpected child count in reference node");

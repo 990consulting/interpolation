@@ -10,34 +10,37 @@ import compiler.interpret.nodes.ASTDefinitionNode;
 import compiler.interpret.nodes.ASTStatementNode;
 import compiler.translate.nodes.TranslatorNode;
 import compiler.translate.nodes.TranslatorReferenceNode;
+import compiler.util.UnrecognizedIdentifierException;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
-import java.util.HashMap;
 
 /**
  * Created by dbborens on 2/18/15.
  */
 public class ObjectSymbolTable extends SymbolTable<ASTStatementNode> {
 
-    private HashMap<String, Symbol> members;
+    private LocalContext memberContext;
 
     public ObjectSymbolTable(TranslatorReferenceNode type) {
         super(type);
-        members = new HashMap<>();
+        memberContext = new LocalContext();
     }
 
     protected void member(String name, Symbol symbol) {
-        members.put(name, symbol);
+        memberContext.put(name, symbol);
     }
 
     @Override
     public TranslatorNode translate(ASTStatementNode content) {
         ASTAssignmentNode node = verifyAndCast(content);
-        String name = node.getReference().getName();
-        if (!members.containsKey(name)) {
+        String name = node.getReference().getIdentifier();
+        Symbol symbol;
+
+        try {
+            symbol = memberContext.get(name);
+        } catch (UnrecognizedIdentifierException ex) {
             throw new IllegalArgumentException("Unrecognized argument '" + name + "' in object " + type);
         }
-        Symbol symbol = members.get(name);
+
         TranslationHelper translator = symbol.getTranslator();
         return translator.translate(node);
     }

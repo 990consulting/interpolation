@@ -12,6 +12,7 @@ import compiler.translate.nodes.TranslatorObjectNodeBuilder;
 import compiler.translate.symbols.SymbolTable;
 import org.junit.Before;
 import org.junit.Test;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import static org.mockito.Mockito.*;
 
@@ -37,5 +38,13 @@ public class ASTObjAssignmentVisitorTest {
         when(input.getReference()).thenReturn(reference);
         query.visit(input);
         verify(builder).load(reference, result);
+    }
+
+    @Test(expected = NotImplementedException.class)
+    public void nestedScopeNotImplemented() throws Exception {
+        ASTReferenceNode reference = mock(ASTReferenceNode.class);
+        when(reference.hasChild()).thenReturn(true);
+        when(input.getReference()).thenReturn(reference);
+        query.visit(input);
     }
 }

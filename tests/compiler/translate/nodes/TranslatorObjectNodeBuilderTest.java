@@ -28,7 +28,7 @@ public class TranslatorObjectNodeBuilderTest {
         parentType = mock(TranslatorReferenceNode.class);
         query = new TranslatorObjectNodeBuilder(parentType);
         childReference = mock(ASTReferenceNode.class);
-        when(childReference.getName()).thenReturn(name);
+        when(childReference.getIdentifier()).thenReturn(name);
         childValue = mock(TranslatorNode.class);
     }
 

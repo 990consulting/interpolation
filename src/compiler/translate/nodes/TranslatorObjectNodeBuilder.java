@@ -6,7 +6,7 @@
 package compiler.translate.nodes;
 
 import compiler.interpret.nodes.ASTReferenceNode;
-import compiler.translate.ReferenceNameConverter;
+import compiler.translate.ReferenceToAssignmentConverter;
 
 /**
  * Created by dbborens on 2/18/15.
@@ -14,14 +14,14 @@ import compiler.translate.ReferenceNameConverter;
 public class TranslatorObjectNodeBuilder {
 
     private TranslatorObjectNode parent;
-    private ReferenceNameConverter converter;
+    private ReferenceToAssignmentConverter converter;
 
     boolean built;
 
     public TranslatorObjectNodeBuilder(TranslatorReferenceNode parentType) {
         built = false;
         parent = new TranslatorObjectNode(parentType);
-        converter = new ReferenceNameConverter();
+        converter = new ReferenceToAssignmentConverter();
     }
 
     public TranslatorObjectNode build() {

@@ -35,4 +35,5 @@ public abstract class SymbolTable<T extends ASTNode> {
     public TranslatorReferenceNode getType() {
         return type;
     }
+
 }

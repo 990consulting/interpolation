@@ -10,12 +10,12 @@ import compiler.nodes.AbstractReferenceNode;
 /**
  * Created by dbborens on 2/17/15.
  */
-public class ReferenceNameConverter {
+public class ReferenceToAssignmentConverter {
 
     public String convert(AbstractReferenceNode node) {
         if (node.hasChild()) {
-            throw new IllegalStateException("Name conversion of non-leaf reference");
+            throw new IllegalStateException("Attempting to convert nested reference to an assignment.");
         }
-        return node.getName();
+        return node.getIdentifier();
     }
 }

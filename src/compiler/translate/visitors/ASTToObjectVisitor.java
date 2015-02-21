@@ -5,10 +5,9 @@
 
 package compiler.translate.visitors;
 
-import compiler.interpret.nodes.ASTAssignmentNode;
-import compiler.interpret.nodes.ASTBlockNode;
-import compiler.interpret.nodes.ASTDefinitionNode;
-import compiler.interpret.nodes.ASTValueNode;
+import compiler.interpret.nodes.*;
+import compiler.interpret.visitors.AbstractNanoBlockVisitor;
+import compiler.nodes.AbstractReferenceNode;
 import compiler.translate.nodes.TranslatorObjectNode;
 import compiler.translate.nodes.TranslatorObjectNodeBuilder;
 import compiler.translate.symbols.SymbolTable;
@@ -72,4 +71,5 @@ public class ASTToObjectVisitor implements ASTVisitor<ASTValueNode> {
             throw new IllegalArgumentException("Unexpected argument in object node");
         }
     }
+
 }

@@ -6,7 +6,7 @@
 package compiler.translate.nodes;
 
 import compiler.interpret.nodes.ASTReferenceNode;
-import compiler.translate.ReferenceNameConverter;
+import compiler.translate.ReferenceToAssignmentConverter;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,13 +24,13 @@ public class MemberIndexTest {
 
     private MemberIndex query;
     private Map<String, TranslatorNode> map;
-    private ReferenceNameConverter converter;
+    private ReferenceToAssignmentConverter converter;
     private ASTReferenceNode reference;
     private TranslatorNode value;
 
     @Before
     public void init() {
-        converter = mock(ReferenceNameConverter.class);
+        converter = mock(ReferenceToAssignmentConverter.class);
         map = new HashMap<>();
         query = new MemberIndex(map, converter);
         reference = mock(ASTReferenceNode.class);
