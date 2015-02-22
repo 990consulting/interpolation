@@ -5,31 +5,56 @@
 
 package compiler.translate.symbols;
 
-import compiler.interpret.nodes.ASTNode;
+import compiler.interpret.nodes.ASTAssignmentNode;
+import compiler.interpret.nodes.ASTDefinitionNode;
+import compiler.interpret.nodes.ASTStatementNode;
 import compiler.translate.nodes.TranslatorNode;
 import compiler.translate.nodes.TranslatorReferenceNode;
+import compiler.util.UnrecognizedIdentifierException;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
- * A SymbolTable is a representation of all known symbols (words,
- * references) and the content to which they map. There is a
- * SymbolTable for every Nanoverse object that can be specified.
- *
- * The SymbolTable validates user input against expected parameters,
- * determining both whether the specified information is recognized
- * and well-defined, as well as whether all required information
- * has been provided.
- *
- * The details of this process depend on the type of input involved.
- *
- * Created by dbborens on 2/16/15.
+ * Created by dbborens on 2/18/15.
  */
-public abstract class SymbolTable<T extends ASTNode> {
+public class SymbolTable {
 
-    public abstract TranslatorNode translate(T content);
-    protected TranslatorReferenceNode type;
+    private LocalContext memberContext;
+
+    private TranslatorReferenceNode type;
 
     public SymbolTable(TranslatorReferenceNode type) {
         this.type = type;
+        memberContext = new LocalContext();
+    }
+
+    protected void member(String name, Symbol symbol) {
+        memberContext.put(name, symbol);
+    }
+
+    public TranslatorNode translate(ASTStatementNode content) {
+        ASTAssignmentNode node = verifyAndCast(content);
+        String name = node.getReference().getIdentifier();
+        Symbol symbol;
+
+        try {
+            symbol = memberContext.get(name);
+        } catch (UnrecognizedIdentifierException ex) {
+            throw new IllegalArgumentException("Unrecognized argument '" + name + "' in object " + type);
+        }
+
+        TranslationHelper translator = symbol.getTranslator();
+        return translator.translate(node);
+    }
+
+
+    private ASTAssignmentNode verifyAndCast(ASTStatementNode toCast) {
+        if (toCast instanceof ASTDefinitionNode) {
+            throw new NotImplementedException();
+        } else if (!(toCast instanceof ASTAssignmentNode)) {
+            throw new IllegalStateException("Unexpected argument in object node");
+        }
+
+        return (ASTAssignmentNode) toCast;
     }
 
     public TranslatorReferenceNode getType() {

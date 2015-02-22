@@ -19,9 +19,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 
-public class ObjectSymbolTableTest {
+public class SymbolTableTest {
 
-    private ObjectSymbolTable query;
+    private SymbolTable query;
     private TranslatorReferenceNode type;
     private Symbol symbol;
     private TranslationHelper translator;
@@ -64,7 +64,7 @@ public class ObjectSymbolTableTest {
     public void getType() throws Exception {
         assertSame(type, query.getType());
     }
-    public class LoadedObjectSymbolTable extends ObjectSymbolTable {
+    public class LoadedObjectSymbolTable extends SymbolTable {
 
         public LoadedObjectSymbolTable(TranslatorReferenceNode type) {
             super(type);

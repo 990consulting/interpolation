@@ -12,7 +12,7 @@ import java.util.HashMap;
 /**
  * Created by dbborens on 2/21/15.
  */
-public class LocalContext {
+public class LocalContext implements Context {
 
     private HashMap<String, Symbol> members;
 
@@ -20,18 +20,17 @@ public class LocalContext {
         members = new HashMap<>();
     }
 
-    public LocalContext(HashMap<String, Symbol> members) {
-        this.members = members;
-    }
-
+    @Override
     public void put(String identifier, Symbol symbol) {
         members.put(identifier, symbol);
     }
 
+    @Override
     public boolean has(String identifier) {
         return members.containsKey(identifier);
     }
 
+    @Override
     public Symbol get(String identifier) throws UnrecognizedIdentifierException {
         if (!has(identifier)) {
             throw new UnrecognizedIdentifierException();
