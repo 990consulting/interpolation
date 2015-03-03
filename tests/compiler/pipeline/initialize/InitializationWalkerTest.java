@@ -5,7 +5,7 @@
 
 package compiler.pipeline.initialize;
 
-import compiler.pipeline.initialize.helpers.SlaveManager;
+import compiler.pipeline.initialize.helpers.InitSlaveManager;
 import compiler.pipeline.interpret.nodes.*;
 import compiler.symbol.SymbolTable;
 import compiler.symbol.tables.RootSymbolTable;
@@ -19,13 +19,13 @@ import static org.mockito.Mockito.*;
 
 public class InitializationWalkerTest {
 
-    private SlaveManager slaveManager;
+    private InitSlaveManager slaveManager;
     private ExposedInitializationWalker query;
     private SymbolTable symbolTable;
 
     @Before
     public void init() throws Exception {
-        slaveManager = mock(SlaveManager.class);
+        slaveManager = mock(InitSlaveManager.class);
         symbolTable = mock(SymbolTable.class);
 
         query = new ExposedInitializationWalker(slaveManager);
@@ -74,12 +74,13 @@ public class InitializationWalkerTest {
     public void primitiveCase() throws Exception {
         ASTPrimitiveNode child = mock(ASTPrimitiveNode.class);
         query.walkChildren(child, symbolTable);
+        verify(slaveManager).init(any());
         verifyNoMoreInteractions(slaveManager);
     }
 
     private class ExposedInitializationWalker extends InitializationWalker {
 
-        public ExposedInitializationWalker(SlaveManager slaveManager) {
+        public ExposedInitializationWalker(InitSlaveManager slaveManager) {
             super(slaveManager);
         }
 

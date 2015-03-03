@@ -6,6 +6,7 @@
 package compiler.pipeline.initialize.helpers;
 
 import compiler.pipeline.interpret.nodes.ASTBlockNode;
+import compiler.pipeline.interpret.nodes.ASTValueNode;
 import compiler.symbol.SymbolTable;
 
 /**
@@ -14,9 +15,12 @@ import compiler.symbol.SymbolTable;
 public class BlockWalker extends SlaveWalker<ASTBlockNode> {
 
     @Override
-    public void walk(ASTBlockNode toWalk, SymbolTable symbolTable) {
+    public void walk(ASTBlockNode toWalk, SymbolTable symbolTable)  {
         toWalk.getChildren()
-                .forEach(child ->
-                        walker.accept(child, symbolTable));
+                .forEach(child -> acceptChild(child, symbolTable));
+    }
+
+    private void acceptChild(ASTValueNode child, SymbolTable symbolTable)  {
+        walker.accept(child, symbolTable);
     }
 }

@@ -5,11 +5,12 @@
 
 package compiler.pipeline.initialize;
 
-import compiler.pipeline.initialize.helpers.SlaveManager;
+import compiler.pipeline.initialize.helpers.InitSlaveManager;
 import compiler.pipeline.interpret.nodes.*;
 import compiler.symbol.SymbolTable;
 import compiler.symbol.tables.RootSymbolTable;
-import compiler.util.UserError;
+
+import java.util.function.BiConsumer;
 
 /**
  * Breadth-first search of the abstract syntax tree, which initializes
@@ -33,23 +34,25 @@ import compiler.util.UserError;
  */
 public class InitializationWalker {
 
-    private SlaveManager slaveManager;
+    private InitSlaveManager slaveManager;
 
     public InitializationWalker() {
-        slaveManager = new SlaveManager();
+        this(new InitSlaveManager());
     }
 
-    public InitializationWalker(SlaveManager slaveManager) {
+    public InitializationWalker(InitSlaveManager slaveManager) {
         this.slaveManager = slaveManager;
+        BiConsumer<ASTValueNode, SymbolTable> walker = (node, st) -> walkChildren(node, st);
+        slaveManager.init(walker);
     }
 
-    public RootSymbolTable walk(ASTRootNode root) throws UserError {
+    public RootSymbolTable walk(ASTRootNode root) {
         RootSymbolTable ret = new RootSymbolTable();
         walkChildren(root, ret);
         return ret;
     }
 
-    protected void walkChildren(ASTValueNode toWalk, SymbolTable symbolTable) throws UserError {
+    protected void walkChildren(ASTValueNode toWalk, SymbolTable symbolTable) {
         // Walk the child list, loading any user-defined values.
         loadUserDefined(toWalk, symbolTable);
 

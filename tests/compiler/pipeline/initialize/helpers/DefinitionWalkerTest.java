@@ -6,7 +6,7 @@
 package compiler.pipeline.initialize.helpers;
 
 import compiler.pipeline.interpret.nodes.ASTDefinitionNode;
-import compiler.pipeline.interpret.nodes.ASTNode;
+import compiler.pipeline.interpret.nodes.ASTValueNode;
 import compiler.symbol.SymbolTable;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +18,7 @@ import static org.mockito.Mockito.mock;
 
 public class DefinitionWalkerTest {
 
-    private BiConsumer<ASTNode, SymbolTable> walker;
+    private BiConsumer<ASTValueNode, SymbolTable> walker;
     private ASTDefinitionNode input;
     private SymbolTable symbolTable;
     private DefinitionWalker query;

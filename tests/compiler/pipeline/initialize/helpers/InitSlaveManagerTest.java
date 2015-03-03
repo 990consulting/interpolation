@@ -15,7 +15,7 @@ import java.util.function.BiConsumer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class SlaveManagerTest {
+public class InitSlaveManagerTest {
 
     private BlockWalker blockWalker;
     private AssignmentWalker assignmentWalker;
@@ -23,7 +23,7 @@ public class SlaveManagerTest {
     private ReferenceWalker referenceWalker;
     private SymbolTable symbolTable;
 
-    private SlaveManager query;
+    private InitSlaveManager query;
 
     @Before
     public void init() {
@@ -33,7 +33,7 @@ public class SlaveManagerTest {
         referenceWalker = mock(ReferenceWalker.class);
         symbolTable = mock(SymbolTable.class);
 
-        query = new SlaveManager(assignmentWalker,
+        query = new InitSlaveManager(assignmentWalker,
                 blockWalker,
                 definitionWalker,
                 referenceWalker);
@@ -69,7 +69,7 @@ public class SlaveManagerTest {
 
     @Test
     public void initReachesHelpers() throws Exception {
-        BiConsumer<ASTNode, SymbolTable> walker = mock(BiConsumer.class);
+        BiConsumer<ASTValueNode, SymbolTable> walker = mock(BiConsumer.class);
         query.init(walker);
         verify(referenceWalker).init(walker);
         verify(assignmentWalker).init(walker);

@@ -6,8 +6,8 @@
 package compiler.pipeline.initialize.helpers;
 
 import compiler.pipeline.interpret.nodes.ASTNode;
+import compiler.pipeline.interpret.nodes.ASTValueNode;
 import compiler.symbol.SymbolTable;
-import compiler.util.UserError;
 
 import java.util.function.BiConsumer;
 
@@ -22,12 +22,12 @@ import java.util.function.BiConsumer;
 public abstract class SlaveWalker<T extends ASTNode> {
 
     // Master initialization walker's walkChildren method
-    protected BiConsumer<ASTNode, SymbolTable> walker;
+    protected BiConsumer<ASTValueNode, SymbolTable> walker;
 
-    public void init(BiConsumer<ASTNode, SymbolTable> walker) {
+    public void init(BiConsumer<ASTValueNode, SymbolTable> walker) {
         this.walker = walker;
     }
 
-    public abstract void walk(T toWalk, SymbolTable symbolTable) throws UserError;
+    public abstract void walk(T toWalk, SymbolTable symbolTable) ;
 
 }

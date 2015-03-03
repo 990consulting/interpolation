@@ -7,6 +7,7 @@ package compiler.pipeline.interpret.visitors;
 
 import compiler.pipeline.interpret.nodes.ASTBlockNode;
 import compiler.pipeline.interpret.nodes.ASTStatementNode;
+import compiler.pipeline.interpret.nodes.ASTValueNode;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 
@@ -21,14 +22,14 @@ import static compiler.pipeline.interpret.nanosyntax.NanosyntaxParser.StatementC
  * Created by dbborens on 2/14/15.
  */
 public abstract class AbstractNanoBlockVisitor<T extends ASTBlockNode, S extends ParserRuleContext> extends AbstractNanoNodeVisitor {
-    private Function<Stream<ASTStatementNode>, T> constructor;
+    private Function<Stream<ASTValueNode>, T> constructor;
 
     private Class[] validPayloadContexts = new Class[] {
             StatementContext.class,
             DefinitionContext.class
     };
 
-    public AbstractNanoBlockVisitor(NanoToASTVisitor master, Function<Stream<ASTStatementNode>, T> constructor) {
+    public AbstractNanoBlockVisitor(NanoToASTVisitor master, Function<Stream<ASTValueNode>, T> constructor) {
         super(master);
         this.constructor = constructor;
     }
@@ -36,12 +37,13 @@ public abstract class AbstractNanoBlockVisitor<T extends ASTBlockNode, S extends
     public abstract T visit(S ctx);
 
     protected T doVisit(S ctx, int start, int end) {
-        Stream<ASTStatementNode> children = IntStream.range(start, end)
+        Stream<ASTValueNode> children = IntStream.range(start, end)
                 .mapToObj(ctx::getChild)             // int --> ParseTree
                 .map(this::verifyAndAccept);
 
         return constructor.apply(children);
     }
+
     private ASTStatementNode verifyAndAccept(ParseTree child) {
         verifyPayload(child, validPayloadContexts);
         ASTStatementNode ret = (ASTStatementNode) child.accept(master);

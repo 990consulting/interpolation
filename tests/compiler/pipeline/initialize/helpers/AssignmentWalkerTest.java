@@ -6,7 +6,6 @@
 package compiler.pipeline.initialize.helpers;
 
 import compiler.pipeline.interpret.nodes.ASTAssignmentNode;
-import compiler.pipeline.interpret.nodes.ASTNode;
 import compiler.pipeline.interpret.nodes.ASTReferenceNode;
 import compiler.pipeline.interpret.nodes.ASTValueNode;
 import compiler.symbol.SymbolTable;
@@ -21,7 +20,7 @@ import static org.mockito.Mockito.*;
 
 public class AssignmentWalkerTest {
 
-    private BiConsumer<ASTNode, SymbolTable> walker;
+    private BiConsumer<ASTValueNode, SymbolTable> walker;
     private AssignmentWalker query;
     private SymbolTable symbolTable;
     private ASTAssignmentNode toWalk;

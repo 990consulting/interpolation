@@ -9,7 +9,6 @@ import compiler.pipeline.interpret.nodes.ASTAssignmentNode;
 import compiler.pipeline.interpret.nodes.ASTReferenceNode;
 import compiler.pipeline.interpret.nodes.ASTValueNode;
 import compiler.symbol.SymbolTable;
-import compiler.util.UserError;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -18,7 +17,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 public class AssignmentWalker extends SlaveWalker<ASTAssignmentNode> {
 
     @Override
-    public void walk(ASTAssignmentNode toWalk, SymbolTable symbolTable) throws UserError {
+    public void walk(ASTAssignmentNode toWalk, SymbolTable symbolTable) {
         validate(toWalk);
         ASTValueNode value = toWalk.getValue();
 

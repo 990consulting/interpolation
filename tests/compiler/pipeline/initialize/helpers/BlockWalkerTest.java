@@ -6,7 +6,6 @@
 package compiler.pipeline.initialize.helpers;
 
 import compiler.pipeline.interpret.nodes.ASTBlockNode;
-import compiler.pipeline.interpret.nodes.ASTNode;
 import compiler.pipeline.interpret.nodes.ASTStatementNode;
 import compiler.pipeline.interpret.nodes.ASTValueNode;
 import compiler.symbol.SymbolTable;
@@ -20,7 +19,7 @@ import static org.mockito.Mockito.*;
 
 public class BlockWalkerTest {
 
-    private BiConsumer<ASTNode, SymbolTable> walker;
+    private BiConsumer<ASTValueNode, SymbolTable> walker;
     private ASTBlockNode input;
     private ASTStatementNode child;
     private SymbolTable symbolTable;

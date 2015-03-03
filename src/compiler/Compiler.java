@@ -9,7 +9,6 @@ import compiler.pipeline.initialize.InitializationWalker;
 import compiler.pipeline.interpret.Interpreter;
 import compiler.pipeline.interpret.nodes.ASTRootNode;
 import compiler.symbol.tables.RootSymbolTable;
-import compiler.util.UserError;
 
 import java.io.File;
 
@@ -19,7 +18,7 @@ import java.io.File;
 public class Compiler {
 
     // TODO the compiler really should return a runner object.
-    public void compile(File source) throws UserError {
+    public void compile(File source) {
         // Stage 1: @compiler.pipeline.interpret
         // Interpret nanosyntax to abstract syntax tree.
         Interpreter interpreter = new Interpreter();

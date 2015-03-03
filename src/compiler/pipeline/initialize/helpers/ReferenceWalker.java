@@ -7,7 +7,6 @@ package compiler.pipeline.initialize.helpers;
 
 import compiler.pipeline.interpret.nodes.ASTReferenceNode;
 import compiler.symbol.SymbolTable;
-import compiler.util.UserError;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -16,7 +15,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 public class ReferenceWalker extends SlaveWalker<ASTReferenceNode> {
 
     @Override
-    public void walk(ASTReferenceNode toWalk, SymbolTable symbolTable) throws UserError {
+    public void walk(ASTReferenceNode toWalk, SymbolTable symbolTable)  {
         if (toWalk.hasChild()) {
             throw new NotImplementedException();
         }

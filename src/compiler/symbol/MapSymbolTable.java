@@ -11,7 +11,6 @@ import compiler.pipeline.interpret.nodes.ASTValueNode;
 import compiler.util.IllegalAssignmentError;
 import compiler.util.SyntaxError;
 import compiler.util.UnrecognizedIdentifierError;
-import compiler.util.UserError;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -39,7 +38,7 @@ public abstract class MapSymbolTable implements SymbolTable {
     }
 
     @Override
-    public void initSymbolTable(ASTValueNode content) throws UserError {
+    public void initSymbolTable(ASTValueNode content)  {
         ASTAssignmentNode assignment = verifyAndCast(content);
         String identifier = assignment.getReference().getIdentifier();
 
@@ -55,7 +54,7 @@ public abstract class MapSymbolTable implements SymbolTable {
         localContext.get(identifier).resolve(value);
     }
 
-    private ASTAssignmentNode verifyAndCast(ASTValueNode content) throws UserError {
+    private ASTAssignmentNode verifyAndCast(ASTValueNode content)  {
         if (!(content instanceof ASTAssignmentNode)) {
             throw new SyntaxError("Non-assignment in object definition");
         }
@@ -68,11 +67,8 @@ public abstract class MapSymbolTable implements SymbolTable {
 
         return ret;
     }
-    @Override
-    public SymbolTable getSymbolTable(ASTValueNode content) throws UserError {
-        ASTAssignmentNode assignment = verifyAndCast(content);
-        String identifier = assignment.getReference().getIdentifier();
 
+    public SymbolTable getSymbolTable(String identifier) {
         if (reservedContext.has(identifier)) {
             throw new IllegalStateException("Attempted to retrieve symbol table for reserved keyword.");
         }
@@ -82,5 +78,16 @@ public abstract class MapSymbolTable implements SymbolTable {
         }
 
         return localContext.get(identifier).getSymbolTable();
+    }
+
+    @Override
+    public SymbolTable getSymbolTable(ASTValueNode content)  {
+        ASTAssignmentNode assignment = verifyAndCast(content);
+        String identifier = assignment.getReference().getIdentifier();
+        return getSymbolTable(identifier);
+    }
+
+    public boolean has(String identifier) {
+        return false;
     }
 }

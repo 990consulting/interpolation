@@ -9,4 +9,12 @@ package compiler.util;
  * Created by dbborens on 2/21/15.
  */
 public class IllegalAssignmentError extends UserError {
+
+    public IllegalAssignmentError() {
+        super();
+    }
+
+    public IllegalAssignmentError(String message) {
+        super(message);
+    }
 }

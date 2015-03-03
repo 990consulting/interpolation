@@ -7,7 +7,6 @@ package compiler.symbol;
 
 import compiler.nodes.TypeNode;
 import compiler.pipeline.interpret.nodes.ASTValueNode;
-import compiler.util.UserError;
 
 /**
  * Created by dbborens on 2/21/15.
@@ -27,7 +26,7 @@ public interface SymbolTable<T extends ASTValueNode> {
      * symbol table provided will be the one corresponding to the narrowest
      * possible interpretation of the child's type.
      */
-    public void initSymbolTable(T content) throws UserError;
+    public void initSymbolTable(T content) ;
 
     /**
      * Returns the symbol table. Should blow up if called before
@@ -36,5 +35,5 @@ public interface SymbolTable<T extends ASTValueNode> {
      * @param content The node for which a symbol table is required.
      * @return The symbol table required to translate this node.
      */
-    public SymbolTable getSymbolTable(T content) throws UserError;
+    public SymbolTable getSymbolTable(T content) ;
 }

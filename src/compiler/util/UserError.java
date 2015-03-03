@@ -8,7 +8,7 @@ package compiler.util;
 /**
  * Created by dbborens on 2/22/15.
  */
-public class UserError extends Exception {
+public class UserError extends RuntimeException {
     public UserError() {
         super();
     }
