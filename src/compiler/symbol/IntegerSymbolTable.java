@@ -1,0 +1,20 @@
+/*
+ * Copyright (c) 2015 David Bruce Borenstein and the
+ * Trustees of Princeton University. All rights reserved.
+ */
+
+package compiler.symbol;
+
+import compiler.pipeline.interpret.nodes.ASTPrimitiveInteger;
+import compiler.pipeline.translate.nodes.ConstantInteger;
+
+/**
+ * Created by dbborens on 3/5/15.
+ */
+public class IntegerSymbolTable implements PrimitiveSymbolTable<ConstantInteger, ASTPrimitiveInteger> {
+    @Override
+    public ConstantInteger convert(ASTPrimitiveInteger toInterpret) {
+        Integer value = toInterpret.getContent();
+        return new ConstantInteger(value);
+    }
+}

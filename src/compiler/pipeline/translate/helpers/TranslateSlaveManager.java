@@ -5,11 +5,14 @@
 
 package compiler.pipeline.translate.helpers;
 
+import compiler.pipeline.interpret.nodes.ASTPrimitiveNode;
 import compiler.pipeline.interpret.nodes.ASTValueNode;
 import compiler.pipeline.translate.nodes.ListObjectNode;
 import compiler.pipeline.translate.nodes.MapObjectNode;
+import compiler.pipeline.translate.nodes.PrimitiveNode;
 import compiler.symbol.ListSymbolTable;
 import compiler.symbol.MapSymbolTable;
+import compiler.symbol.PrimitiveSymbolTable;
 import compiler.symbol.ReservedContext;
 
 /**
@@ -19,6 +22,7 @@ public class TranslateSlaveManager {
 
     private ListTranslationManager listManager;
     private MapTranslationManager mapManager;
+//    private PrimitiveTranslationManager primitiveManager;
 
     public TranslateSlaveManager() {
         this(new ListTranslationManager(), new MapTranslationManager());
@@ -42,5 +46,13 @@ public class TranslateSlaveManager {
     public void init(TranslationCallback walker) {
         mapManager.init(walker);
         listManager.init(walker);
+    }
+
+    public PrimitiveNode translate(ASTValueNode toTranslate, PrimitiveSymbolTable symbolTable) {
+        if (!(toTranslate instanceof ASTPrimitiveNode)) {
+            throw new IllegalStateException("AST node does not match symbol table");
+        }
+
+        return symbolTable.convert((ASTPrimitiveNode) toTranslate);
     }
 }

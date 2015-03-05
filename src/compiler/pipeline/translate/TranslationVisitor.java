@@ -9,10 +9,7 @@ import compiler.pipeline.interpret.nodes.ASTValueNode;
 import compiler.pipeline.translate.helpers.TranslateSlaveManager;
 import compiler.pipeline.translate.helpers.TranslationCallback;
 import compiler.pipeline.translate.nodes.ObjectNode;
-import compiler.symbol.ListSymbolTable;
-import compiler.symbol.MapSymbolTable;
-import compiler.symbol.ReservedContext;
-import compiler.symbol.SymbolTable;
+import compiler.symbol.*;
 
 /**
  * Depth-first search of the abstract syntax tree, which translates
@@ -51,9 +48,10 @@ public class TranslationVisitor {
     public ObjectNode translate(ASTValueNode toTranslate, SymbolTable symbolTable, ReservedContext reserved) {
         if (symbolTable instanceof ListSymbolTable) {
             return manager.translate(toTranslate, (ListSymbolTable) symbolTable, reserved);
-        } else
-            if (symbolTable instanceof MapSymbolTable) {
+        } else if (symbolTable instanceof MapSymbolTable) {
             return manager.translate(toTranslate, (MapSymbolTable) symbolTable, reserved);
+        } else if (symbolTable instanceof PrimitiveSymbolTable) {
+            return manager.translate(toTranslate, (PrimitiveSymbolTable) symbolTable);
         } else {
             throw new IllegalArgumentException("Unexpected symbol table class");
         }

@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 /**
  * Created by dbborens on 2/14/15.
  */
-public class ASTPrimitiveNode<T> extends AbstractPrimitiveNode<T> implements ASTValueNode {
+public abstract class ASTPrimitiveNode<T> extends AbstractPrimitiveNode<T> implements ASTValueNode {
 
     public ASTPrimitiveNode(T content) {
         super(content);

@@ -5,11 +5,14 @@
 
 package compiler.pipeline.translate.helpers;
 
+import compiler.pipeline.interpret.nodes.ASTPrimitiveNode;
 import compiler.pipeline.interpret.nodes.ASTValueNode;
 import compiler.pipeline.translate.nodes.ListObjectNode;
 import compiler.pipeline.translate.nodes.MapObjectNode;
+import compiler.pipeline.translate.nodes.PrimitiveNode;
 import compiler.symbol.ListSymbolTable;
 import compiler.symbol.MapSymbolTable;
+import compiler.symbol.PrimitiveSymbolTable;
 import compiler.symbol.ReservedContext;
 import org.junit.Before;
 import org.junit.Test;
@@ -48,6 +51,16 @@ public class TranslateSlaveManagerTest {
         MapObjectNode expected = mock(MapObjectNode.class);
         when(mapManager.translate(node, st, reserved)).thenReturn(expected);
         MapObjectNode actual = query.translate(node, st, reserved);
+        assertSame(expected, actual);
+    }
+
+    @Test
+    public void primitiveSymbolTableCase() throws Exception {
+        PrimitiveSymbolTable pst = mock(PrimitiveSymbolTable.class);
+        ASTPrimitiveNode node = mock(ASTPrimitiveNode.class);
+        PrimitiveNode expected = mock(PrimitiveNode.class);
+        when(pst.convert(node)).thenReturn(expected);
+        PrimitiveNode actual =  query.translate(node, pst);
         assertSame(expected, actual);
     }
 

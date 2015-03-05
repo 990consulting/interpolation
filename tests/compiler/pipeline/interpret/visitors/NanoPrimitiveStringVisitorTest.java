@@ -5,13 +5,13 @@
 
 package compiler.pipeline.interpret.visitors;
 
+import compiler.pipeline.interpret.nanosyntax.NanosyntaxParser.StringPrimitiveContext;
 import compiler.pipeline.interpret.nodes.ASTPrimitiveNode;
 import org.antlr.v4.runtime.CommonToken;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.junit.Test;
 
-import static compiler.pipeline.interpret.nanosyntax.NanosyntaxParser.StringPrimitiveContext;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

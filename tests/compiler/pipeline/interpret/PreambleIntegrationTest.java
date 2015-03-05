@@ -45,7 +45,7 @@ public class PreambleIntegrationTest implements FileTest {
         ASTAssignmentNode actionAssignment = new ASTAssignmentNode(action, wander);
 
         ASTReferenceNode every = new ASTReferenceNode("every");
-        ASTPrimitiveNode<Double> period = new ASTPrimitiveNode<>(1.0);
+        ASTPrimitiveFloat period = new ASTPrimitiveFloat(1.0);
         ASTAssignmentNode everyAssignment = new ASTAssignmentNode(every, period);
 
         ASTReferenceNode until = new ASTReferenceNode("until");
@@ -57,7 +57,7 @@ public class PreambleIntegrationTest implements FileTest {
         ASTReferenceNode operator = new ASTReferenceNode(">=");
 
         ASTReferenceNode rightOperandReference = new ASTReferenceNode("right");
-        ASTPrimitiveNode<Double> rightOperandValue = new ASTPrimitiveNode<>(100.0);
+        ASTPrimitiveFloat rightOperandValue = new ASTPrimitiveFloat(100.0);
         ASTAssignmentNode rightOperand = new ASTAssignmentNode(rightOperandReference, rightOperandValue);
 
         Stream<ASTValueNode> operandStream = Stream.of(leftOperand, rightOperand);
@@ -83,7 +83,7 @@ public class PreambleIntegrationTest implements FileTest {
         ASTReferenceNode agent = new ASTReferenceNode("Agent", doRef);
 
         ASTReferenceNode count = new ASTReferenceNode("count");
-        ASTPrimitiveNode<Integer> one = new ASTPrimitiveNode<>(1);
+        ASTPrimitiveInteger one = new ASTPrimitiveInteger(1);
         ASTAssignmentNode countAssignment = new ASTAssignmentNode(count, one);
 
         ASTAssignmentNode agentAssignment = new ASTAssignmentNode(agent, behaviorAssigment);

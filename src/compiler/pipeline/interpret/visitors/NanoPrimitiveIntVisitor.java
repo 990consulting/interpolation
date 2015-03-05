@@ -5,16 +5,31 @@
 
 package compiler.pipeline.interpret.visitors;
 
-import compiler.pipeline.interpret.nanosyntax.NanosyntaxParser;
+import compiler.pipeline.interpret.nodes.ASTPrimitiveInteger;
+import org.antlr.v4.runtime.CommonToken;
+import org.antlr.v4.runtime.tree.ParseTree;
 
+import static compiler.pipeline.interpret.nanosyntax.NanosyntaxParser.IntPrimitiveContext;
 /**
  * Created by dbborens on 2/15/15.
  */
-public class NanoPrimitiveIntVisitor
-        extends AbstractNanoNarrowPrimitiveVisitor<Integer,
-                        NanosyntaxParser.IntPrimitiveContext> {
+public class NanoPrimitiveIntVisitor extends AbstractNanoNodeVisitor {
+
 
     public NanoPrimitiveIntVisitor(NanoToASTVisitor master) {
-        super(master, Integer::valueOf);
+        super(master);
+    }
+
+    public ASTPrimitiveInteger visit(IntPrimitiveContext ctx) {
+        if (ctx.getChildCount() != 1) {
+            throw new IllegalArgumentException("Malformed primitive");
+        }
+
+        ParseTree child = ctx.getChild(0);
+        verifyPayload(child, CommonToken.class);
+
+        String valueText = child.getText();
+        Integer value = Integer.valueOf(valueText);
+        return new ASTPrimitiveInteger(value);
     }
 }

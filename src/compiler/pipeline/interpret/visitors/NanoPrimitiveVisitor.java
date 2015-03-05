@@ -5,7 +5,10 @@
 
 package compiler.pipeline.interpret.visitors;
 
+import compiler.pipeline.interpret.nodes.ASTPrimitiveFloat;
+import compiler.pipeline.interpret.nodes.ASTPrimitiveInteger;
 import compiler.pipeline.interpret.nodes.ASTPrimitiveNode;
+import compiler.pipeline.interpret.nodes.ASTPrimitiveString;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import static compiler.pipeline.interpret.nanosyntax.NanosyntaxParser.*;
@@ -31,11 +34,11 @@ public class NanoPrimitiveVisitor extends AbstractNanoNodeVisitor {
         Object payload = child.getPayload();
 
         if (StringPrimitiveContext.class.isInstance(payload)) {
-            return (ASTPrimitiveNode<String>) child.accept(master);
+            return (ASTPrimitiveString) child.accept(master);
         } else if (IntPrimitiveContext.class.isInstance(payload)) {
-            return (ASTPrimitiveNode<Integer>) child.accept(master);
+            return (ASTPrimitiveInteger) child.accept(master);
         } else if (FloatPrimitiveContext.class.isInstance(payload)) {
-            return (ASTPrimitiveNode<Double>) child.accept(master);
+            return (ASTPrimitiveFloat) child.accept(master);
         } else {
             throw new IllegalArgumentException("Unrecognized primitive");
         }

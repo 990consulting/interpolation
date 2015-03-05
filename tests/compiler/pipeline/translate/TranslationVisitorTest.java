@@ -10,10 +10,8 @@ import compiler.pipeline.translate.helpers.TranslateSlaveManager;
 import compiler.pipeline.translate.nodes.ListObjectNode;
 import compiler.pipeline.translate.nodes.MapObjectNode;
 import compiler.pipeline.translate.nodes.ObjectNode;
-import compiler.symbol.InstanceSymbolTable;
-import compiler.symbol.ListSymbolTable;
-import compiler.symbol.MapSymbolTable;
-import compiler.symbol.ReservedContext;
+import compiler.pipeline.translate.nodes.PrimitiveNode;
+import compiler.symbol.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -60,6 +58,15 @@ public class TranslationVisitorTest {
         MapObjectNode expected = mock(MapObjectNode.class);
         when(manager.translate(input, st, reserved)).thenReturn(expected);
         ObjectNode actual = query.translate(input, st, reserved);
+        assertSame(expected, actual);
+    }
+
+    @Test
+    public void primitiveSymbolTableCase() throws Exception {
+        PrimitiveSymbolTable st = mock(PrimitiveSymbolTable.class);
+        PrimitiveNode expected = mock(PrimitiveNode.class);
+        when(manager.translate(input, st)).thenReturn(expected);
+        ObjectNode actual = query.translate(input, st, null);
         assertSame(expected, actual);
     }
 
