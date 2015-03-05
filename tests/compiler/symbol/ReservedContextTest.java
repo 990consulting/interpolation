@@ -5,11 +5,6 @@
 
 package compiler.symbol;
 
-import compiler.util.IllegalAssignmentError;
-import org.junit.Test;
-
-import static org.mockito.Mockito.when;
-
 /**
  * Created by dbborens on 2/21/15.
  */
@@ -21,15 +16,15 @@ public class ReservedContextTest extends AbstractNestedContextTest {
     }
 
 
-    @Test(expected = IllegalAssignmentError.class)
-    public void putAfterHasLocalThrows() throws Exception {
-        query.put(identifier, symbol);
-        query.put(identifier, symbol);
-    }
-
-    @Test(expected = IllegalAssignmentError.class)
-    public void putAfterParentHasThrows() throws Exception {
-        when(parent.has(identifier)).thenReturn(true);
-        query.put(identifier, symbol);
-    }
+//    @Test(expected = IllegalAssignmentError.class)
+//    public void putAfterHasLocalThrows() throws Exception {
+//        query.put(identifier);
+//        query.put(identifier);
+//    }
+//
+//    @Test(expected = IllegalAssignmentError.class)
+//    public void putAfterParentHasThrows() throws Exception {
+//        when(parent.has(identifier)).thenReturn(true);
+//        query.put(identifier);
+//    }
 }

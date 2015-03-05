@@ -5,14 +5,14 @@
 
 package compiler.pipeline.translate.helpers;
 
-import compiler.pipeline.translate.nodes.MapObjectNode;
-import compiler.symbol.MapSymbolTable;
+import compiler.pipeline.translate.nodes.ListObjectNode;
+import compiler.symbol.ListSymbolTable;
 import compiler.symbol.ReservedContext;
 
 /**
  * Created by dbborens on 3/2/15.
  */
-public class MapAssignmentLoaderFactory {
+public class ListValueLoaderFactory {
 
     private TranslationCallback callback;
 
@@ -20,9 +20,9 @@ public class MapAssignmentLoaderFactory {
         this.callback = callback;
     }
 
-    public MapAssignmentLoader build(MapSymbolTable symbolTable, ReservedContext reserved) {
-        MapObjectNode node = new MapObjectNode(symbolTable, reserved);
-        MapAssignmentLoader loader = new MapAssignmentLoader(node, callback);
+    public ListValueLoader build(ListSymbolTable symbolTable, ReservedContext reserved) {
+        ListObjectNode node = new ListObjectNode(symbolTable, reserved);
+        ListValueLoader loader = new ListValueLoader(node, callback);
         return loader;
     }
 }

@@ -11,6 +11,7 @@ import compiler.pipeline.translate.helpers.TranslationCallback;
 import compiler.pipeline.translate.nodes.ObjectNode;
 import compiler.symbol.ListSymbolTable;
 import compiler.symbol.MapSymbolTable;
+import compiler.symbol.ReservedContext;
 import compiler.symbol.SymbolTable;
 
 /**
@@ -39,7 +40,7 @@ public class TranslationVisitor {
 
     public TranslationVisitor(TranslateSlaveManager manager) {
         this.manager = manager;
-        TranslationCallback walker = (node, st) -> translate(node, st);
+        TranslationCallback walker = (node, st, reserved) -> translate(node, st, reserved);
         manager.init(walker);
     }
 
@@ -47,11 +48,12 @@ public class TranslationVisitor {
         this (new TranslateSlaveManager());
     }
 
-    public ObjectNode translate(ASTValueNode toTranslate, SymbolTable symbolTable) {
+    public ObjectNode translate(ASTValueNode toTranslate, SymbolTable symbolTable, ReservedContext reserved) {
         if (symbolTable instanceof ListSymbolTable) {
-            return manager.translate(toTranslate, (ListSymbolTable) symbolTable);
-        } else if (symbolTable instanceof MapSymbolTable) {
-            return manager.translate(toTranslate, (MapSymbolTable) symbolTable);
+            return manager.translate(toTranslate, (ListSymbolTable) symbolTable, reserved);
+        } else
+            if (symbolTable instanceof MapSymbolTable) {
+            return manager.translate(toTranslate, (MapSymbolTable) symbolTable, reserved);
         } else {
             throw new IllegalArgumentException("Unexpected symbol table class");
         }

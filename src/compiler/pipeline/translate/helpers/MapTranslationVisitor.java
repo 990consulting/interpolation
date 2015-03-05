@@ -38,20 +38,35 @@ import compiler.util.SyntaxError;
 public class MapTranslationVisitor {
 
     public MapObjectNode translate(ASTValueNode root, MapAssignmentLoader loader) {
+
+        // If the AST node is a reference (=leaf), then just build the empty
+        // object node and return it.
         if (root instanceof ASTReferenceNode) {
             return loader.finish();
         }
 
+        // If the AST node is an assignment, then we expect that its value is also
+        // an assignment: it should represent an assignment to a particular member
+        // of an instance of an appropriate class.
         if (root instanceof ASTAssignmentNode) {
-            loader.loadAssignment((ASTAssignmentNode) root);
-            return loader.finish();
+            return doAssignmentCase((ASTAssignmentNode) root, loader);
         }
 
-        if (root instanceof ASTBlockNode) {
+        else if (root instanceof ASTBlockNode) {
             return doBlockCase((ASTBlockNode) root, loader);
         }
 
         throw new SyntaxError("Illegal input format in named object specification.");
+    }
+
+    private MapObjectNode doAssignmentCase(ASTAssignmentNode root, MapAssignmentLoader loader) {
+        ASTValueNode value = root.getValue();
+        if (!(value instanceof  ASTAssignmentNode)) {
+            throw new SyntaxError("Unexpected statement in object definition.");
+        }
+
+        loader.loadAssignment((ASTAssignmentNode) value);
+        return loader.finish();
     }
 
     private MapObjectNode doBlockCase(ASTBlockNode root, MapAssignmentLoader loader) {
@@ -59,7 +74,6 @@ public class MapTranslationVisitor {
             if (!(child instanceof ASTAssignmentNode)) {
                 throw new SyntaxError("Expected assignment in attribute specification block.");
             }
-
             loader.loadAssignment((ASTAssignmentNode) child);
         });
         return loader.finish();

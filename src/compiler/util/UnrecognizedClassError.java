@@ -3,11 +3,10 @@
  * Trustees of Princeton University. All rights reserved.
  */
 
-package compiler.symbol;
+package compiler.util;
 
 /**
- * Created by dbborens on 3/4/15.
+ * Created by dbborens on 2/21/15.
  */
-public abstract class ListSymbolTable extends ClassSymbolTable {
-
+public class UnrecognizedClassError extends UserError {
 }

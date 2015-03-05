@@ -8,6 +8,7 @@ package compiler.pipeline.translate.helpers;
 import compiler.pipeline.interpret.nodes.ASTValueNode;
 import compiler.pipeline.translate.nodes.MapObjectNode;
 import compiler.symbol.MapSymbolTable;
+import compiler.symbol.ReservedContext;
 
 /**
  * Created by dbborens on 3/2/15.
@@ -32,8 +33,8 @@ public class MapTranslationManager {
         factory.init(walker);
     }
 
-    public MapObjectNode translate(ASTValueNode root, MapSymbolTable symbolTable) {
-        MapAssignmentLoader loader = factory.build(symbolTable);
+    public MapObjectNode translate(ASTValueNode root, MapSymbolTable symbolTable, ReservedContext reserved) {
+        MapAssignmentLoader loader = factory.build(symbolTable, reserved);
         return visitor.translate(root, loader);
     }
 }

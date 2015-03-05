@@ -4,10 +4,11 @@
 
 initially: scatter {
     count: 1;
-    description: Agent -> do: 
-        Behavior {
-            action: wander;
-            every: 1.0;
-            until: time >= 100.0;
-        };
+    description:
+        Agent:
+            do: Behavior {
+                    action: wander;
+                    every: 1.0;
+                    until: time >= 100.0;
+                };
 };

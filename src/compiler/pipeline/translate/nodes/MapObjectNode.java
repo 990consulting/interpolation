@@ -5,10 +5,11 @@
 
 package compiler.pipeline.translate.nodes;
 
-import compiler.symbol.MapSymbolTable;
-import compiler.symbol.SymbolTable;
+import compiler.symbol.ClassSymbolTable;
+import compiler.symbol.InstanceSymbolTable;
+import compiler.symbol.ReservedContext;
+import compiler.util.IllegalAssignmentError;
 
-import java.util.stream.Stream;
 
 /**
  * MapObjectNode represents a Java object whose members
@@ -17,33 +18,37 @@ import java.util.stream.Stream;
  *
  * Created by dbborens on 2/22/15.
  */
-public class MapObjectNode extends ObjectNode<MapSymbolTable> {
+public class MapObjectNode implements ObjectNode {
 
-    private final ContextMap map;
+    private final LocalContextMap local;
+    private final ReservedContext reserved;
 
-    public MapObjectNode(MapSymbolTable symbolTable) {
-        this(symbolTable, new ContextMap());
+    private final InstanceSymbolTable symbolTable;
+
+    public MapObjectNode(InstanceSymbolTable symbolTable, ReservedContext reserved) {
+        this(symbolTable, reserved, new LocalContextMap());
     }
 
-    public MapObjectNode(MapSymbolTable symbolTable, ContextMap map) {
-        super(symbolTable);
-        this.map = map;
-    }
-
-    public Stream<String> getDefinedMemberNames() {
-        return map.getMemberNames();
-    }
-
-    public ObjectNode getMember(String name) {
-        return map.getMember(name);
+    public MapObjectNode(InstanceSymbolTable symbolTable, ReservedContext reserved, LocalContextMap local) {
+        this.symbolTable = symbolTable;
+        this.reserved = reserved;
+        this.local = local;
     }
 
     public void loadMember(String identifier, ObjectNode value) {
-        map.loadMember(identifier, value);
+        local.loadMember(identifier, value);
     }
 
-    public SymbolTable getSymbolTableFor(String name) {
-        return symbolTable.getSymbolTable(name);
+    public ClassSymbolTable getSymbolTable(String identifier) {
+        if (reserved.has(identifier)) {
+            throw new IllegalAssignmentError("Attempting to assign to reserved keyword " + identifier);
+        }
+
+        return symbolTable.getSymbolTable(identifier);
+    }
+
+    public ReservedContext getReserved() {
+        return reserved;
     }
 
     @Override
@@ -53,7 +58,7 @@ public class MapObjectNode extends ObjectNode<MapSymbolTable> {
 
         MapObjectNode that = (MapObjectNode) o;
 
-        if (!map.equals(that.map)) return false;
+        if (!local.equals(that.local)) return false;
         if (!symbolTable.equals(that.symbolTable)) return false;
 
         return true;

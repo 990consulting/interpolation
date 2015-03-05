@@ -5,37 +5,31 @@
 
 package compiler.symbol;
 
-import compiler.util.IllegalAssignmentError;
-import compiler.util.UnrecognizedIdentifierError;
-
-import java.util.HashMap;
+import java.util.HashSet;
 
 /**
- * Created by dbborens on 2/21/15.
+ * Represents reserved keywords. The current implementation (3/3/15) is a stub:
+ * rather than being a map of keywords to resolvers, it is just a set of
+ * keywords. Once I finish the translate stage, I will add the additional
+ * functionality necessary to resolve keywords.
+ *
+ * Created by dbborens on 3/3/15.
  */
-public class AbstractNestedContext implements Context {
-
+public class AbstractNestedContext {
     public AbstractNestedContext parent;
 
-    private HashMap<String, Symbol> members;
+    private HashSet<String> members;
 
     public AbstractNestedContext() {
         this(null);
     }
-
     public AbstractNestedContext(AbstractNestedContext parent) {
         this.parent = parent;
-        members = new HashMap<>();
+        members = new HashSet<>();
     }
 
-    @Override
-    public void put(String identifier, Symbol symbol) throws IllegalAssignmentError {
-        members.put(identifier, symbol);
-    }
-
-    @Override
     public boolean has(String identifier) {
-        if (members.containsKey(identifier)) {
+        if (members.contains(identifier)) {
             return true;
         }
 
@@ -46,16 +40,8 @@ public class AbstractNestedContext implements Context {
         return false;
     }
 
-    @Override
-    public Symbol get(String identifier) throws UnrecognizedIdentifierError {
-        if (!has(identifier)) {
-            throw new UnrecognizedIdentifierError();
-        }
-
-        if (members.containsKey(identifier)) {
-            return members.get(identifier);
-        }
-
-        return parent.get(identifier);
+    public void put(String identifier) {
+        members.add(identifier);
     }
+
 }

@@ -52,9 +52,11 @@ public class MapTranslationVisitorTest {
 
     @Test
     public void assignmentLoadsChild() throws Exception {
-        ASTAssignmentNode root = mock(ASTAssignmentNode.class);
+        ASTAssignmentNode child = mock(ASTAssignmentNode.class);
+        ASTReferenceNode ref = mock(ASTReferenceNode.class);
+        ASTAssignmentNode root = new ASTAssignmentNode(ref, child);
         query.translate(root, loader);
-        verify(loader).loadAssignment(root);
+        verify(loader).loadAssignment(child);
     }
 
     @Test
@@ -75,7 +77,7 @@ public class MapTranslationVisitorTest {
     }
 
     /**
-     * In the context of map nodes, a block is just a way of conveying
+     * In the context of localMap nodes, a block is just a way of conveying
      * multiple assignments (or definitions). Anything else should throw--
      * including a nested block.
      *

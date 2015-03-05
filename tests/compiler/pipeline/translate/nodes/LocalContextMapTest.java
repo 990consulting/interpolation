@@ -17,20 +17,20 @@ import java.util.stream.Stream;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
-public class ContextMapTest {
+public class LocalContextMapTest {
 
-    private ContextMap query;
+    private LocalContextMap query;
 
     @Before
     public void init() throws Exception {
-        query = new ContextMap();
+        query = new LocalContextMap();
     }
 
     @Test
     public void testGetMemberNamesEmpty() throws Exception {
         List<String> expected = new ArrayList<>();
         List<String> actual = query.
-                getMemberNames().
+                getMemberIdentifiers().
                 collect(Collectors.toList());
 
         assertEquals(expected, actual);
@@ -43,7 +43,7 @@ public class ContextMapTest {
                 .collect(Collectors.toList());
 
         List<String> actual = query.
-                getMemberNames().
+                getMemberIdentifiers().
                 collect(Collectors.toList());
 
         assertEquals(expected, actual);

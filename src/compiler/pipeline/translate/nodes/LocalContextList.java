@@ -12,21 +12,17 @@ import java.util.stream.Stream;
 /**
  * Created by dbborens on 2/22/15.
  */
-public class ContextList {
+public class LocalContextList {
 
     private List<ObjectNode> members;
 
-    public ContextList() {
+    public LocalContextList() {
         members = new ArrayList<>();
-    }
-
-    public ContextList(List<ObjectNode> members) {
-        this.members = members;
     }
 
     public ObjectNode get(int i) {
         if (i >= members.size()) {
-            throw new IllegalStateException("Retrieval of undefined indexed member");
+            throw new IllegalArgumentException("Retrieval of undefined indexed member");
         }
 
         return members.get(i);
@@ -49,7 +45,7 @@ public class ContextList {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ContextList that = (ContextList) o;
+        LocalContextList that = (LocalContextList) o;
 
         if (!members.equals(that.members)) return false;
 

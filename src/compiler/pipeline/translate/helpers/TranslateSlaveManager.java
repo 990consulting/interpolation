@@ -10,36 +10,37 @@ import compiler.pipeline.translate.nodes.ListObjectNode;
 import compiler.pipeline.translate.nodes.MapObjectNode;
 import compiler.symbol.ListSymbolTable;
 import compiler.symbol.MapSymbolTable;
+import compiler.symbol.ReservedContext;
 
 /**
  * Created by dbborens on 2/22/15.
  */
 public class TranslateSlaveManager {
 
-    private ListTranslationVisitor listVisitor;
+    private ListTranslationManager listManager;
     private MapTranslationManager mapManager;
 
     public TranslateSlaveManager() {
-        this(new ListTranslationVisitor(), new MapTranslationManager());
+        this(new ListTranslationManager(), new MapTranslationManager());
     }
 
-    public TranslateSlaveManager(ListTranslationVisitor listVisitor,
+    public TranslateSlaveManager(ListTranslationManager listManager,
                                  MapTranslationManager mapManager) {
 
-        this.listVisitor = listVisitor;
+        this.listManager = listManager;
         this.mapManager = mapManager;
     }
 
-    public MapObjectNode translate(ASTValueNode root, MapSymbolTable symbolTable) {
-        return mapManager.translate(root, symbolTable);
+    public MapObjectNode translate(ASTValueNode root, MapSymbolTable symbolTable, ReservedContext reserved) {
+        return mapManager.translate(root, symbolTable, reserved);
     }
 
-    public ListObjectNode translate(ASTValueNode root, ListSymbolTable symbolTable) {
-        return listVisitor.translate(root, symbolTable);
+    public ListObjectNode translate(ASTValueNode root, ListSymbolTable symbolTable, ReservedContext reserved) {
+        return listManager.translate(root, symbolTable, reserved);
     }
 
     public void init(TranslationCallback walker) {
         mapManager.init(walker);
-        listVisitor.init(walker);
+        listManager.init(walker);
     }
 }

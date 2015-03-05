@@ -5,41 +5,38 @@
 
 package compiler.pipeline.translate.helpers;
 
-import compiler.pipeline.interpret.nodes.ASTAssignmentNode;
 import compiler.pipeline.interpret.nodes.ASTValueNode;
-import compiler.pipeline.translate.nodes.MapObjectNode;
+import compiler.pipeline.translate.nodes.ListObjectNode;
 import compiler.pipeline.translate.nodes.ObjectNode;
 import compiler.symbol.InstanceSymbolTable;
 
 /**
  * Created by dbborens on 3/2/15.
  */
-public class MapAssignmentLoader {
+public class ListValueLoader {
 
-    private MapObjectNode node;
+    private ListObjectNode node;
     private TranslationCallback callback;
-    private MapMemberResolver resolver;
+    private ListMemberResolver resolver;
     private boolean finished;
 
-    public MapAssignmentLoader(MapObjectNode node, TranslationCallback callback) {
+    public ListValueLoader(ListObjectNode node, TranslationCallback callback) {
         this.callback = callback;
         this.node = node;
-        resolver = new MapMemberResolver(node);
+        resolver = new ListMemberResolver(node);
         finished = false;
     }
 
-    public void loadAssignment(ASTAssignmentNode toTranslate) {
+    public void loadAssignment(ASTValueNode toTranslate) {
         if (finished) {
             throw new IllegalStateException("Attempting to add to finished node");
         }
-        String identifier = toTranslate.getReference().getIdentifier();
         InstanceSymbolTable childSt = resolver.resolve(toTranslate);
-        ASTValueNode childValue = toTranslate.getValue();
-        ObjectNode childNode = callback.walk(childValue, childSt, node.getReserved());
-        node.loadMember(identifier, childNode);
+        ObjectNode childNode = callback.walk(toTranslate, childSt, node.getReserved());
+        node.loadMember(childNode);
     }
 
-    public MapObjectNode finish()  {
+    public ListObjectNode finish()  {
         finished = true;
         return node;
     }
@@ -49,7 +46,7 @@ public class MapAssignmentLoader {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        MapAssignmentLoader that = (MapAssignmentLoader) o;
+        ListValueLoader that = (ListValueLoader) o;
 
         if (!callback.equals(that.callback)) return false;
         if (!node.equals(that.node)) return false;

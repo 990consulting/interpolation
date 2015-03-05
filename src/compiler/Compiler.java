@@ -5,10 +5,8 @@
 
 package compiler;
 
-import compiler.pipeline.initialize.InitializationWalker;
 import compiler.pipeline.interpret.Interpreter;
 import compiler.pipeline.interpret.nodes.ASTRootNode;
-import compiler.symbol.tables.RootSymbolTable;
 
 import java.io.File;
 
@@ -26,8 +24,8 @@ public class Compiler {
 
         // Stage 2: @compiler.pipeline.initialize
         // Initialize symbol tables.
-        InitializationWalker initWalker = new InitializationWalker();
-        RootSymbolTable rootSymbolTable = initWalker.walk(astRoot);
+//        InitializationWalker initWalker = new InitializationWalker();
+//        RootSymbolTable rootSymbolTable = initWalker.walk(astRoot);
 
         // Stage 3: @compiler.pipeline.translate
         // Translate abstract syntax tree into an approximately one-to-one

@@ -5,29 +5,78 @@
 
 package compiler.pipeline.translate.nodes;
 
+import compiler.symbol.ClassSymbolTable;
+import compiler.symbol.ListSymbolTable;
+import compiler.symbol.ReservedContext;
+import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.fail;
+import java.util.stream.Stream;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.mockito.Mockito.*;
 
 public class ListObjectNodeTest {
 
-    @Test
-    public void testGetMemberStream() throws Exception {
-        fail();
+    private LocalContextList list;
+    private ListSymbolTable symbolTable;
+    private ListObjectNode query;
+    private ReservedContext reserved;
+
+    @Before
+    public void init() throws Exception {
+        symbolTable = mock(ListSymbolTable.class);
+        list = mock(LocalContextList.class);
+        reserved = mock(ReservedContext.class);
+        query = new ListObjectNode(symbolTable, list, reserved);
     }
 
     @Test
-    public void testGetMember() throws Exception {
-        fail();
+    public void getStreamAsksList() throws Exception {
+        Stream<ObjectNode> expected = mock(Stream.class);
+        when(list.getMembers()).thenReturn(expected);
+        Stream<ObjectNode> actual = query.getMemberStream();
+        assertSame(expected, actual);
     }
 
     @Test
-    public void testLoadMember() throws Exception {
-        fail();
+    public void getMemberAsksList() throws Exception {
+        ObjectNode expected = mock(ObjectNode.class);
+        when(list.size()).thenReturn(1);
+        when(list.get(0)).thenReturn(expected);
+        ObjectNode actual = query.getMember(0);
+        assertSame(expected, actual);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getOutOfBoundsThrows() throws Exception {
+        query.getMember(0);
     }
 
     @Test
-    public void testSize() throws Exception {
-        fail();
+    public void loadAsksList() throws Exception {
+        ObjectNode node = mock(ObjectNode.class);
+        query.loadMember(node);
+        verify(list).loadMember(node);
     }
+
+    @Test
+    public void sizeAsksList() throws Exception {
+        when(list.size()).thenReturn(5);
+        assertEquals(5, query.size());
+    }
+
+    @Test
+    public void getSymbolTable() throws Exception {
+        ClassSymbolTable actual = query.getSymbolTable();
+        assertSame(symbolTable, actual);
+    }
+
+    @Test
+    public void getReserved() throws Exception {
+        ReservedContext actual = query.getReserved();
+        assertSame(reserved, actual);
+    }
+
 }

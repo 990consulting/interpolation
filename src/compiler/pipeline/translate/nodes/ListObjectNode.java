@@ -5,39 +5,56 @@
 
 package compiler.pipeline.translate.nodes;
 
-import compiler.symbol.SymbolTable;
+import compiler.symbol.ClassSymbolTable;
+import compiler.symbol.ListSymbolTable;
+import compiler.symbol.ReservedContext;
 
 import java.util.stream.Stream;
 
 /**
  * Created by dbborens on 2/22/15.
  */
-public class ListObjectNode extends ObjectNode {
-    private final ContextList list;
+public class ListObjectNode implements ObjectNode {
 
-    public ListObjectNode(SymbolTable symbolTable) {
-        this(symbolTable, new ContextList());
+    private ListSymbolTable symbolTable;
+    private final LocalContextList local;
+    private final ReservedContext reserved;
+
+    public ListObjectNode(ListSymbolTable symbolTable, ReservedContext reserved) {
+        this(symbolTable, new LocalContextList(), reserved);
     }
 
-    public ListObjectNode(SymbolTable symbolTable, ContextList list) {
-        super(symbolTable);
-        this.list = list;
+    public ListObjectNode(ListSymbolTable symbolTable, LocalContextList local, ReservedContext reserved) {
+        this.symbolTable = symbolTable;
+        this.local = local;
+        this.reserved = reserved;
     }
 
     public Stream<ObjectNode> getMemberStream() {
-        return null;
+        return local.getMembers();
     }
 
     public ObjectNode getMember(int index) {
-        return null;
+        if (index >= size()) {
+            throw new IllegalArgumentException("List context member index out of bounds.");
+        }
+        return local.get(index);
     }
 
     public void loadMember(ObjectNode value) {
-
+        local.loadMember(value);
     }
 
     public int size() {
-        return 0;
+        return local.size();
+    }
+
+    public ClassSymbolTable getSymbolTable() {
+        return symbolTable;
+    }
+
+    public ReservedContext getReserved() {
+        return reserved;
     }
 
     @Override
@@ -47,7 +64,7 @@ public class ListObjectNode extends ObjectNode {
 
         ListObjectNode that = (ListObjectNode) o;
 
-        if (!list.equals(that.list)) return false;
+        if (!local.equals(that.local)) return false;
         if (!symbolTable.equals(that.symbolTable)) return false;
 
         return true;

@@ -5,11 +5,9 @@
 
 package compiler.symbol;
 
-import compiler.util.IllegalAssignmentError;
-
 /**
- * A nested context in which any occlusion of identifiers results in an
- * exception. Used for reserved keywords.
+ * A nested context in which any user assignment to identifiers
+ * results in an exception. Used for reserved keywords.
  *
  * Created by dbborens on 2/21/15.
  */
@@ -23,10 +21,7 @@ public class ReservedContext extends AbstractNestedContext {
     }
 
     @Override
-    public void put(String identifier, Symbol symbol) throws IllegalAssignmentError {
-        if (has(identifier)) {
-            throw new IllegalAssignmentError();
-        }
-        super.put(identifier, symbol);
+    public void put(String identifier) {
+        super.put(identifier);
     }
 }

@@ -6,8 +6,8 @@
 package compiler.pipeline.translate.helpers;
 
 import compiler.pipeline.interpret.nodes.ASTValueNode;
-import compiler.pipeline.translate.nodes.MapObjectNode;
-import compiler.symbol.MapSymbolTable;
+import compiler.pipeline.translate.nodes.ListObjectNode;
+import compiler.symbol.ListSymbolTable;
 import compiler.symbol.ReservedContext;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,17 +15,17 @@ import org.junit.Test;
 import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.*;
 
-public class MapTranslationManagerTest {
+public class ListTranslationManagerTest {
 
-    private MapTranslationVisitor visitor;
-    private MapAssignmentLoaderFactory factory;
-    private MapTranslationManager query;
+    private ListTranslationVisitor visitor;
+    private ListValueLoaderFactory factory;
+    private ListTranslationManager query;
 
     @Before
     public void initTests() {
-        visitor = mock(MapTranslationVisitor.class);
-        factory = mock(MapAssignmentLoaderFactory.class);
-        query = new MapTranslationManager(visitor, factory);
+        visitor = mock(ListTranslationVisitor.class);
+        factory = mock(ListValueLoaderFactory.class);
+        query = new ListTranslationManager(visitor, factory);
     }
 
     @Test
@@ -47,16 +47,14 @@ public class MapTranslationManagerTest {
     }
 
     private void doTranslationTest(ReservedContext reserved) throws Exception {
-        MapAssignmentLoader loader = mock(MapAssignmentLoader.class);
-        MapSymbolTable st = mock(MapSymbolTable.class);
+        ListValueLoader loader = mock(ListValueLoader.class);
+        ListSymbolTable st = mock(ListSymbolTable.class);
         when(factory.build(st, reserved)).thenReturn(loader);
-        MapObjectNode expected = mock(MapObjectNode.class);
+        ListObjectNode expected = mock(ListObjectNode.class);
         ASTValueNode node = mock(ASTValueNode.class);
         when(visitor.translate(node, loader)).thenReturn(expected);
 
-        MapObjectNode actual = query.translate(node, st, reserved);
+        ListObjectNode actual = query.translate(node, st, reserved);
         assertSame(expected, actual);
     }
-
-
 }

@@ -14,14 +14,14 @@ import java.util.stream.Stream;
 /**
  * Created by dbborens on 2/22/15.
  */
-public class ContextMap {
+public class LocalContextMap {
     private Map<String, ObjectNode> members;
 
-    public ContextMap() {
+    public LocalContextMap() {
         members = new HashMap<>();
     }
 
-    public Stream<String> getMemberNames() {
+    public Stream<String> getMemberIdentifiers() {
         return members.keySet().stream();
     }
 
@@ -49,7 +49,7 @@ public class ContextMap {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ContextMap that = (ContextMap) o;
+        LocalContextMap that = (LocalContextMap) o;
 
         if (!members.equals(that.members)) return false;
 

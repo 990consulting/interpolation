@@ -8,7 +8,7 @@ package compiler.pipeline.translate.helpers;
 import compiler.pipeline.interpret.nodes.ASTAssignmentNode;
 import compiler.pipeline.interpret.nodes.ASTReferenceNode;
 import compiler.pipeline.interpret.nodes.ASTValueNode;
-import compiler.pipeline.translate.nodes.MapObjectNode;
+import compiler.pipeline.translate.nodes.ListObjectNode;
 import compiler.pipeline.translate.nodes.ObjectNode;
 import compiler.symbol.ClassSymbolTable;
 import compiler.symbol.InstanceSymbolTable;
@@ -19,17 +19,17 @@ import org.junit.Test;
 import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.*;
 
-public class MapAssignmentLoaderTest {
+public class ListValueLoaderTest {
 
-    private MapObjectNode node;
+    private ListObjectNode node;
     private TranslationCallback callback;
-    private ASTAssignmentNode toTranslate;
-    private MapAssignmentLoader query;
+    private ASTValueNode toTranslate;
+    private ListValueLoader query;
     private ReservedContext reserved;
     @Before
     public void init() throws Exception {
         reserved = mock(ReservedContext.class);
-        node = mock(MapObjectNode.class);
+        node = mock(ListObjectNode.class);
         when(node.getReserved()).thenReturn(reserved);
 
         callback = mock(TranslationCallback.class);
@@ -38,21 +38,20 @@ public class MapAssignmentLoaderTest {
         ASTValueNode value = mock(ASTValueNode.class);
         toTranslate = new ASTAssignmentNode(ref, value);
 
-        query = new MapAssignmentLoader(node, callback);
+        query = new ListValueLoader(node, callback);
     }
 
     @Test
-    public void testLoadAssignment() throws Exception {
-        ClassSymbolTable childCst = mock(ClassSymbolTable.class);
-        when(node.getSymbolTable("test")).thenReturn(childCst);
-        InstanceSymbolTable childIst = mock(InstanceSymbolTable.class);
-        when(childCst.getSymbolTable(toTranslate.getValue())).thenReturn(childIst);
-        ASTValueNode value = toTranslate.getValue();
+    public void testLoadValue() throws Exception {
+        ClassSymbolTable cst = mock(ClassSymbolTable.class);
+        when(node.getSymbolTable()).thenReturn(cst);
+        InstanceSymbolTable ist = mock(InstanceSymbolTable.class);
+        when(cst.getSymbolTable(toTranslate)).thenReturn(ist);
         ObjectNode childValue = mock(ObjectNode.class);
-        when(callback.walk(value, childIst, reserved)).thenReturn(childValue);
+        when(callback.walk(toTranslate, ist, reserved)).thenReturn(childValue);
 
         query.loadAssignment(toTranslate);
-        verify(node).loadMember("test", childValue);
+        verify(node).loadMember(childValue);
     }
 
     @Test(expected = IllegalStateException.class)
