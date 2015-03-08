@@ -5,9 +5,11 @@
 
 package runtime.layer.agent;
 
+import runtime.agent.Agent;
 import runtime.geometry.Coordinate;
 
 import java.util.HashMap;
+import java.util.IdentityHashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -16,22 +18,23 @@ import java.util.stream.Stream;
  */
 public class AgentLayerContent {
 
-    private final Map<Coordinate, Integer> coordToAgentMap;
-    private final Map<Integer, Coordinate> agentToCoordMap;
+    private final Map<Coordinate, Agent> coordToAgentMap;
+    private final IdentityHashMap<Agent, Coordinate> agentToCoordMap;
 
     public AgentLayerContent(Stream<Coordinate> canonicalSites) {
         coordToAgentMap = new HashMap<>();
         canonicalSites.forEach(c -> coordToAgentMap.put(c, null));
 
-        agentToCoordMap = new HashMap<>();
+        agentToCoordMap = new IdentityHashMap<>();
     }
 
-    public void put(Integer id, Coordinate coordinate) {
+    public void put(Agent agent, Coordinate coordinate) {
         if (!coordToAgentMap.containsKey(coordinate)) {
             throw new IllegalArgumentException("Attempting placement to non-canonical coordinate");
         }
 
-        if (agentToCoordMap.containsKey(id)) {
+
+        if (agentToCoordMap.containsKey(agent)) {
             throw new IllegalArgumentException("Attempting double placement of agent");
         }
 
@@ -39,28 +42,29 @@ public class AgentLayerContent {
             throw new IllegalArgumentException("Attempting double coordinate occupancy");
         }
 
-        coordToAgentMap.put(coordinate, id);
-        agentToCoordMap.put(id, coordinate);
+        coordToAgentMap.put(coordinate, agent);
+        agentToCoordMap.put(agent, coordinate);
     }
 
-    public Integer get(Coordinate coordinate) {
+    public Agent get(Coordinate coordinate) {
         if (!coordToAgentMap.containsKey(coordinate)) {
             throw new IllegalArgumentException("Attempting to access contents of non-canonical coordinate");
         }
+
         return coordToAgentMap.get(coordinate);
     }
 
-    public void remove(Integer id) {
-        if (!agentToCoordMap.containsKey(id)) {
+    public void remove(Agent agent) {
+        if (!agentToCoordMap.containsKey(agent)) {
             throw new IllegalArgumentException("Attempting to remove agent that does not exist on this layer");
         }
 
-        Coordinate c = agentToCoordMap.get(id);
+        Coordinate c = agentToCoordMap.get(agent);
         coordToAgentMap.put(c, null);
-        agentToCoordMap.remove(id);
+        agentToCoordMap.remove(agent);
     }
 
-    public Coordinate locate(Integer agentId) {
-        return agentToCoordMap.get(agentId);
+    public Coordinate locate(Agent agent) {
+        return agentToCoordMap.get(agent);
     }
 }

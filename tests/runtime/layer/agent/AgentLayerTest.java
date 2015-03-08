@@ -5,13 +5,13 @@
 
 package runtime.layer.agent;
 
-import org.junit.*;
-import org.mockito.InOrder;
+import org.junit.Before;
+import org.junit.Test;
 import runtime.agent.Agent;
 import runtime.geometry.Coordinate;
 import runtime.geometry.Geometry;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.*;
 
 public class AgentLayerTest {
@@ -20,20 +20,21 @@ public class AgentLayerTest {
     private Geometry geometry;
     private AgentSwapHelper swapHelper;
     private AgentLayer query;
-
+    private Agent agent;
     @Before
     public void init() throws Exception {
         content = mock(AgentLayerContent.class);
         geometry = mock(Geometry.class);
         swapHelper = mock(AgentSwapHelper.class);
+        agent = mock(Agent.class);
         query = new AgentLayer(content, geometry, swapHelper);
     }
 
     @Test
     public void locateAsksContent() throws Exception {
         Coordinate expected = mock(Coordinate.class);
-        when(content.locate(4)).thenReturn(expected);
-        Coordinate actual = query.locate(4);
+        when(content.locate(agent)).thenReturn(expected);
+        Coordinate actual = query.locate(agent);
         assertSame(expected, actual);
     }
 

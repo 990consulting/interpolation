@@ -5,6 +5,7 @@
 
 package runtime.layer.agent;
 
+import runtime.agent.Agent;
 import runtime.geometry.Coordinate;
 
 /**
@@ -19,6 +20,28 @@ public class AgentSwapHelper {
     }
 
     public void swap(Coordinate p, Coordinate q) {
+        Agent pAgent = content.get(p);
+        Agent qAgent = content.get(q);
 
+        removeIfNotNull(pAgent);
+        removeIfNotNull(qAgent);
+
+        placeIfNotNull(pAgent, q);
+        placeIfNotNull(qAgent, p);
+    }
+
+    private void placeIfNotNull(Agent agent, Coordinate coord) {
+        if (agent == null) {
+            return;
+        }
+
+        content.put(agent, coord);
+    }
+
+    private void removeIfNotNull(Agent agent) {
+        if (agent == null) {
+            return;
+        }
+        content.remove(agent);
     }
 }

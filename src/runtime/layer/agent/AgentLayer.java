@@ -5,6 +5,7 @@
 
 package runtime.layer.agent;
 
+import runtime.agent.Agent;
 import runtime.geometry.Coordinate;
 import runtime.geometry.Geometry;
 
@@ -30,8 +31,8 @@ public class AgentLayer {
         this(content, geometry, new AgentSwapHelper(content));
     }
 
-    public Coordinate locate(int agentId) {
-        return content.locate(agentId);
+    public Coordinate locate(Agent agent) {
+        return content.locate(agent);
     }
 
     public Geometry getGeometry() {

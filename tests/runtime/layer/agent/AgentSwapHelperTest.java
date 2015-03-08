@@ -1,28 +1,32 @@
 /*
- * Copyright (c) 2015 David Bruce Borenstein and the
+ * Copyright (c) b0a5 David Bruce Borenstein and the
  * Trustees of Princeton University. All rights reserved.
  */
 
 package runtime.layer.agent;
 
-import org.junit.*;
+import org.junit.Before;
+import org.junit.Test;
 import org.mockito.InOrder;
 import runtime.agent.Agent;
 import runtime.geometry.Coordinate;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 public class AgentSwapHelperTest {
 
     private Coordinate p, q;
+    private Agent a, b;
+
     private AgentLayerContent content;
     private AgentSwapHelper query;
-
     @Before
     public void init() throws Exception {
         p = mock(Coordinate.class);
         q = mock(Coordinate.class);
+
+        a = mock(Agent.class);
+        b = mock(Agent.class);
 
         content = mock(AgentLayerContent.class);
         query = new AgentSwapHelper(content);
@@ -30,26 +34,26 @@ public class AgentSwapHelperTest {
 
     @Test
     public void swapTwoOccupied() throws Exception {
-        when(content.get(p)).thenReturn(1);
-        when(content.get(q)).thenReturn(2);
+        when(content.get(p)).thenReturn(a);
+        when(content.get(q)).thenReturn(b);
         query.swap(p, q);
         InOrder inOrder = inOrder(content);
-        inOrder.verify(content).remove(1);
-        inOrder.verify(content).remove(2);
-        inOrder.verify(content).put(1, q);
-        inOrder.verify(content).put(2, p);
+        inOrder.verify(content).remove(a);
+        inOrder.verify(content).remove(b);
+        inOrder.verify(content).put(a, q);
+        inOrder.verify(content).put(b, p);
     }
 
     @Test
     public void swapOneVacant() throws Exception {
-        when(content.get(p)).thenReturn(1);
+        when(content.get(p)).thenReturn(a);
         query.swap(p, q);
         InOrder inOrder = inOrder(content);
-        inOrder.verify(content).remove(1);
-        inOrder.verify(content).put(1, q);
+        inOrder.verify(content).remove(a);
+        inOrder.verify(content).put(a, q);
 
         verify(content, never()).remove(null);
-        verify(content, never()).put(2, q);
+        verify(content, never()).put(b, q);
     }
 
     @Test
