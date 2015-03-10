@@ -3,6 +3,12 @@ package test;/*
  * Trustees of Princeton University. All rights reserved.
  */
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static junit.framework.TestCase.assertEquals;
+
 /**
  * Created by dbborens on 2/15/15.
  */
@@ -27,5 +33,17 @@ public abstract class TestBase {
         double delta = p - q;
         double magnitude = Math.abs(delta);
         return (magnitude < epsilon());
+    }
+
+    protected <T> List<T> listOf(T... contents) {
+        return Stream
+                .of(contents)
+                .collect(Collectors.toList());
+    }
+
+    protected <T> void assertStreamsEqual(Stream<T> expected, Stream<T> actual) {
+        List<T> expList = expected.collect(Collectors.toList());
+        List<T> actList = actual.collect(Collectors.toList());
+        assertEquals(expList, actList);
     }
 }

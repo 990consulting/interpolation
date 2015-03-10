@@ -20,6 +20,7 @@ public class AgentSwapHelperTest {
 
     private AgentLayerContent content;
     private AgentSwapHelper query;
+
     @Before
     public void init() throws Exception {
         p = mock(Coordinate.class);

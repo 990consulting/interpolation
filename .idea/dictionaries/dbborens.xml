@@ -2,6 +2,7 @@
   <dictionary name="dbborens">
     <words>
       <w>antlr</w>
+      <w>multimap</w>
       <w>nano</w>
       <w>nanosyntax</w>
     </words>
