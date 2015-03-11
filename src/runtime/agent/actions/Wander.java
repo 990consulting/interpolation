@@ -5,7 +5,7 @@
 
 package runtime.agent.actions;
 
-import runtime.geometry.Coordinate;
+import runtime.geometry.coordinate.Coordinate;
 import runtime.util.RandomChooser;
 
 import java.util.function.Consumer;

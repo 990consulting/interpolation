@@ -5,16 +5,16 @@
 
 package runtime.agent.actions.coordinate;
 
-import org.junit.*;
-import runtime.geometry.Coordinate;
+import org.junit.Test;
+import runtime.geometry.coordinate.Coordinate;
 
-import javax.management.Query;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertSame;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class NeighborhoodSupplierTest {
 

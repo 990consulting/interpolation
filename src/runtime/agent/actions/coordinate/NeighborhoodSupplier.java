@@ -5,7 +5,7 @@
 
 package runtime.agent.actions.coordinate;
 
-import runtime.geometry.Coordinate;
+import runtime.geometry.coordinate.Coordinate;
 
 import java.util.function.Function;
 import java.util.function.Supplier;

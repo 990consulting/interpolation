@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InOrder;
 import runtime.agent.Agent;
-import runtime.geometry.Coordinate;
+import runtime.geometry.coordinate.Coordinate;
 
 import static org.mockito.Mockito.*;
 

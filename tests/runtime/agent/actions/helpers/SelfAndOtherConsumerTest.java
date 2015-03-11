@@ -5,14 +5,14 @@
 
 package runtime.agent.actions.helpers;
 
-import org.junit.*;
-import runtime.geometry.Coordinate;
+import org.junit.Test;
+import runtime.geometry.coordinate.Coordinate;
 
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class SelfAndOtherConsumerTest {
 

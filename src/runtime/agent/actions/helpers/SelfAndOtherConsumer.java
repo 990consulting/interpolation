@@ -5,7 +5,7 @@
 
 package runtime.agent.actions.helpers;
 
-import runtime.geometry.Coordinate;
+import runtime.geometry.coordinate.Coordinate;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;

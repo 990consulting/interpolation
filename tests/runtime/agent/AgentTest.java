@@ -5,12 +5,14 @@
 
 package runtime.agent;
 
-import org.junit.*;
-import runtime.geometry.Coordinate;
+import org.junit.Before;
+import org.junit.Test;
+import runtime.geometry.coordinate.Coordinate;
 
 import java.util.function.Supplier;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.*;
 
 public class AgentTest {
@@ -18,14 +20,16 @@ public class AgentTest {
     private Agent query;
     private Supplier<Coordinate> locator;
     private Supplier<String> layerResolver;
+    private Runnable death;
     private int id = 5;
 
     @Before
     public void init() throws Exception {
         locator = mock(Supplier.class);
         layerResolver = mock(Supplier.class);
+        death = mock(Runnable.class);
         id = 5;
-        query = new Agent(id, layerResolver, locator);
+        query = new Agent(id, layerResolver, locator, death);
     }
 
     @Test
@@ -45,5 +49,11 @@ public class AgentTest {
         when(locator.get()).thenReturn(expected);
         Coordinate actual = query.locate();
         assertSame(expected, actual);
+    }
+
+    @Test
+    public void die() throws Exception {
+        query.die();
+        verify(death).run();
     }
 }

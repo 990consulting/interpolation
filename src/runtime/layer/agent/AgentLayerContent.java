@@ -6,7 +6,7 @@
 package runtime.layer.agent;
 
 import runtime.agent.Agent;
-import runtime.geometry.Coordinate;
+import runtime.geometry.coordinate.Coordinate;
 
 import java.util.HashMap;
 import java.util.IdentityHashMap;

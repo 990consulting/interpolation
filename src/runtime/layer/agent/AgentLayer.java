@@ -6,8 +6,8 @@
 package runtime.layer.agent;
 
 import runtime.agent.Agent;
-import runtime.geometry.Coordinate;
 import runtime.geometry.Geometry;
+import runtime.geometry.coordinate.Coordinate;
 
 /**
  * Created by dbborens on 3/5/15.

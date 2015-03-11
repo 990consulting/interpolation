@@ -8,8 +8,8 @@ package runtime.layer.agent;
 import org.junit.Before;
 import org.junit.Test;
 import runtime.agent.Agent;
-import runtime.geometry.Coordinate;
 import runtime.geometry.Geometry;
+import runtime.geometry.coordinate.Coordinate;
 
 import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.*;
