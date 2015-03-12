@@ -7,32 +7,37 @@ package runtime.geometry.coordinate;
 
 import org.junit.Test;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class Coordinate2DTest {
 
+    private final Coordinate2D c = new Coordinate2D(1, 2);
+
     @Test
-    public void getX() throws Exception {
-        fail();
+    public void x() throws Exception {
+        assertEquals(1, c.x());
     }
 
     @Test
-    public void getY() throws Exception {
-        fail();
+    public void y() throws Exception {
+        assertEquals(2, c.y());
     }
 
     @Test
     public void isOverbounds() throws Exception {
-        fail();
+        assertFalse(c.isOverbounds());
     }
 
     @Test
     public void asOverbounds() throws Exception {
-        fail();
+        Coordinate expected = new Coordinate2D(1, 2, true);
+        assertEquals(expected, c.asOverbounds());
     }
 
     @Test
-    public void simpleConstructorNotOverbound() throws Exception {
-        fail();
+    public void complexConstructor() throws Exception {
+        Coordinate cEquiv = new Coordinate2D(1, 2, false);
+        assertEquals(cEquiv, c);
     }
 }

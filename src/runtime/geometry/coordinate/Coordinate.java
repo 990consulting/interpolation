@@ -16,4 +16,7 @@ public abstract class Coordinate<C extends Coordinate> {
 
     @Override
     public abstract boolean equals(Object o);
+
+    @Override
+    public abstract String toString();
 }

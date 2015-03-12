@@ -12,7 +12,6 @@ public class Coordinate2D extends Coordinate<Coordinate2D> {
 
     private final int x;
     private final int y;
-    private static final Coordinate2D zero = new Coordinate2D(0, 0);
 
     private final boolean overbounds;
 
@@ -51,6 +50,20 @@ public class Coordinate2D extends Coordinate<Coordinate2D> {
         if (y != that.y) return false;
 
         return true;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("(");
+        if (overbounds) {
+            sb.append("!");
+        }
+        sb.append(x);
+        sb.append(", ");
+        sb.append(y);
+        sb.append(")");
+        return sb.toString();
     }
 
     @Override

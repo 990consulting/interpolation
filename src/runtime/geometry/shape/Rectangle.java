@@ -21,7 +21,7 @@ public class Rectangle extends Shape<Coordinate2D> {
     private final int height, width;
     private final Set<Coordinate2D> canonicalSites;
 
-    public Rectangle(Lattice<Coordinate2D> lattice, int height, int width) {
+    public Rectangle(Lattice<Coordinate2D> lattice, int width, int height) {
         super(lattice);
         this.height = height;
         this.width = width;
@@ -33,7 +33,7 @@ public class Rectangle extends Shape<Coordinate2D> {
         return IntStream.range(0, width)
                 .mapToObj(x -> IntStream.range(0, height)
                         .mapToObj(y -> new Coordinate2D(x, y)))
-                .map(x -> (Coordinate2D) x)
+                .flatMap(subStream -> subStream.map(c -> c))
                 .collect(Collectors.toSet());
     }
 
@@ -48,7 +48,7 @@ public class Rectangle extends Shape<Coordinate2D> {
         int dx = overbounds(d.x(), width);
         int dy = overbounds(d.y(), height);
 
-        boolean overbounds = dx > 0 || dy > 0;
+        boolean overbounds = dx != 0 || dy != 0;
 
         return new Coordinate2D(dx, dy, overbounds);
     }
@@ -65,7 +65,7 @@ public class Rectangle extends Shape<Coordinate2D> {
 
     @Override
     public boolean isOverbounds(Coordinate2D coordinate) {
-        return canonicalSites.contains(coordinate);
+        return !canonicalSites.contains(coordinate);
     }
 
 }
