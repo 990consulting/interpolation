@@ -3,7 +3,9 @@
  * Trustees of Princeton University. All rights reserved.
  */
 
-package compiler.symbol;
+package compiler.symbol.symbols;
+
+import compiler.symbol.tables.InstantiableSymbolTable;
 
 import java.util.function.Supplier;
 
@@ -13,15 +15,15 @@ import java.util.function.Supplier;
  */
 public class ClassSymbol {
 
-    private Supplier<InstanceSymbolTable> symbolTableSupplier;
+    private Supplier<InstantiableSymbolTable> symbolTableSupplier;
     private String description;
 
-    public ClassSymbol(Supplier<InstanceSymbolTable> symbolTableSupplier, String description) {
+    public ClassSymbol(Supplier<InstantiableSymbolTable> symbolTableSupplier, String description) {
         this.symbolTableSupplier = symbolTableSupplier;
         this.description = description;
     }
 
-    public InstanceSymbolTable getSymbolTable() {
+    public InstantiableSymbolTable getSymbolTable() {
         return symbolTableSupplier.get();
     }
 

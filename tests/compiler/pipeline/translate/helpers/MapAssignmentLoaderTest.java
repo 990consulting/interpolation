@@ -10,9 +10,9 @@ import compiler.pipeline.interpret.nodes.ASTReferenceNode;
 import compiler.pipeline.interpret.nodes.ASTValueNode;
 import compiler.pipeline.translate.nodes.MapObjectNode;
 import compiler.pipeline.translate.nodes.ObjectNode;
-import compiler.symbol.ClassSymbolTable;
-import compiler.symbol.InstanceSymbolTable;
-import compiler.symbol.ReservedContext;
+import compiler.symbol.context.ReservedContext;
+import compiler.symbol.tables.ClassSymbolTable;
+import compiler.symbol.tables.MapSymbolTable;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -45,7 +45,7 @@ public class MapAssignmentLoaderTest {
     public void testLoadAssignment() throws Exception {
         ClassSymbolTable childCst = mock(ClassSymbolTable.class);
         when(node.getSymbolTable("test")).thenReturn(childCst);
-        InstanceSymbolTable childIst = mock(InstanceSymbolTable.class);
+        MapSymbolTable childIst = mock(MapSymbolTable.class);
         when(childCst.getSymbolTable(toTranslate.getValue())).thenReturn(childIst);
         ASTValueNode value = toTranslate.getValue();
         ObjectNode childValue = mock(ObjectNode.class);

@@ -7,6 +7,7 @@ package compiler.symbol;
 
 import compiler.pipeline.interpret.nodes.ASTPrimitiveInteger;
 import compiler.pipeline.translate.nodes.ConstantInteger;
+import compiler.symbol.tables.primitive.IntegerSymbolTable;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

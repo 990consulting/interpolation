@@ -9,8 +9,9 @@ import compiler.pipeline.interpret.nodes.ASTAssignmentNode;
 import compiler.pipeline.interpret.nodes.ASTReferenceNode;
 import compiler.pipeline.interpret.nodes.ASTValueNode;
 import compiler.pipeline.translate.nodes.MapObjectNode;
-import compiler.symbol.ClassSymbolTable;
-import compiler.symbol.InstanceSymbolTable;
+import compiler.symbol.tables.ClassSymbolTable;
+import compiler.symbol.tables.InstantiableSymbolTable;
+import compiler.symbol.tables.MapSymbolTable;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -41,10 +42,10 @@ public class MapMemberResolverTest {
         when(objectNode.getSymbolTable("test")).thenReturn(classTable);
 
         ASTValueNode value = translateNode.getValue();
-        InstanceSymbolTable expected = mock(InstanceSymbolTable.class);
+        MapSymbolTable expected = mock(MapSymbolTable.class);
         when(classTable.getSymbolTable(value)).thenReturn(expected);
 
-        InstanceSymbolTable actual = query.resolve(translateNode);
+        InstantiableSymbolTable actual = query.resolve(translateNode);
         assertSame(expected, actual);
     }
 }

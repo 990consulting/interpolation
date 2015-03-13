@@ -7,8 +7,8 @@ package compiler.pipeline.translate.helpers;
 
 import compiler.pipeline.interpret.nodes.ASTValueNode;
 import compiler.pipeline.translate.nodes.ObjectNode;
-import compiler.symbol.ReservedContext;
-import compiler.symbol.SymbolTable;
+import compiler.symbol.context.ReservedContext;
+import compiler.symbol.tables.SymbolTable;
 
 /**
  * Created by dbborens on 3/2/15.

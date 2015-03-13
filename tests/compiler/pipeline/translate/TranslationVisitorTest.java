@@ -11,7 +11,11 @@ import compiler.pipeline.translate.nodes.ListObjectNode;
 import compiler.pipeline.translate.nodes.MapObjectNode;
 import compiler.pipeline.translate.nodes.ObjectNode;
 import compiler.pipeline.translate.nodes.PrimitiveNode;
-import compiler.symbol.*;
+import compiler.symbol.context.ReservedContext;
+import compiler.symbol.tables.InstantiableSymbolTable;
+import compiler.symbol.tables.ListSymbolTable;
+import compiler.symbol.tables.MapSymbolTable;
+import compiler.symbol.tables.primitive.PrimitiveSymbolTable;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -72,7 +76,7 @@ public class TranslationVisitorTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void otherSymbolTableThrows() throws Exception {
-        InstanceSymbolTable st = mock(InstanceSymbolTable.class);
+        InstantiableSymbolTable st = mock(InstantiableSymbolTable.class);
         query.translate(input, st, reserved);
     }
 }

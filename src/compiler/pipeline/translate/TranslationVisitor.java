@@ -9,7 +9,11 @@ import compiler.pipeline.interpret.nodes.ASTValueNode;
 import compiler.pipeline.translate.helpers.TranslateSlaveManager;
 import compiler.pipeline.translate.helpers.TranslationCallback;
 import compiler.pipeline.translate.nodes.ObjectNode;
-import compiler.symbol.*;
+import compiler.symbol.context.ReservedContext;
+import compiler.symbol.tables.ListSymbolTable;
+import compiler.symbol.tables.MapSymbolTable;
+import compiler.symbol.tables.SymbolTable;
+import compiler.symbol.tables.primitive.PrimitiveSymbolTable;
 
 /**
  * Depth-first search of the abstract syntax tree, which translates

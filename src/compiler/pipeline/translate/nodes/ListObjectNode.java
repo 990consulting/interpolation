@@ -5,9 +5,9 @@
 
 package compiler.pipeline.translate.nodes;
 
-import compiler.symbol.ClassSymbolTable;
-import compiler.symbol.ListSymbolTable;
-import compiler.symbol.ReservedContext;
+import compiler.symbol.context.ReservedContext;
+import compiler.symbol.tables.ClassSymbolTable;
+import compiler.symbol.tables.ListSymbolTable;
 
 import java.util.stream.Stream;
 

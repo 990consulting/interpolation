@@ -7,8 +7,8 @@ package compiler.pipeline.translate.helpers;
 
 import compiler.pipeline.interpret.nodes.ASTValueNode;
 import compiler.pipeline.translate.nodes.ListObjectNode;
-import compiler.symbol.ListSymbolTable;
-import compiler.symbol.ReservedContext;
+import compiler.symbol.context.ReservedContext;
+import compiler.symbol.tables.ListSymbolTable;
 import org.junit.Before;
 import org.junit.Test;
 

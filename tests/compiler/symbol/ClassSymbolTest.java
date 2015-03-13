@@ -5,6 +5,8 @@
 
 package compiler.symbol;
 
+import compiler.symbol.symbols.ClassSymbol;
+import compiler.symbol.tables.InstantiableSymbolTable;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,19 +16,19 @@ import static org.mockito.Mockito.mock;
 public class ClassSymbolTest {
 
     private ClassSymbol query;
-    private InstanceSymbolTable ist;
+    private InstantiableSymbolTable ist;
     private String description;
 
     @Before
     public void init() throws Exception {
-        ist = mock(InstanceSymbolTable.class);
+        ist = mock(InstantiableSymbolTable.class);
         description = "description";
         query = new ClassSymbol(() -> ist, description);
     }
 
     @Test
     public void testGetSymbolTable() throws Exception {
-        InstanceSymbolTable actual = query.getSymbolTable();
+        InstantiableSymbolTable actual = query.getSymbolTable();
         assertSame(ist, actual);
     }
 

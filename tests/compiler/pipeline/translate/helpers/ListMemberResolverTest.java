@@ -7,8 +7,8 @@ package compiler.pipeline.translate.helpers;
 
 import compiler.pipeline.interpret.nodes.ASTValueNode;
 import compiler.pipeline.translate.nodes.ListObjectNode;
-import compiler.symbol.ClassSymbolTable;
-import compiler.symbol.InstanceSymbolTable;
+import compiler.symbol.tables.ClassSymbolTable;
+import compiler.symbol.tables.InstantiableSymbolTable;
 import org.junit.Test;
 
 import static org.junit.Assert.assertSame;
@@ -24,11 +24,11 @@ public class ListMemberResolverTest {
         when(objectNode.getSymbolTable()).thenReturn(cst);
 
         ASTValueNode value = mock(ASTValueNode.class);
-        InstanceSymbolTable expected = mock(InstanceSymbolTable.class);
+        InstantiableSymbolTable expected = mock(InstantiableSymbolTable.class);
         when(cst.getSymbolTable(value)).thenReturn(expected);
 
         ListMemberResolver query = new ListMemberResolver(objectNode);
-        InstanceSymbolTable actual = query.resolve(value);
+        InstantiableSymbolTable actual = query.resolve(value);
         assertSame(expected, actual);
     }
 }

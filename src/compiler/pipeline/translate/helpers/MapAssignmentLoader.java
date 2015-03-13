@@ -9,7 +9,7 @@ import compiler.pipeline.interpret.nodes.ASTAssignmentNode;
 import compiler.pipeline.interpret.nodes.ASTValueNode;
 import compiler.pipeline.translate.nodes.MapObjectNode;
 import compiler.pipeline.translate.nodes.ObjectNode;
-import compiler.symbol.InstanceSymbolTable;
+import compiler.symbol.tables.InstantiableSymbolTable;
 
 /**
  * Created by dbborens on 3/2/15.
@@ -33,7 +33,7 @@ public class MapAssignmentLoader {
             throw new IllegalStateException("Attempting to add to finished node");
         }
         String identifier = toTranslate.getReference().getIdentifier();
-        InstanceSymbolTable childSt = resolver.resolve(toTranslate);
+        InstantiableSymbolTable childSt = resolver.resolve(toTranslate);
         ASTValueNode childValue = toTranslate.getValue();
         ObjectNode childNode = callback.walk(childValue, childSt, node.getReserved());
         node.loadMember(identifier, childNode);

@@ -3,7 +3,9 @@
  * Trustees of Princeton University. All rights reserved.
  */
 
-package compiler.symbol;
+package compiler.symbol.symbols;
+
+import compiler.symbol.tables.ClassSymbolTable;
 
 /**
  * A member symbol reports back the expected class for

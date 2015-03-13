@@ -8,8 +8,8 @@ package compiler.pipeline.translate.helpers;
 import compiler.pipeline.interpret.nodes.ASTAssignmentNode;
 import compiler.pipeline.interpret.nodes.ASTValueNode;
 import compiler.pipeline.translate.nodes.MapObjectNode;
-import compiler.symbol.ClassSymbolTable;
-import compiler.symbol.InstanceSymbolTable;
+import compiler.symbol.tables.ClassSymbolTable;
+import compiler.symbol.tables.InstantiableSymbolTable;
 
 /**
  * Created by dbborens on 3/3/15.
@@ -22,12 +22,12 @@ public class MapMemberResolver {
         this.objectNode = objectNode;
     }
 
-    public InstanceSymbolTable resolve(ASTAssignmentNode assignment) {
+    public InstantiableSymbolTable resolve(ASTAssignmentNode assignment) {
 
         String identifier = assignment.getReference().getIdentifier();
         ASTValueNode value = assignment.getValue();
         ClassSymbolTable classTable = objectNode.getSymbolTable(identifier);
-        InstanceSymbolTable ret = classTable.getSymbolTable(value);
+        InstantiableSymbolTable ret = classTable.getSymbolTable(value);
         return ret;
     }
 }

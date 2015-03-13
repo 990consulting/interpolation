@@ -8,6 +8,9 @@ package compiler.symbol;
 import compiler.pipeline.interpret.nodes.ASTAssignmentNode;
 import compiler.pipeline.interpret.nodes.ASTReferenceNode;
 import compiler.pipeline.interpret.nodes.ASTValueNode;
+import compiler.symbol.symbols.ClassSymbol;
+import compiler.symbol.tables.ClassSymbolTable;
+import compiler.symbol.tables.InstantiableSymbolTable;
 import compiler.util.UnrecognizedIdentifierError;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,19 +22,19 @@ import static org.mockito.Mockito.mock;
 
 public class ClassSymbolTableTest {
 
-    private InstanceSymbolTable ist;
+    private InstantiableSymbolTable ist;
     private LoadedClassSymbolTable query;
 
     @Before
     public void init() throws Exception {
-        ist = mock(InstanceSymbolTable.class);
+        ist = mock(InstantiableSymbolTable.class);
         query = new LoadedClassSymbolTable();
     }
 
     @Test
     public void referenceCase() throws Exception {
         ASTReferenceNode node = new ASTReferenceNode("test");
-        InstanceSymbolTable actual = query.getSymbolTable(node);
+        InstantiableSymbolTable actual = query.getSymbolTable(node);
         assertSame(ist, actual);
     }
 
@@ -39,7 +42,7 @@ public class ClassSymbolTableTest {
     public void assignmentCase() throws Exception {
         ASTReferenceNode ref = new ASTReferenceNode("test");
         ASTAssignmentNode node = new ASTAssignmentNode(ref, null);
-        InstanceSymbolTable actual = query.getSymbolTable(node);
+        InstantiableSymbolTable actual = query.getSymbolTable(node);
         assertSame(ist, actual);
     }
 

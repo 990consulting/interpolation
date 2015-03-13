@@ -10,10 +10,10 @@ import compiler.pipeline.interpret.nodes.ASTValueNode;
 import compiler.pipeline.translate.nodes.ListObjectNode;
 import compiler.pipeline.translate.nodes.MapObjectNode;
 import compiler.pipeline.translate.nodes.PrimitiveNode;
-import compiler.symbol.ListSymbolTable;
-import compiler.symbol.MapSymbolTable;
-import compiler.symbol.PrimitiveSymbolTable;
-import compiler.symbol.ReservedContext;
+import compiler.symbol.context.ReservedContext;
+import compiler.symbol.tables.ListSymbolTable;
+import compiler.symbol.tables.MapSymbolTable;
+import compiler.symbol.tables.primitive.PrimitiveSymbolTable;
 
 /**
  * Created by dbborens on 2/22/15.

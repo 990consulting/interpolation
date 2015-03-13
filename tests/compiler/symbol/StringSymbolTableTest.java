@@ -7,6 +7,7 @@ package compiler.symbol;
 
 import compiler.pipeline.interpret.nodes.ASTPrimitiveString;
 import compiler.pipeline.translate.nodes.ConstantString;
+import compiler.symbol.tables.primitive.StringSymbolTable;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

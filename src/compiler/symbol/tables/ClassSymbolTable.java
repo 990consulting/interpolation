@@ -3,11 +3,12 @@
  * Trustees of Princeton University. All rights reserved.
  */
 
-package compiler.symbol;
+package compiler.symbol.tables;
 
 import compiler.pipeline.interpret.nodes.ASTAssignmentNode;
 import compiler.pipeline.interpret.nodes.ASTReferenceNode;
 import compiler.pipeline.interpret.nodes.ASTValueNode;
+import compiler.symbol.symbols.ClassSymbol;
 import compiler.util.UnrecognizedIdentifierError;
 
 import java.util.HashMap;
@@ -15,7 +16,7 @@ import java.util.HashMap;
 /**
  * Created by dbborens on 3/3/15.
  */
-public abstract class ClassSymbolTable implements SymbolTable {
+public abstract class ClassSymbolTable implements ResolvingSymbolTable {
 
     private HashMap<String, ClassSymbol> members;
 
@@ -25,7 +26,8 @@ public abstract class ClassSymbolTable implements SymbolTable {
 
     protected abstract HashMap<String, ClassSymbol> resolveSubclasses();
 
-    public InstanceSymbolTable getSymbolTable(ASTValueNode value) {
+    @Override
+    public InstantiableSymbolTable getSymbolTable(ASTValueNode value) {
         String identifier;
         if (value instanceof ASTReferenceNode) {
             identifier = ((ASTReferenceNode) value).getIdentifier();
@@ -38,7 +40,7 @@ public abstract class ClassSymbolTable implements SymbolTable {
         return doGet(identifier);
     }
 
-    private InstanceSymbolTable doGet(String identifier) {
+    private InstantiableSymbolTable doGet(String identifier) {
         if (!members.containsKey(identifier)) {
             throw new UnrecognizedIdentifierError();
         }

@@ -5,9 +5,9 @@
 
 package compiler.pipeline.translate.nodes;
 
-import compiler.symbol.ClassSymbolTable;
-import compiler.symbol.InstanceSymbolTable;
-import compiler.symbol.ReservedContext;
+import compiler.symbol.context.ReservedContext;
+import compiler.symbol.tables.ClassSymbolTable;
+import compiler.symbol.tables.MapSymbolTable;
 import compiler.util.IllegalAssignmentError;
 
 
@@ -18,18 +18,18 @@ import compiler.util.IllegalAssignmentError;
  *
  * Created by dbborens on 2/22/15.
  */
-public class MapObjectNode implements ObjectNode {
+public class MapObjectNode<T> implements ObjectNode {
 
     private final LocalContextMap local;
     private final ReservedContext reserved;
 
-    private final InstanceSymbolTable symbolTable;
+    private final MapSymbolTable<T> symbolTable;
 
-    public MapObjectNode(InstanceSymbolTable symbolTable, ReservedContext reserved) {
+    public MapObjectNode(MapSymbolTable<T> symbolTable, ReservedContext reserved) {
         this(symbolTable, reserved, new LocalContextMap());
     }
 
-    public MapObjectNode(InstanceSymbolTable symbolTable, ReservedContext reserved, LocalContextMap local) {
+    public MapObjectNode(MapSymbolTable<T> symbolTable, ReservedContext reserved, LocalContextMap local) {
         this.symbolTable = symbolTable;
         this.reserved = reserved;
         this.local = local;

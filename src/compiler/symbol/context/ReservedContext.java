@@ -3,7 +3,7 @@
  * Trustees of Princeton University. All rights reserved.
  */
 
-package compiler.symbol;
+package compiler.symbol.context;
 
 /**
  * A nested context in which any user assignment to identifiers

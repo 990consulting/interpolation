@@ -5,6 +5,9 @@
 
 package compiler.symbol;
 
+import compiler.symbol.context.AbstractNestedContext;
+import compiler.symbol.context.ReservedContext;
+
 /**
  * Created by dbborens on 2/21/15.
  */

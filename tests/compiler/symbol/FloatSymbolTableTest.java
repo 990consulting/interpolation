@@ -7,6 +7,7 @@ package compiler.symbol;
 
 import compiler.pipeline.interpret.nodes.ASTPrimitiveFloat;
 import compiler.pipeline.translate.nodes.ConstantFloat;
+import compiler.symbol.tables.primitive.FloatSymbolTable;
 import org.junit.Test;
 import test.TestBase;
 

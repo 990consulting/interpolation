@@ -5,9 +5,9 @@
 
 package compiler.pipeline.translate.nodes;
 
-import compiler.symbol.ClassSymbolTable;
-import compiler.symbol.InstanceSymbolTable;
-import compiler.symbol.ReservedContext;
+import compiler.symbol.context.ReservedContext;
+import compiler.symbol.tables.ClassSymbolTable;
+import compiler.symbol.tables.MapSymbolTable;
 import compiler.util.IllegalAssignmentError;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,13 +19,13 @@ public class MapObjectNodeTest {
 
     private LocalContextMap localMap;
     private ReservedContext reserved;
-    private InstanceSymbolTable st;
+    private MapSymbolTable st;
     private MapObjectNode query;
 
     @Before
     public void init() throws Exception {
         localMap = mock(LocalContextMap.class);
-        st = mock(InstanceSymbolTable.class);
+        st = mock(MapSymbolTable.class);
         reserved = mock(ReservedContext.class);
         query = new MapObjectNode(st, reserved, localMap);
     }

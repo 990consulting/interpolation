@@ -3,8 +3,9 @@
  * Trustees of Princeton University. All rights reserved.
  */
 
-package compiler.symbol;
+package compiler.symbol.tables;
 
+import compiler.symbol.symbols.MemberSymbol;
 import compiler.util.UnrecognizedIdentifierError;
 
 import java.util.HashMap;
@@ -12,11 +13,10 @@ import java.util.HashMap;
 /**
  * Created by dbborens on 3/3/15.
  */
-public abstract class InstanceSymbolTable<T> implements InstantiableSymbolTable<T> {
-
+public abstract class MapSymbolTable<T> implements InstantiableSymbolTable<T> {
     private HashMap<String, MemberSymbol> members;
 
-    public InstanceSymbolTable() {
+    public MapSymbolTable() {
         members = resolveMembers();
     }
 

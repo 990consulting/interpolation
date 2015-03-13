@@ -5,6 +5,9 @@
 
 package compiler.symbol;
 
+import compiler.symbol.symbols.MemberSymbol;
+import compiler.symbol.tables.ClassSymbolTable;
+import compiler.symbol.tables.MapSymbolTable;
 import compiler.util.UnrecognizedIdentifierError;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,15 +17,15 @@ import java.util.HashMap;
 import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.mock;
 
-public class InstanceSymbolTableTest {
+public class MapSymbolTableTest {
 
     private ClassSymbolTable cst;
-    private LoadedInstanceSymbolTable query;
+    private LoadedMapSymbolTable query;
 
     @Before
     public void init() throws Exception {
         cst = mock(ClassSymbolTable.class);
-        query = new LoadedInstanceSymbolTable();
+        query = new LoadedMapSymbolTable();
     }
 
     @Test
@@ -35,7 +38,7 @@ public class InstanceSymbolTableTest {
     public void unrecognizedMemberThrows() throws Exception {
         query.getSymbolTable("something unrecognized");
     }
-    private class LoadedInstanceSymbolTable extends InstanceSymbolTable {
+    private class LoadedMapSymbolTable extends MapSymbolTable {
 
         @Override
         protected HashMap<String, MemberSymbol> resolveMembers() {

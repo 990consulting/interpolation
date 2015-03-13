@@ -5,6 +5,8 @@
 
 package compiler.symbol;
 
+import compiler.symbol.symbols.MemberSymbol;
+import compiler.symbol.tables.ClassSymbolTable;
 import org.junit.Before;
 import org.junit.Test;
 

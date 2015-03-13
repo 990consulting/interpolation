@@ -5,6 +5,7 @@
 
 package compiler.symbol;
 
+import compiler.symbol.context.AbstractNestedContext;
 import org.junit.Before;
 import org.junit.Test;
 

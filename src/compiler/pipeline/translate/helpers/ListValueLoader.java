@@ -8,7 +8,7 @@ package compiler.pipeline.translate.helpers;
 import compiler.pipeline.interpret.nodes.ASTValueNode;
 import compiler.pipeline.translate.nodes.ListObjectNode;
 import compiler.pipeline.translate.nodes.ObjectNode;
-import compiler.symbol.InstanceSymbolTable;
+import compiler.symbol.tables.InstantiableSymbolTable;
 
 /**
  * Created by dbborens on 3/2/15.
@@ -31,7 +31,7 @@ public class ListValueLoader {
         if (finished) {
             throw new IllegalStateException("Attempting to add to finished node");
         }
-        InstanceSymbolTable childSt = resolver.resolve(toTranslate);
+        InstantiableSymbolTable childSt = resolver.resolve(toTranslate);
         ObjectNode childNode = callback.walk(toTranslate, childSt, node.getReserved());
         node.loadMember(childNode);
     }

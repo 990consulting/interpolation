@@ -11,9 +11,9 @@ import compiler.pipeline.interpret.nodes.ASTPrimitiveString;
 import compiler.pipeline.translate.nodes.ConstantFloat;
 import compiler.pipeline.translate.nodes.ConstantInteger;
 import compiler.pipeline.translate.nodes.ConstantString;
-import compiler.symbol.FloatSymbolTable;
-import compiler.symbol.IntegerSymbolTable;
-import compiler.symbol.StringSymbolTable;
+import compiler.symbol.tables.primitive.FloatSymbolTable;
+import compiler.symbol.tables.primitive.IntegerSymbolTable;
+import compiler.symbol.tables.primitive.StringSymbolTable;
 import org.junit.Before;
 import org.junit.Test;
 

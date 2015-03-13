@@ -3,7 +3,7 @@
  * Trustees of Princeton University. All rights reserved.
  */
 
-package compiler.symbol;
+package compiler.symbol.tables;
 
 /**
  * Created by dbborens on 3/5/15.

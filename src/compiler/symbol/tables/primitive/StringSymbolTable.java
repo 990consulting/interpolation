@@ -3,7 +3,7 @@
  * Trustees of Princeton University. All rights reserved.
  */
 
-package compiler.symbol;
+package compiler.symbol.tables.primitive;
 
 import compiler.pipeline.interpret.nodes.ASTPrimitiveString;
 import compiler.pipeline.translate.nodes.ConstantString;

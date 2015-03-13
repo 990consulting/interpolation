@@ -10,9 +10,9 @@ import compiler.pipeline.interpret.nodes.ASTReferenceNode;
 import compiler.pipeline.interpret.nodes.ASTValueNode;
 import compiler.pipeline.translate.nodes.ListObjectNode;
 import compiler.pipeline.translate.nodes.ObjectNode;
-import compiler.symbol.ClassSymbolTable;
-import compiler.symbol.InstanceSymbolTable;
-import compiler.symbol.ReservedContext;
+import compiler.symbol.context.ReservedContext;
+import compiler.symbol.tables.ClassSymbolTable;
+import compiler.symbol.tables.InstantiableSymbolTable;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -45,7 +45,7 @@ public class ListValueLoaderTest {
     public void testLoadValue() throws Exception {
         ClassSymbolTable cst = mock(ClassSymbolTable.class);
         when(node.getSymbolTable()).thenReturn(cst);
-        InstanceSymbolTable ist = mock(InstanceSymbolTable.class);
+        InstantiableSymbolTable ist = mock(InstantiableSymbolTable.class);
         when(cst.getSymbolTable(toTranslate)).thenReturn(ist);
         ObjectNode childValue = mock(ObjectNode.class);
         when(callback.walk(toTranslate, ist, reserved)).thenReturn(childValue);
