@@ -3,10 +3,11 @@
  * Trustees of Princeton University. All rights reserved.
  */
 
-package runtime.util.halt;
+package runtime.process.agent;
 
 /**
- * Created by dbborens on 3/8/15.
+ * Created by dbborens on 3/12/15.
  */
-public class NoMoreEvents extends HaltCondition {
+public abstract class AgentProcess implements Runnable{
+
 }

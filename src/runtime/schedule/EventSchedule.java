@@ -11,19 +11,19 @@ import runtime.schedule.event.DeterministicEvent;
 /**
  * Created by dbborens on 3/8/15.
  */
-public class EventScheduler {
+public class EventSchedule {
 
     private final EventBlockRunner runner;
-    private final SchedulerContent schedulerContent;
+    private final ScheduleContent schedulerContent;
     private double time;
 
-    public EventScheduler() {
-        schedulerContent = new SchedulerContent();
+    public EventSchedule() {
+        schedulerContent = new ScheduleContent();
         runner = new EventBlockRunner(schedulerContent);
         time = 0.0;
     }
 
-    public EventScheduler(EventBlockRunner runner, SchedulerContent schedulerContent) {
+    public EventSchedule(EventBlockRunner runner, ScheduleContent schedulerContent) {
         this.runner = runner;
         this.schedulerContent = schedulerContent;
         time = 0.0;

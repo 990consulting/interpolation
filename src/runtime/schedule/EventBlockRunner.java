@@ -9,8 +9,8 @@ package runtime.schedule;
  * Created by dbborens on 3/8/15.
  */
 public class EventBlockRunner {
-    private SchedulerContent content;
-    public EventBlockRunner(SchedulerContent content) {
+    private ScheduleContent content;
+    public EventBlockRunner(ScheduleContent content) {
         this.content = content;
     }
 

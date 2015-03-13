@@ -15,17 +15,17 @@ import java.util.stream.Stream;
  *
  * Created by dbborens on 3/8/15.
  */
-public class SchedulerContent {
+public class ScheduleContent {
 
     private final IdentityMultimap<Agent, DeterministicEvent> multimap;
     private final EventQueue queue;
 
-    public SchedulerContent() {
+    public ScheduleContent() {
         this(new IdentityMultimap<>(), new EventQueue());
     }
 
-    public SchedulerContent(IdentityMultimap<Agent, DeterministicEvent> multimap,
-                            EventQueue queue) {
+    public ScheduleContent(IdentityMultimap<Agent, DeterministicEvent> multimap,
+                           EventQueue queue) {
         this.multimap = multimap;
         this.queue = queue;
     }

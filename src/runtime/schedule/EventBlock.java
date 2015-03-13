@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 
 /**
  * A doubly linked list node whose contents are a set of Events.
- * @see SchedulerContent
+ * @see ScheduleContent
  *
  * Created by dbborens on 3/8/15.
  */

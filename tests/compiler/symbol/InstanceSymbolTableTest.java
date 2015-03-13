@@ -44,5 +44,10 @@ public class InstanceSymbolTableTest {
             ret.put("test", symbol);
             return ret;
         }
+
+        @Override
+        public Object instantiate() {
+            return null;
+        }
     }
 }

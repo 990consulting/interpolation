@@ -15,23 +15,25 @@ import java.util.function.Supplier;
 public class Agent {
 
     private final int id;
-    private final Supplier<String> layerResolver;
-    private final Supplier<Coordinate> locator;
-    private final Runnable death;
+//    private final Supplier<String> layerResolver;
+    private Supplier<Coordinate> locator;
+    private Runnable death;
 
     /**
      * @param id The agent's unique ID
-     * @param layerResolver Reports the layer on which this agent resides
+     */
+    public Agent(int id) {
+
+        this.id = id;
+    }
+
+    /**
      * @param locator Reports the location of this agent
      * @param death Trigger that notifies scheduler and lattice to remove this
      *              agent, as well as notifying the neighborhood that the agent
      *              is gone
      */
-    public Agent(int id, Supplier<String> layerResolver,
-                 Supplier<Coordinate> locator, Runnable death) {
-
-        this.id = id;
-        this.layerResolver = layerResolver;
+    public void init(Supplier<Coordinate> locator, Runnable death) {
         this.locator = locator;
         this.death = death;
     }
@@ -44,9 +46,9 @@ public class Agent {
         return locator.get();
     }
 
-    public String getLayerId() {
-        return layerResolver.get();
-    }
+//    public String getLayerId() {
+//        return layerResolver.get();
+//    }
 
     public void die() {
         death.run();

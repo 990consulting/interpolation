@@ -14,7 +14,7 @@ import static org.mockito.Mockito.*;
 public class EventBlockRunnerTest {
 
     private EventBlock block;
-    private SchedulerContent content;
+    private ScheduleContent content;
     private EventBlockRunner query;
     private DeterministicEvent event;
 
@@ -25,7 +25,7 @@ public class EventBlockRunnerTest {
         event = mockEvent(1.0);
         block.add(event);
 
-        content = mock(SchedulerContent.class);
+        content = mock(ScheduleContent.class);
         query = new EventBlockRunner(content);
     }
 

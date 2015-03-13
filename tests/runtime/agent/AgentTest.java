@@ -19,17 +19,19 @@ public class AgentTest {
 
     private Agent query;
     private Supplier<Coordinate> locator;
-    private Supplier<String> layerResolver;
+//    private Supplier<String> layerResolver;
     private Runnable death;
     private int id = 5;
 
     @Before
     public void init() throws Exception {
         locator = mock(Supplier.class);
-        layerResolver = mock(Supplier.class);
+//        layerResolver = mock(Supplier.class);
         death = mock(Runnable.class);
         id = 5;
-        query = new Agent(id, layerResolver, locator, death);
+//        query = new Agent(id, layerResolver, locator, death);
+        query = new Agent(id);
+        query.init(locator, death);
     }
 
     @Test
@@ -37,11 +39,11 @@ public class AgentTest {
         assertEquals(5, query.getAgentId());
     }
 
-    @Test
-    public void getLayer() throws Exception {
-        when(layerResolver.get()).thenReturn("layer");
-        assertEquals("layer", query.getLayerId());
-    }
+//    @Test
+//    public void getLayer() throws Exception {
+//        when(layerResolver.get()).thenReturn("layer");
+//        assertEquals("layer", query.getLayerId());
+//    }
 
     @Test
     public void locate() throws Exception {

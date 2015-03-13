@@ -12,7 +12,7 @@ import java.util.HashMap;
 /**
  * Created by dbborens on 3/3/15.
  */
-public abstract class InstanceSymbolTable implements SymbolTable {
+public abstract class InstanceSymbolTable<T> implements InstantiableSymbolTable<T> {
 
     private HashMap<String, MemberSymbol> members;
 

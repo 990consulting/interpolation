@@ -6,8 +6,9 @@
 package compiler.symbol;
 
 /**
- * Created by dbborens on 3/4/15.
+ * Created by dbborens on 3/11/15.
  */
-public abstract class ListSymbolTable<T> extends ClassSymbolTable implements InstantiableSymbolTable<T> {
+public interface InstantiableSymbolTable<T> extends SymbolTable {
 
+    public T instantiate();
 }

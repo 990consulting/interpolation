@@ -14,17 +14,17 @@ import test.TestBase;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
-public class EventSchedulerTest extends TestBase {
+public class EventScheduleTest extends TestBase {
 
-    private EventScheduler query;
+    private EventSchedule query;
     private EventBlockRunner runner;
-    private SchedulerContent queue;
+    private ScheduleContent queue;
 
     @Before
     public void init() throws Exception {
         runner = mock(EventBlockRunner.class);
-        queue = mock(SchedulerContent.class);
-        query = new EventScheduler(runner, queue);
+        queue = mock(ScheduleContent.class);
+        query = new EventSchedule(runner, queue);
     }
 
     @Test

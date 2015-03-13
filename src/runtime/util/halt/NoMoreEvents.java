@@ -8,5 +8,11 @@ package runtime.util.halt;
 /**
  * Created by dbborens on 3/8/15.
  */
-public class HaltCondition extends RuntimeException {
+public class NoMoreEvents extends HaltCondition {
+
+    @Override
+    public String toString() {
+        return "No more events scheduled.";
+    }
+
 }

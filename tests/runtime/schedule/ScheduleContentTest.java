@@ -17,13 +17,13 @@ import java.util.stream.Stream;
 import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.*;
 
-public class SchedulerContentTest {
+public class ScheduleContentTest {
 
     private DeterministicEvent event;
     private Agent agent;
     private IdentityMultimap<Agent, DeterministicEvent> multimap;
     private EventQueue queue;
-    private SchedulerContent query;
+    private ScheduleContent query;
 
     @Before
     public void init() throws Exception {
@@ -34,7 +34,7 @@ public class SchedulerContentTest {
         multimap = mock(IdentityMultimap.class);
         queue = mock(EventQueue.class);
 
-        query = new SchedulerContent(multimap, queue);
+        query = new ScheduleContent(multimap, queue);
     }
 
     @Test
