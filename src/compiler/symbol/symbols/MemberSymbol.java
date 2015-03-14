@@ -5,7 +5,7 @@
 
 package compiler.symbol.symbols;
 
-import compiler.symbol.tables.ClassSymbolTable;
+import compiler.symbol.tables.ResolvingSymbolTable;
 
 /**
  * A member symbol reports back the expected class for
@@ -15,15 +15,15 @@ import compiler.symbol.tables.ClassSymbolTable;
  */
 public class MemberSymbol {
 
-    private ClassSymbolTable symbolTable;
+    private ResolvingSymbolTable symbolTable;
     private String description;
 
-    public MemberSymbol(ClassSymbolTable symbolTable, String description) {
+    public MemberSymbol(ResolvingSymbolTable symbolTable, String description) {
         this.symbolTable = symbolTable;
         this.description = description;
     }
 
-    public ClassSymbolTable getSymbolTable() {
+    public ResolvingSymbolTable getSymbolTable() {
         return symbolTable;
     }
 

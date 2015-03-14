@@ -52,7 +52,6 @@ public class RectangleAndRectLatticeTest extends TestBase {
 
         Set<Coordinate2D> actual = query
                 .getCanonicalSites()
-                .peek(c -> System.out.println(c))
                 .collect(Collectors.toSet());
 
         assertSetsEqual(expected, actual);

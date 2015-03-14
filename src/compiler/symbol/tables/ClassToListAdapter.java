@@ -7,19 +7,22 @@ package compiler.symbol.tables;
 
 import compiler.pipeline.interpret.nodes.ASTValueNode;
 
+import java.util.List;
+import java.util.function.Supplier;
+
 /**
  * Created by dbborens on 3/13/15.
  */
 public class ClassToListAdapter<T> implements ResolvingSymbolTable {
 
-    private final ListSymbolTable<T> contents;
+    private final Supplier<ListSymbolTable<T>> contents;
 
-    public ClassToListAdapter(ListSymbolTable<T> contents) {
+    public ClassToListAdapter(Supplier<ListSymbolTable<T>> contents) {
         this.contents = contents;
     }
 
     @Override
-    public InstantiableSymbolTable<T> getSymbolTable(ASTValueNode value) {
-        return contents;
+    public InstantiableSymbolTable<List<T>> getSymbolTable(ASTValueNode value) {
+        return contents.get();
     }
 }

@@ -6,8 +6,8 @@
 package compiler.pipeline.translate.nodes;
 
 import compiler.symbol.context.ReservedContext;
-import compiler.symbol.tables.ClassSymbolTable;
 import compiler.symbol.tables.MapSymbolTable;
+import compiler.symbol.tables.ResolvingSymbolTable;
 import compiler.util.IllegalAssignmentError;
 
 
@@ -39,7 +39,7 @@ public class MapObjectNode<T> implements ObjectNode {
         local.loadMember(identifier, value);
     }
 
-    public ClassSymbolTable getSymbolTable(String identifier) {
+    public ResolvingSymbolTable getSymbolTable(String identifier) {
         if (reserved.has(identifier)) {
             throw new IllegalAssignmentError("Attempting to assign to reserved keyword " + identifier);
         }

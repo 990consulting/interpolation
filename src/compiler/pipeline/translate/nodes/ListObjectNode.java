@@ -6,8 +6,8 @@
 package compiler.pipeline.translate.nodes;
 
 import compiler.symbol.context.ReservedContext;
-import compiler.symbol.tables.ClassSymbolTable;
 import compiler.symbol.tables.ListSymbolTable;
+import compiler.symbol.tables.ResolvingSymbolTable;
 
 import java.util.stream.Stream;
 
@@ -49,7 +49,7 @@ public class ListObjectNode implements ObjectNode {
         return local.size();
     }
 
-    public ClassSymbolTable getSymbolTable() {
+    public ResolvingSymbolTable getSymbolTable() {
         return symbolTable;
     }
 

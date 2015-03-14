@@ -5,14 +5,17 @@
 
 package compiler.symbol;
 
+import compiler.pipeline.build.builders.Builder;
 import compiler.symbol.symbols.MemberSymbol;
 import compiler.symbol.tables.ClassSymbolTable;
 import compiler.symbol.tables.MapSymbolTable;
+import compiler.symbol.tables.ResolvingSymbolTable;
 import compiler.util.UnrecognizedIdentifierError;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashMap;
+import java.util.function.Function;
 
 import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.mock;
@@ -30,7 +33,7 @@ public class MapSymbolTableTest {
 
     @Test
     public void testGetSymbolTable() throws Exception {
-        ClassSymbolTable actual = query.getSymbolTable("test");
+        ResolvingSymbolTable actual = query.getSymbolTable("test");
         assertSame(cst, actual);
     }
 
@@ -38,6 +41,7 @@ public class MapSymbolTableTest {
     public void unrecognizedMemberThrows() throws Exception {
         query.getSymbolTable("something unrecognized");
     }
+
     private class LoadedMapSymbolTable extends MapSymbolTable {
 
         @Override
@@ -49,8 +53,13 @@ public class MapSymbolTableTest {
         }
 
         @Override
-        public Object instantiate() {
-            return null;
+        protected HashMap<String, Function> resolveReserved() {
+            return new HashMap<>();
+        }
+
+        @Override
+        public Builder getBuilder() {
+            return mock(Builder.class);
         }
     }
 }

@@ -7,8 +7,8 @@ package compiler.pipeline.translate.helpers;
 
 import compiler.pipeline.interpret.nodes.ASTValueNode;
 import compiler.pipeline.translate.nodes.ListObjectNode;
-import compiler.symbol.tables.ClassSymbolTable;
 import compiler.symbol.tables.InstantiableSymbolTable;
+import compiler.symbol.tables.ResolvingSymbolTable;
 
 /**
  * Created by dbborens on 3/3/15.
@@ -22,7 +22,7 @@ public class ListMemberResolver {
     }
 
     public InstantiableSymbolTable resolve(ASTValueNode value) {
-        ClassSymbolTable classTable = objectNode.getSymbolTable();
+        ResolvingSymbolTable classTable = objectNode.getSymbolTable();
         InstantiableSymbolTable ret = classTable.getSymbolTable(value);
         return ret;
     }

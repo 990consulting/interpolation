@@ -6,8 +6,8 @@
 package compiler.pipeline.translate.nodes;
 
 import compiler.symbol.context.ReservedContext;
-import compiler.symbol.tables.ClassSymbolTable;
 import compiler.symbol.tables.ListSymbolTable;
+import compiler.symbol.tables.ResolvingSymbolTable;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -69,7 +69,7 @@ public class ListObjectNodeTest {
 
     @Test
     public void getSymbolTable() throws Exception {
-        ClassSymbolTable actual = query.getSymbolTable();
+        ResolvingSymbolTable actual = query.getSymbolTable();
         assertSame(symbolTable, actual);
     }
 

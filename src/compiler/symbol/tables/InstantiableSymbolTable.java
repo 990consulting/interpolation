@@ -5,10 +5,13 @@
 
 package compiler.symbol.tables;
 
+import compiler.pipeline.build.builders.Builder;
+
 /**
  * Created by dbborens on 3/11/15.
  */
 public interface InstantiableSymbolTable<T> extends SymbolTable {
 
-    public T instantiate();
+    public abstract Builder<T> getBuilder();
+
 }

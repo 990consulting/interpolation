@@ -8,6 +8,7 @@ package compiler.pipeline.translate.nodes;
 import compiler.symbol.context.ReservedContext;
 import compiler.symbol.tables.ClassSymbolTable;
 import compiler.symbol.tables.MapSymbolTable;
+import compiler.symbol.tables.ResolvingSymbolTable;
 import compiler.util.IllegalAssignmentError;
 import org.junit.Before;
 import org.junit.Test;
@@ -57,7 +58,7 @@ public class MapObjectNodeTest {
     public void getChildSymTableAsksMySymTable() throws Exception {
         ClassSymbolTable expected = mock(ClassSymbolTable.class);
         when(st.getSymbolTable("test")).thenReturn(expected);
-        ClassSymbolTable actual = query.getSymbolTable("test");
+        ResolvingSymbolTable actual = query.getSymbolTable("test");
         assertSame(expected, actual);
     }
 

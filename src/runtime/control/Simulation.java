@@ -29,4 +29,8 @@ public class Simulation implements Runnable {
             System.err.println("Messages should be handled by a mockable logger like log4j.");
         }
     }
+
+    public Double getTime() {
+        return scheduler.getTime();
+    }
 }

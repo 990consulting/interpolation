@@ -34,7 +34,7 @@ public class Compiler {
 //        Translator translator = new Translator(rootSymbolTable);
 //        TranslatedNode objectTree = translator.translate(astRoot);
 
-        // Stage 4: @compiler.pipeline.infer
+        // Stage 4: @compiler.pipeline.interpolate
         // Infer defaults for any members not specified by the user, or fail
         // if this is not possible.
 

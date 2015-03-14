@@ -7,6 +7,7 @@ package compiler.symbol;
 
 import compiler.symbol.symbols.MemberSymbol;
 import compiler.symbol.tables.ClassSymbolTable;
+import compiler.symbol.tables.ResolvingSymbolTable;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,7 +29,7 @@ public class MemberSymbolTest {
 
     @Test
     public void getSymbolTable() throws Exception {
-        ClassSymbolTable actual = query.getSymbolTable();
+        ResolvingSymbolTable actual = query.getSymbolTable();
         assertSame(cst, actual);
     }
 
