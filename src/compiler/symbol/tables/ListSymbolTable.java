@@ -5,9 +5,9 @@
 
 package compiler.symbol.tables;
 
-import compiler.pipeline.build.builders.Builder;
-import compiler.pipeline.build.builders.util.ListBuilder;
+import compiler.pipeline.build.Builder;
 import compiler.pipeline.interpret.nodes.ASTValueNode;
+import compiler.pipeline.translate.nodes.ListObjectNode;
 
 import java.util.List;
 
@@ -28,8 +28,7 @@ public class ListSymbolTable<T> implements InstantiableSymbolTable<List<T>>,  Re
     }
 
     @Override
-    public Builder<List<T>> getBuilder() {
-        return new ListBuilder<>();
+    public Builder<ListObjectNode, List<T>> getBuilder() {
+        return null;
     }
-
 }

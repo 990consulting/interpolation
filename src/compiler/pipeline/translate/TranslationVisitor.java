@@ -8,8 +8,8 @@ package compiler.pipeline.translate;
 import compiler.pipeline.interpret.nodes.ASTValueNode;
 import compiler.pipeline.translate.helpers.TranslateSlaveManager;
 import compiler.pipeline.translate.helpers.TranslationCallback;
+import compiler.pipeline.translate.nodes.NestedContext;
 import compiler.pipeline.translate.nodes.ObjectNode;
-import compiler.symbol.context.ReservedContext;
 import compiler.symbol.tables.ListSymbolTable;
 import compiler.symbol.tables.MapSymbolTable;
 import compiler.symbol.tables.SymbolTable;
@@ -49,7 +49,7 @@ public class TranslationVisitor {
         this (new TranslateSlaveManager());
     }
 
-    public ObjectNode translate(ASTValueNode toTranslate, SymbolTable symbolTable, ReservedContext reserved) {
+    public ObjectNode translate(ASTValueNode toTranslate, SymbolTable symbolTable, NestedContext reserved) {
         if (symbolTable instanceof ListSymbolTable) {
             return manager.translate(toTranslate, (ListSymbolTable) symbolTable, reserved);
         } else if (symbolTable instanceof MapSymbolTable) {

@@ -5,10 +5,13 @@
 
 package compiler.pipeline.translate.nodes;
 
-import compiler.symbol.context.ReservedContext;
+import compiler.pipeline.build.Builder;
 import compiler.symbol.tables.MapSymbolTable;
 import compiler.symbol.tables.ResolvingSymbolTable;
 import compiler.util.IllegalAssignmentError;
+
+import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 
 /**
@@ -18,25 +21,40 @@ import compiler.util.IllegalAssignmentError;
  *
  * Created by dbborens on 2/22/15.
  */
-public class MapObjectNode<T> implements ObjectNode {
+public class MapObjectNode<T> implements ObjectNode<T> {
 
     private final LocalContextMap local;
-    private final ReservedContext reserved;
+    private final NestedContext reserved;
 
     private final MapSymbolTable<T> symbolTable;
 
-    public MapObjectNode(MapSymbolTable<T> symbolTable, ReservedContext reserved) {
+    public MapObjectNode(MapSymbolTable<T> symbolTable, NestedContext reserved) {
         this(symbolTable, reserved, new LocalContextMap());
     }
 
-    public MapObjectNode(MapSymbolTable<T> symbolTable, ReservedContext reserved, LocalContextMap local) {
+    public MapObjectNode(MapSymbolTable<T> symbolTable, NestedContext reserved, LocalContextMap local) {
         this.symbolTable = symbolTable;
         this.reserved = reserved;
         this.local = local;
     }
 
-    public void loadMember(String identifier, ObjectNode value) {
+    public void loadMember(String identifier, Resolvable value) {
+        if (reserved.has(identifier)) {
+            throw new IllegalAssignmentError();
+        }
         local.loadMember(identifier, value);
+    }
+
+    public Stream<String> getMemberIdentifiers() {
+        return local.getMemberIdentifiers();
+    }
+
+    public Resolvable getMember(String identifier) {
+        if (reserved.has(identifier)) {
+            return reserved.get(identifier);
+        }
+
+        return local.getMember(identifier);
     }
 
     public ResolvingSymbolTable getSymbolTable(String identifier) {
@@ -47,7 +65,7 @@ public class MapObjectNode<T> implements ObjectNode {
         return symbolTable.getSymbolTable(identifier);
     }
 
-    public ReservedContext getReserved() {
+    public NestedContext getReserved() {
         return reserved;
     }
 
@@ -63,4 +81,11 @@ public class MapObjectNode<T> implements ObjectNode {
 
         return true;
     }
+
+    @Override
+    public void instantiate(Consumer<T> callback) {
+        Builder builder = symbolTable.getBuilder();
+        builder.visit(this, callback);
+    }
+
 }

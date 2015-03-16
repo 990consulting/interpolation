@@ -6,8 +6,8 @@
 package compiler.pipeline.translate.helpers;
 
 import compiler.pipeline.interpret.nodes.ASTValueNode;
+import compiler.pipeline.translate.nodes.NestedContext;
 import compiler.pipeline.translate.nodes.ObjectNode;
-import compiler.symbol.context.ReservedContext;
 import compiler.symbol.tables.SymbolTable;
 
 /**
@@ -15,5 +15,5 @@ import compiler.symbol.tables.SymbolTable;
  */
 @FunctionalInterface
 public interface TranslationCallback {
-    public ObjectNode walk(ASTValueNode node, SymbolTable st, ReservedContext reserved);
+    public ObjectNode walk(ASTValueNode node, SymbolTable st, NestedContext reserved);
 }

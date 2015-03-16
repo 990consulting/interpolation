@@ -7,7 +7,7 @@ package compiler.pipeline.translate.helpers;
 
 import compiler.pipeline.interpret.nodes.ASTValueNode;
 import compiler.pipeline.translate.nodes.ListObjectNode;
-import compiler.symbol.context.ReservedContext;
+import compiler.pipeline.translate.nodes.NestedContext;
 import compiler.symbol.tables.ListSymbolTable;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,11 +42,11 @@ public class ListTranslationManagerTest {
 
     @Test
     public void translateChild() throws Exception {
-        ReservedContext reserved = mock(ReservedContext.class);
+        NestedContext reserved = mock(NestedContext.class);
         doTranslationTest(reserved);
     }
 
-    private void doTranslationTest(ReservedContext reserved) throws Exception {
+    private void doTranslationTest(NestedContext reserved) throws Exception {
         ListValueLoader loader = mock(ListValueLoader.class);
         ListSymbolTable st = mock(ListSymbolTable.class);
         when(factory.build(st, reserved)).thenReturn(loader);

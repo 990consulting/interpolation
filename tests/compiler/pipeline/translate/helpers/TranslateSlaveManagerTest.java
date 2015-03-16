@@ -9,8 +9,8 @@ import compiler.pipeline.interpret.nodes.ASTPrimitiveNode;
 import compiler.pipeline.interpret.nodes.ASTValueNode;
 import compiler.pipeline.translate.nodes.ListObjectNode;
 import compiler.pipeline.translate.nodes.MapObjectNode;
+import compiler.pipeline.translate.nodes.NestedContext;
 import compiler.pipeline.translate.nodes.PrimitiveNode;
-import compiler.symbol.context.ReservedContext;
 import compiler.symbol.tables.ListSymbolTable;
 import compiler.symbol.tables.MapSymbolTable;
 import compiler.symbol.tables.primitive.PrimitiveSymbolTable;
@@ -26,11 +26,11 @@ public class TranslateSlaveManagerTest {
     private MapTranslationManager mapManager;
     private TranslateSlaveManager query;
     private ASTValueNode node;
-    private ReservedContext reserved;
+    private NestedContext reserved;
 
     @Before
     public void init() throws Exception {
-        reserved = mock(ReservedContext.class);
+        reserved = mock(NestedContext.class);
         listManager = mock(ListTranslationManager.class);
         mapManager = mock(MapTranslationManager.class);
         query = new TranslateSlaveManager(listManager, mapManager);

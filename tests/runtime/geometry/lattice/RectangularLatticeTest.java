@@ -49,7 +49,7 @@ public class RectangularLatticeTest extends TestBase {
                 new Coordinate2D(0, -2),
                 new Coordinate2D(-1, -1),
                 new Coordinate2D(-2, 0),
-                new Coordinate2D(1, -1)
+                new Coordinate2D(-1, 1)
         ).collect(Collectors.toSet());
 
         Set<Coordinate2D> actual = query.getAnnulus(c, 2)

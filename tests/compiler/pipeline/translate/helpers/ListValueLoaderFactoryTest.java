@@ -6,7 +6,7 @@
 package compiler.pipeline.translate.helpers;
 
 import compiler.pipeline.translate.nodes.ListObjectNode;
-import compiler.symbol.context.ReservedContext;
+import compiler.pipeline.translate.nodes.NestedContext;
 import compiler.symbol.tables.ListSymbolTable;
 import org.junit.Test;
 
@@ -21,7 +21,7 @@ public class ListValueLoaderFactoryTest {
         ListValueLoaderFactory query = new ListValueLoaderFactory();
         query.init(callback);
         ListSymbolTable st = mock(ListSymbolTable.class);
-        ReservedContext reserved = mock(ReservedContext.class);
+        NestedContext reserved = mock(NestedContext.class);
         ListObjectNode expectedNode = new ListObjectNode(st, reserved);
         ListValueLoader expected = new ListValueLoader(expectedNode, callback);
         ListValueLoader actual = query.build(st, reserved);

@@ -5,13 +5,14 @@
 
 package compiler.symbol.tables;
 
-import compiler.pipeline.build.builders.Builder;
+import compiler.pipeline.build.Builder;
+import compiler.pipeline.translate.nodes.ObjectNode;
 
 /**
  * Created by dbborens on 3/11/15.
  */
 public interface InstantiableSymbolTable<T> extends SymbolTable {
 
-    public abstract Builder<T> getBuilder();
+    public abstract Builder<? extends ObjectNode, T> getBuilder();
 
 }

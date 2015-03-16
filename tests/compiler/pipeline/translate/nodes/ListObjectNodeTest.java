@@ -5,7 +5,6 @@
 
 package compiler.pipeline.translate.nodes;
 
-import compiler.symbol.context.ReservedContext;
 import compiler.symbol.tables.ListSymbolTable;
 import compiler.symbol.tables.ResolvingSymbolTable;
 import org.junit.Before;
@@ -22,13 +21,13 @@ public class ListObjectNodeTest {
     private LocalContextList list;
     private ListSymbolTable symbolTable;
     private ListObjectNode query;
-    private ReservedContext reserved;
+    private NestedContext reserved;
 
     @Before
     public void init() throws Exception {
         symbolTable = mock(ListSymbolTable.class);
         list = mock(LocalContextList.class);
-        reserved = mock(ReservedContext.class);
+        reserved = mock(NestedContext.class);
         query = new ListObjectNode(symbolTable, list, reserved);
     }
 
@@ -75,7 +74,7 @@ public class ListObjectNodeTest {
 
     @Test
     public void getReserved() throws Exception {
-        ReservedContext actual = query.getReserved();
+        NestedContext actual = query.getReserved();
         assertSame(reserved, actual);
     }
 

@@ -6,7 +6,7 @@
 package compiler.pipeline.translate.helpers;
 
 import compiler.pipeline.translate.nodes.MapObjectNode;
-import compiler.symbol.context.ReservedContext;
+import compiler.pipeline.translate.nodes.NestedContext;
 import compiler.symbol.tables.MapSymbolTable;
 import org.junit.Test;
 
@@ -21,7 +21,7 @@ public class MapAssignmentLoaderFactoryTest {
         MapAssignmentLoaderFactory query = new MapAssignmentLoaderFactory();
         query.init(callback);
         MapSymbolTable st = mock(MapSymbolTable.class);
-        ReservedContext reserved = mock(ReservedContext.class);
+        NestedContext reserved = mock(NestedContext.class);
         MapObjectNode expectedNode = new MapObjectNode(st, reserved);
         MapAssignmentLoader expected = new MapAssignmentLoader(expectedNode, callback);
         MapAssignmentLoader actual = query.build(st, reserved);

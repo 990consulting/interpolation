@@ -5,26 +5,28 @@
 
 package compiler.pipeline.translate.nodes;
 
-import compiler.symbol.context.ReservedContext;
+import compiler.pipeline.build.Builder;
 import compiler.symbol.tables.ListSymbolTable;
 import compiler.symbol.tables.ResolvingSymbolTable;
 
+import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 /**
  * Created by dbborens on 2/22/15.
  */
-public class ListObjectNode implements ObjectNode {
+public class ListObjectNode<T extends List<?>> implements ObjectNode<T> {
 
     private ListSymbolTable symbolTable;
     private final LocalContextList local;
-    private final ReservedContext reserved;
+    private final NestedContext reserved;
 
-    public ListObjectNode(ListSymbolTable symbolTable, ReservedContext reserved) {
+    public ListObjectNode(ListSymbolTable symbolTable, NestedContext reserved) {
         this(symbolTable, new LocalContextList(), reserved);
     }
 
-    public ListObjectNode(ListSymbolTable symbolTable, LocalContextList local, ReservedContext reserved) {
+    public ListObjectNode(ListSymbolTable symbolTable, LocalContextList local, NestedContext reserved) {
         this.symbolTable = symbolTable;
         this.local = local;
         this.reserved = reserved;
@@ -53,7 +55,7 @@ public class ListObjectNode implements ObjectNode {
         return symbolTable;
     }
 
-    public ReservedContext getReserved() {
+    public NestedContext getReserved() {
         return reserved;
     }
 
@@ -68,5 +70,11 @@ public class ListObjectNode implements ObjectNode {
         if (!symbolTable.equals(that.symbolTable)) return false;
 
         return true;
+    }
+
+    @Override
+    public void instantiate(Consumer<T> callback) {
+        Builder builder = symbolTable.getBuilder();
+        builder.visit(this, callback);
     }
 }

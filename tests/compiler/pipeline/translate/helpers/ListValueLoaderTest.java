@@ -9,8 +9,8 @@ import compiler.pipeline.interpret.nodes.ASTAssignmentNode;
 import compiler.pipeline.interpret.nodes.ASTReferenceNode;
 import compiler.pipeline.interpret.nodes.ASTValueNode;
 import compiler.pipeline.translate.nodes.ListObjectNode;
+import compiler.pipeline.translate.nodes.NestedContext;
 import compiler.pipeline.translate.nodes.ObjectNode;
-import compiler.symbol.context.ReservedContext;
 import compiler.symbol.tables.ClassSymbolTable;
 import compiler.symbol.tables.InstantiableSymbolTable;
 import org.junit.Before;
@@ -25,10 +25,10 @@ public class ListValueLoaderTest {
     private TranslationCallback callback;
     private ASTValueNode toTranslate;
     private ListValueLoader query;
-    private ReservedContext reserved;
+    private NestedContext reserved;
     @Before
     public void init() throws Exception {
-        reserved = mock(ReservedContext.class);
+        reserved = mock(NestedContext.class);
         node = mock(ListObjectNode.class);
         when(node.getReserved()).thenReturn(reserved);
 

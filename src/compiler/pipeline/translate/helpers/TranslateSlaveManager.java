@@ -9,8 +9,8 @@ import compiler.pipeline.interpret.nodes.ASTPrimitiveNode;
 import compiler.pipeline.interpret.nodes.ASTValueNode;
 import compiler.pipeline.translate.nodes.ListObjectNode;
 import compiler.pipeline.translate.nodes.MapObjectNode;
+import compiler.pipeline.translate.nodes.NestedContext;
 import compiler.pipeline.translate.nodes.PrimitiveNode;
-import compiler.symbol.context.ReservedContext;
 import compiler.symbol.tables.ListSymbolTable;
 import compiler.symbol.tables.MapSymbolTable;
 import compiler.symbol.tables.primitive.PrimitiveSymbolTable;
@@ -35,11 +35,11 @@ public class TranslateSlaveManager {
         this.mapManager = mapManager;
     }
 
-    public MapObjectNode translate(ASTValueNode root, MapSymbolTable symbolTable, ReservedContext reserved) {
+    public MapObjectNode translate(ASTValueNode root, MapSymbolTable symbolTable, NestedContext reserved) {
         return mapManager.translate(root, symbolTable, reserved);
     }
 
-    public ListObjectNode translate(ASTValueNode root, ListSymbolTable symbolTable, ReservedContext reserved) {
+    public ListObjectNode translate(ASTValueNode root, ListSymbolTable symbolTable, NestedContext reserved) {
         return listManager.translate(root, symbolTable, reserved);
     }
 

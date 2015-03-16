@@ -6,7 +6,7 @@
 package compiler.pipeline.translate.helpers;
 
 import compiler.pipeline.translate.nodes.ListObjectNode;
-import compiler.symbol.context.ReservedContext;
+import compiler.pipeline.translate.nodes.NestedContext;
 import compiler.symbol.tables.ListSymbolTable;
 
 /**
@@ -20,7 +20,7 @@ public class ListValueLoaderFactory {
         this.callback = callback;
     }
 
-    public ListValueLoader build(ListSymbolTable symbolTable, ReservedContext reserved) {
+    public ListValueLoader build(ListSymbolTable symbolTable, NestedContext reserved) {
         ListObjectNode node = new ListObjectNode(symbolTable, reserved);
         ListValueLoader loader = new ListValueLoader(node, callback);
         return loader;

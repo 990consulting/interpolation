@@ -45,8 +45,10 @@ public abstract class TestBase {
     }
 
     protected static <T> void assertSetsEqual(Set<T> expected, Set<T> actual) {
-        Set<T> difference = Sets.difference(expected, actual);
-        assertEquals(0, difference.size());
+        Set<T> difference = Sets.symmetricDifference(expected, actual);
+        String differenceString = difference.stream().map(Object::toString).collect(Collectors.joining(", "));
+        String errorString = "Unexpected difference between sets: " + differenceString;
+        assertEquals(errorString, 0, difference.size());
     }
 
     protected static <T> void assertStreamsEqual(Stream<T> expected, Stream<T> actual) {

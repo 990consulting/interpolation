@@ -7,11 +7,7 @@ package compiler.pipeline.translate;
 
 import compiler.pipeline.interpret.nodes.ASTValueNode;
 import compiler.pipeline.translate.helpers.TranslateSlaveManager;
-import compiler.pipeline.translate.nodes.ListObjectNode;
-import compiler.pipeline.translate.nodes.MapObjectNode;
-import compiler.pipeline.translate.nodes.ObjectNode;
-import compiler.pipeline.translate.nodes.PrimitiveNode;
-import compiler.symbol.context.ReservedContext;
+import compiler.pipeline.translate.nodes.*;
 import compiler.symbol.tables.InstantiableSymbolTable;
 import compiler.symbol.tables.ListSymbolTable;
 import compiler.symbol.tables.MapSymbolTable;
@@ -28,13 +24,13 @@ public class TranslationVisitorTest {
     private TranslateSlaveManager manager;
     private TranslationVisitor query;
     private ASTValueNode input;
-    private ReservedContext reserved;
+    private NestedContext reserved;
 
     @Before
     public void init() throws Exception {
         manager = mock(TranslateSlaveManager.class);
         input = mock(ASTValueNode.class);
-        reserved = mock(ReservedContext.class);
+        reserved = mock(NestedContext.class);
 
         query = new TranslationVisitor(manager);
     }

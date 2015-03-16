@@ -5,7 +5,7 @@
 
 package compiler.symbol;
 
-import compiler.pipeline.build.builders.Builder;
+import compiler.pipeline.build.MapBuilder;
 import compiler.symbol.symbols.MemberSymbol;
 import compiler.symbol.tables.ClassSymbolTable;
 import compiler.symbol.tables.MapSymbolTable;
@@ -58,8 +58,8 @@ public class MapSymbolTableTest {
         }
 
         @Override
-        public Builder getBuilder() {
-            return mock(Builder.class);
+        public MapBuilder getBuilder() {
+            return mock(MapBuilder.class);
         }
     }
 }

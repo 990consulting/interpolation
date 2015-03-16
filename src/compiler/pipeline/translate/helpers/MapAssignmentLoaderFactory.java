@@ -6,7 +6,7 @@
 package compiler.pipeline.translate.helpers;
 
 import compiler.pipeline.translate.nodes.MapObjectNode;
-import compiler.symbol.context.ReservedContext;
+import compiler.pipeline.translate.nodes.NestedContext;
 import compiler.symbol.tables.MapSymbolTable;
 
 /**
@@ -20,7 +20,7 @@ public class MapAssignmentLoaderFactory {
         this.callback = callback;
     }
 
-    public MapAssignmentLoader build(MapSymbolTable symbolTable, ReservedContext reserved) {
+    public MapAssignmentLoader build(MapSymbolTable symbolTable, NestedContext reserved) {
         MapObjectNode node = new MapObjectNode(symbolTable, reserved);
         MapAssignmentLoader loader = new MapAssignmentLoader(node, callback);
         return loader;

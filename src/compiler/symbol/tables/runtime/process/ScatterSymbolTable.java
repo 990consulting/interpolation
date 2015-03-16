@@ -5,7 +5,7 @@
 
 package compiler.symbol.tables.runtime.process;
 
-import compiler.pipeline.build.builders.Builder;
+import compiler.pipeline.build.MapBuilder;
 import compiler.symbol.symbols.MemberSymbol;
 import compiler.symbol.tables.MapSymbolTable;
 import runtime.process.agent.Scatter;
@@ -24,7 +24,7 @@ public class ScatterSymbolTable extends MapSymbolTable<Scatter> {
     }
 
     @Override
-    public Builder<Scatter> getBuilder() {
+    public MapBuilder<Scatter> getBuilder() {
         return null;
     }
 

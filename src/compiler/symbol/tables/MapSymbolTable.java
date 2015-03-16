@@ -12,8 +12,7 @@ import java.util.HashMap;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-/**
- * Created by dbborens on 3/3/15.
+/** * Created by dbborens on 3/3/15.
  */
 public abstract class MapSymbolTable<T> implements InstantiableSymbolTable<T> {
     private final HashMap<String, MemberSymbol> members;

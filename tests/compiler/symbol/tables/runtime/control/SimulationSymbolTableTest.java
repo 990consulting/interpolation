@@ -5,8 +5,8 @@
 
 package compiler.symbol.tables.runtime.control;
 
-import compiler.pipeline.build.builders.Builder;
-import compiler.pipeline.build.builders.runtime.control.SimulationBuilder;
+import compiler.pipeline.build.MapBuilder;
+import compiler.pipeline.build.runtime.control.SimulationBuilder;
 import compiler.symbol.tables.runtime.process.ScatterSymbolTable;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,7 +30,7 @@ public class SimulationSymbolTableTest
 
     @Test
     public void getBuilder() throws Exception {
-        Builder builder = query.getBuilder();
+        MapBuilder builder = query.getBuilder();
         assertTrue(builder instanceof SimulationBuilder);
     }
 

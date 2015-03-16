@@ -5,6 +5,8 @@
 
 package compiler.pipeline.translate.nodes;
 
+import java.util.function.Consumer;
+
 /**
  * Created by dbborens on 2/22/15.
  */
@@ -18,5 +20,10 @@ public abstract class PrimitiveNode<T> implements ObjectNode {
 
     public T report() {
         return value;
+    }
+
+    @Override
+    public void instantiate(Consumer callback) {
+        callback.accept(this.report());
     }
 }

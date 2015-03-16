@@ -51,9 +51,9 @@ public class LocalContextMapTest {
 
     @Test
     public void testLoadGetMember() throws Exception {
-        ObjectNode expected = mock(ObjectNode.class);
+        Resolvable expected = mock(Resolvable.class);
         query.loadMember("test", expected);
-        ObjectNode actual = query.getMember("test");
+        Resolvable actual = query.getMember("test");
         assertSame(expected, actual);
     }
 

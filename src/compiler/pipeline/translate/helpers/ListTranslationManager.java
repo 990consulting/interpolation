@@ -7,7 +7,7 @@ package compiler.pipeline.translate.helpers;
 
 import compiler.pipeline.interpret.nodes.ASTValueNode;
 import compiler.pipeline.translate.nodes.ListObjectNode;
-import compiler.symbol.context.ReservedContext;
+import compiler.pipeline.translate.nodes.NestedContext;
 import compiler.symbol.tables.ListSymbolTable;
 
 /**
@@ -33,7 +33,7 @@ public class ListTranslationManager {
         factory.init(walker);
     }
 
-    public ListObjectNode translate(ASTValueNode root, ListSymbolTable symbolTable, ReservedContext reserved) {
+    public ListObjectNode translate(ASTValueNode root, ListSymbolTable symbolTable, NestedContext reserved) {
         ListValueLoader loader = factory.build(symbolTable, reserved);
         return visitor.translate(root, loader);
     }

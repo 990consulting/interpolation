@@ -5,7 +5,7 @@
 
 package compiler.symbol.tables.runtime.control;
 
-import compiler.pipeline.build.builders.runtime.control.SimulationBuilder;
+import compiler.pipeline.build.runtime.control.SimulationBuilder;
 import compiler.symbol.symbols.MemberSymbol;
 import compiler.symbol.tables.ClassSymbolTable;
 import compiler.symbol.tables.ClassToListAdapter;
