@@ -92,4 +92,11 @@ public class MapObjectNodeTest {
         NestedContext actual = query.getReserved();
         assertSame(reserved, actual);
     }
+
+    @Test
+    public void getInstanceClassAsksSymbolTable() throws Exception {
+        Class clazz = Class.class;
+        when(st.getInstanceClass()).thenReturn(clazz);
+        assertSame(clazz, query.getInstanceClass());
+    }
 }

@@ -15,4 +15,5 @@ public interface InstantiableSymbolTable<T> extends SymbolTable {
 
     public abstract Builder<? extends ObjectNode, T> getBuilder();
 
+    public abstract Class getInstanceClass();
 }

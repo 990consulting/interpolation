@@ -42,7 +42,13 @@ public class MapSymbolTableTest {
         query.getSymbolTable("something unrecognized");
     }
 
-    private class LoadedMapSymbolTable extends MapSymbolTable {
+    @Test
+    public void getInstanceClass() throws Exception {
+        Class clazz = query.getInstanceClass();
+        assertSame(String.class, clazz);
+    }
+
+    private class LoadedMapSymbolTable extends MapSymbolTable<String> {
 
         @Override
         protected HashMap<String, MemberSymbol> resolveMembers() {
@@ -53,7 +59,7 @@ public class MapSymbolTableTest {
         }
 
         @Override
-        protected HashMap<String, Function> resolveReserved() {
+        protected HashMap<String, Function<String, ?>> resolveReserved() {
             return new HashMap<>();
         }
 
@@ -61,5 +67,6 @@ public class MapSymbolTableTest {
         public MapBuilder getBuilder() {
             return mock(MapBuilder.class);
         }
+
     }
 }

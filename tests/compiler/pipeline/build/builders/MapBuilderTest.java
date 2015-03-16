@@ -31,7 +31,7 @@ public class MapBuilderTest {
     private Object instance;
     private HashMap<String, Object> assignedFields;
     private HashSet<String> listeningFields;
-    private Consumer<Object> callback;
+    private Consumer callback;
     private LoadedMapBuilder query;
     private MapObjectNode node;
 
@@ -55,17 +55,30 @@ public class MapBuilderTest {
     @Test
     public void visitResolvesKeywordValuedMembers() {
         Object childInstance = mock(Object.class);
-        ObjectNode child = cb -> cb.accept(childInstance);
+        ObjectNode child = stubObjectNode(childInstance);
         when(node.getMember("a")).thenReturn(child);
         query.visit(node, callback);
         assertFalse(listeningFields.contains("a"));
         assertEquals(childInstance, assignedFields.get("a"));
     }
 
+    private ObjectNode stubObjectNode(Object childInstance) {
+        return new ObjectNode() {
+            @Override
+            public void instantiate(Consumer callback) {
+                callback.accept(childInstance);
+            }
+
+            @Override
+            public Class getInstanceClass() {
+                return null;
+            }
+        };
+    }
     @Test
     public void instantiateCalledAfterLastFieldResolved() {
         Object childInstance = mock(Object.class);
-        ObjectNode child = cb -> cb.accept(childInstance);
+        ObjectNode child = stubObjectNode(childInstance);
         when(node.getMember("a")).thenReturn(child);
         query.visit(node, callback);
         verify(callback).accept(instance);

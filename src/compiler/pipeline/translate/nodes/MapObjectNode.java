@@ -21,18 +21,18 @@ import java.util.stream.Stream;
  *
  * Created by dbborens on 2/22/15.
  */
-public class MapObjectNode<T> implements ObjectNode<T> {
+public class MapObjectNode implements ObjectNode {
 
     private final LocalContextMap local;
     private final NestedContext reserved;
 
-    private final MapSymbolTable<T> symbolTable;
+    private final MapSymbolTable symbolTable;
 
-    public MapObjectNode(MapSymbolTable<T> symbolTable, NestedContext reserved) {
+    public MapObjectNode(MapSymbolTable symbolTable, NestedContext reserved) {
         this(symbolTable, reserved, new LocalContextMap());
     }
 
-    public MapObjectNode(MapSymbolTable<T> symbolTable, NestedContext reserved, LocalContextMap local) {
+    public MapObjectNode(MapSymbolTable symbolTable, NestedContext reserved, LocalContextMap local) {
         this.symbolTable = symbolTable;
         this.reserved = reserved;
         this.local = local;
@@ -83,9 +83,14 @@ public class MapObjectNode<T> implements ObjectNode<T> {
     }
 
     @Override
-    public void instantiate(Consumer<T> callback) {
+    public void instantiate(Consumer callback) {
         Builder builder = symbolTable.getBuilder();
         builder.visit(this, callback);
+    }
+
+    @Override
+    public Class getInstanceClass() {
+        return symbolTable.getInstanceClass();
     }
 
 }

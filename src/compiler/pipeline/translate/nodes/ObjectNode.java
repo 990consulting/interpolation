@@ -10,7 +10,13 @@ import java.util.function.Consumer;
 /**
  * Created by dbborens on 2/22/15.
  */
-public interface ObjectNode<T> extends Resolvable {
+public interface ObjectNode extends Resolvable {
 
-    public void instantiate(Consumer<T> callback);
+    public void instantiate(Consumer callback);
+
+    /**
+     * Reports the class of the object that will be instantiated by this class.
+     * @return
+     */
+    public Class getInstanceClass();
 }

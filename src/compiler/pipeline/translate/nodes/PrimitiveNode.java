@@ -5,6 +5,8 @@
 
 package compiler.pipeline.translate.nodes;
 
+import com.google.common.reflect.TypeToken;
+
 import java.util.function.Consumer;
 
 /**
@@ -12,6 +14,7 @@ import java.util.function.Consumer;
  */
 public abstract class PrimitiveNode<T> implements ObjectNode {
 
+    private final TypeToken<T> type = new TypeToken<T>(getClass()) {};
     private T value;
 
     public PrimitiveNode(T value) {
@@ -25,5 +28,10 @@ public abstract class PrimitiveNode<T> implements ObjectNode {
     @Override
     public void instantiate(Consumer callback) {
         callback.accept(this.report());
+    }
+
+    @Override
+    public Class getInstanceClass() {
+        return type.getRawType();
     }
 }

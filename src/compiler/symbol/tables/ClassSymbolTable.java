@@ -5,6 +5,7 @@
 
 package compiler.symbol.tables;
 
+import com.google.common.reflect.TypeToken;
 import compiler.pipeline.interpret.nodes.ASTAssignmentNode;
 import compiler.pipeline.interpret.nodes.ASTReferenceNode;
 import compiler.pipeline.interpret.nodes.ASTValueNode;
@@ -16,9 +17,11 @@ import java.util.HashMap;
 /**
  * Created by dbborens on 3/3/15.
  */
-public abstract class ClassSymbolTable implements ResolvingSymbolTable {
+public abstract class ClassSymbolTable<T> implements ResolvingSymbolTable {
 
     private HashMap<String, ClassSymbol> members;
+
+    private final TypeToken<T> type = new TypeToken<T>(getClass()) {};
 
     public ClassSymbolTable() {
         members = resolveSubclasses();
@@ -46,5 +49,9 @@ public abstract class ClassSymbolTable implements ResolvingSymbolTable {
         }
 
         return members.get(identifier).getSymbolTable();
+    }
+
+    public Class getBroadClass() {
+        return type.getRawType();
     }
 }

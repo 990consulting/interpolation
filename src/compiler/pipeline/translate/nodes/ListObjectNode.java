@@ -9,14 +9,13 @@ import compiler.pipeline.build.Builder;
 import compiler.symbol.tables.ListSymbolTable;
 import compiler.symbol.tables.ResolvingSymbolTable;
 
-import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 /**
  * Created by dbborens on 2/22/15.
  */
-public class ListObjectNode<T extends List<?>> implements ObjectNode<T> {
+public class ListObjectNode implements ObjectNode {
 
     private ListSymbolTable symbolTable;
     private final LocalContextList local;
@@ -73,8 +72,13 @@ public class ListObjectNode<T extends List<?>> implements ObjectNode<T> {
     }
 
     @Override
-    public void instantiate(Consumer<T> callback) {
+    public void instantiate(Consumer callback) {
         Builder builder = symbolTable.getBuilder();
         builder.visit(this, callback);
+    }
+
+    @Override
+    public Class getInstanceClass() {
+        return symbolTable.getInstanceClass();
     }
 }

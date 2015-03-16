@@ -5,6 +5,7 @@
 
 package compiler.symbol.tables;
 
+import com.google.common.reflect.TypeToken;
 import compiler.symbol.symbols.MemberSymbol;
 import compiler.util.UnrecognizedIdentifierError;
 
@@ -17,6 +18,8 @@ import java.util.stream.Stream;
 public abstract class MapSymbolTable<T> implements InstantiableSymbolTable<T> {
     private final HashMap<String, MemberSymbol> members;
     private final HashMap<String, Function<T, ?>> reserved;
+
+    private final TypeToken<T> type = new TypeToken<T>(getClass()) {};
 
     public MapSymbolTable() {
         reserved = resolveReserved();
@@ -41,5 +44,9 @@ public abstract class MapSymbolTable<T> implements InstantiableSymbolTable<T> {
 
     public <U> Function<T, U> getReservedFunction(String keyword) {
         return (Function<T, U>) reserved.get(keyword);
+    }
+
+    public Class getInstanceClass() {
+        return type.getRawType();
     }
 }

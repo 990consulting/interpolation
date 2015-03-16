@@ -31,4 +31,9 @@ public class ListSymbolTable<T> implements InstantiableSymbolTable<List<T>>,  Re
     public Builder<ListObjectNode, List<T>> getBuilder() {
         return null;
     }
+
+    @Override
+    public Class getInstanceClass() {
+        return classSymbolTable.getBroadClass();
+    }
 }

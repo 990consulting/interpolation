@@ -78,4 +78,11 @@ public class ListObjectNodeTest {
         assertSame(reserved, actual);
     }
 
+    @Test
+    public void getInstanceClassAsksSymbolTable() throws Exception {
+        Class clazz = Class.class;
+        when(symbolTable.getInstanceClass()).thenReturn(clazz);
+        assertSame(clazz, query.getInstanceClass());
+    }
+
 }
