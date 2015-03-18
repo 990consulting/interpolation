@@ -7,6 +7,7 @@ package compiler.pipeline.build.util;
 
 import compiler.pipeline.build.Builder;
 import compiler.pipeline.translate.nodes.ListObjectNode;
+import compiler.pipeline.translate.nodes.ObjectNode;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -19,5 +20,10 @@ public class ListBuilder<T> implements Builder<ListObjectNode, List<T>> {
     @Override
     public void visit(ListObjectNode node, Consumer<List<T>> callback) {
 
+    }
+
+    @Override
+    public boolean validate(ObjectNode parentNode) {
+        return false;
     }
 }

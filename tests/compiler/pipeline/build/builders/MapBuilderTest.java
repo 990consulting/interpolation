@@ -143,5 +143,10 @@ public class MapBuilderTest {
         protected Object instantiate() {
             return instance;
         }
+
+        @Override
+        public boolean validate(ObjectNode parentNode) {
+            return false;
+        }
     }
 }

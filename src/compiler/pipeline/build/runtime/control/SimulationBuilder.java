@@ -6,6 +6,7 @@
 package compiler.pipeline.build.runtime.control;
 
 import compiler.pipeline.build.MapBuilder;
+import compiler.pipeline.translate.nodes.ObjectNode;
 import runtime.control.Simulation;
 import runtime.geometry.Geometry;
 
@@ -29,5 +30,10 @@ public class SimulationBuilder extends MapBuilder<Simulation> {
     @Override
     protected Simulation instantiate() {
         return null;
+    }
+
+    @Override
+    public boolean validate(ObjectNode parentNode) {
+        return false;
     }
 }

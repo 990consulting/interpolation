@@ -15,7 +15,7 @@ import compiler.symbol.tables.ResolvingSymbolTable;
  */
 public class MemberSymbol {
 
-    private ResolvingSymbolTable symbolTable;
+    protected ResolvingSymbolTable symbolTable;
     private String description;
 
     public MemberSymbol(ResolvingSymbolTable symbolTable, String description) {

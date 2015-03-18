@@ -42,7 +42,7 @@ public abstract class MapBuilder<T> implements Builder<MapObjectNode, T> {
     @Override
     public void visit(MapObjectNode node, Consumer<T> callback) {
         this.callback = callback;
-        Set<String> ids = (Set<String>) node.getMemberIdentifiers()
+        Set<String> ids = node.getMemberIdentifiers()
                 .collect(Collectors.toSet());
         verifyFieldCoverage(ids);
         ids.forEach(id -> processMember(id, node));
@@ -107,4 +107,6 @@ public abstract class MapBuilder<T> implements Builder<MapObjectNode, T> {
     protected abstract Map<String, Class> resolveFields();
 
     protected abstract T instantiate();
+
+    public
 }

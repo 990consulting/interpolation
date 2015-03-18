@@ -6,36 +6,43 @@
 package compiler.symbol.tables;
 
 import com.google.common.reflect.TypeToken;
+import compiler.symbol.symbols.InterpolableMemberSymbol;
 import compiler.symbol.symbols.MemberSymbol;
 import compiler.util.UnrecognizedIdentifierError;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
 /** * Created by dbborens on 3/3/15.
  */
 public abstract class MapSymbolTable<T> implements InstantiableSymbolTable<T> {
-    private final HashMap<String, MemberSymbol> members;
+    private final HashMap<String, MemberSymbol> requiredMembers;
     private final HashMap<String, Function<T, ?>> reserved;
+    private final HashMap<String, InterpolableMemberSymbol> optionalMembers;
+    private final List<String> interpolationSequence;
 
     private final TypeToken<T> type = new TypeToken<T>(getClass()) {};
 
     public MapSymbolTable() {
         reserved = resolveReserved();
-        members = resolveMembers();
-
+        requiredMembers = resolveMembers();
+        optionalMembers = resolveOptionalMembers();
+        interpolationSequence = resolveInterpolationSequence();
     }
 
     protected abstract HashMap<String, MemberSymbol> resolveMembers();
     protected abstract HashMap<String, Function<T, ?>> resolveReserved();
+    protected abstract HashMap<String, InterpolableMemberSymbol> resolveOptionalMembers();
+    protected abstract List<String> resolveInterpolationSequence();
 
     public ResolvingSymbolTable getSymbolTable(String identifier) {
-        if (!members.containsKey(identifier)) {
+        if (!requiredMembers.containsKey(identifier)) {
             throw new UnrecognizedIdentifierError();
         }
 
-        return members.get(identifier).getSymbolTable();
+        return requiredMembers.get(identifier).getSymbolTable();
     }
 
     public Stream<String> getReservedKeywords() {
